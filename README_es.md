@@ -18,7 +18,7 @@
 ---
 
 
-> **Feed de inteligencia técnica bajo demanda, escudo anti-bots y red comunitaria de desarrolladores verificados.**  
+> **Feed de inteligencia técnica bajo demanda, escudo anti-bots y red comunitaria de desarrolladores verificados.**
 > Diseñado bajo una filosofía de capas simples y desacopladas que forman un sistema robusto, ejecutándose 100% gratis en GitHub Actions y GitHub Pages.
 
 ---

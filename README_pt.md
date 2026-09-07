@@ -18,7 +18,7 @@
 ---
 
 
-> **Feed de inteligência técnica sob demanda, escudo anti-bot e rede de desenvolvedores verificados.**  
+> **Feed de inteligência técnica sob demanda, escudo anti-bot e rede de desenvolvedores verificados.**
 > Construído sob uma arquitetura de camadas modulares simples, operando de forma 100% gratuita no GitHub Actions e Pages.
 
 ---

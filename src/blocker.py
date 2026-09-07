@@ -36,7 +36,7 @@ def evaluate_bot_heuristics(user_data, cfg):
     following = user_data.get("following", 0)
     followers = user_data.get("followers", 0)
     created_at_str = user_data.get("created_at")
-    
+
     if not created_at_str:
         return False, "Datos de cuenta incompletos"
 

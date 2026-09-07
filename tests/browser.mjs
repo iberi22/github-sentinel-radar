@@ -126,5 +126,5 @@ try {
   chrome.kill('SIGTERM');
   await new Promise(r => chrome.exitCode !== null ? r() : chrome.once('exit', r));
   server.close();
-  await rm(profile, {recursive:true, force:true});
+  await rm(profile, {recursive:true, force:true, maxRetries:5, retryDelay:200});
 }

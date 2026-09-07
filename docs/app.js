@@ -39,7 +39,7 @@ async function loadLocale(lang) {
       currentLocale = lang;
       localStorage.setItem('sentinel_locale', lang);
       applyTranslations();
-      
+
       // Handle RTL
       if (RTL_LOCALES.includes(lang)) {
         document.documentElement.setAttribute('dir', 'rtl');
@@ -55,7 +55,7 @@ async function loadLocale(lang) {
 
 function applyTranslations() {
   document.getElementById('lang-select').value = currentLocale;
-  
+
   const map = {
     'app-title': 'app_title',
     'app-tagline': 'tagline',

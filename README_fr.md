@@ -18,7 +18,7 @@
 ---
 
 
-> **Flux de veille technologique à la demande, bouclier anti-bot et réseau de développeurs vérifiés.**  
+> **Flux de veille technologique à la demande, bouclier anti-bot et réseau de développeurs vérifiés.**
 > Conçu selon une philosophie de couches modulaires simples, hébergé gratuitement sur GitHub Actions et Pages.
 
 ---

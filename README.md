@@ -18,7 +18,7 @@
 ---
 
 
-> **On-demand technical intelligence feed, anti-bot shield, and verified open-source developer network.**  
+> **On-demand technical intelligence feed, anti-bot shield, and verified open-source developer network.**
 > Built with simple, decoupled layers forming a robust distributed system running on 100% free GitHub Actions and GitHub Pages.
 
 ---

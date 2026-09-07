@@ -4,7 +4,7 @@
 GitHub Sentinel & Radar es una plataforma distribuida, modular y ejecutada bajo demanda (*on-demand*) diseñada para proteger las cuentas de desarrolladores en GitHub contra bots de spam / *follow-farming* y proporcionar un feed de inteligencia técnica y radar de novedades personalizado.
 
 ### 🏛️ Principio Arquitectónico Rector
-> **Desarrollo por capas simples, no complejas, para que formen sistemas robustos y estos sistemas formen redes mayores.**  
+> **Desarrollo por capas simples, no complejas, para que formen sistemas robustos y estos sistemas formen redes mayores.**
 > Cada componente debe ser autosuficiente, de bajo acoplamiento y con ejecución eficiente. La complejidad innecesaria multiplica los puntos de falla. Todo proceso pesado opera **bajo demanda** para evitar consumo abusivo de recursos.
 
 ---
