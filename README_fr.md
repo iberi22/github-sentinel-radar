@@ -35,11 +35,10 @@
 
 ## 🚀 Déploiement Rapide en 2 Minutes
 
-1. **Forkez ce dépôt** (ou utilisez **"Use this template"**).
-2. Rendez-vous dans **Settings > Secrets and variables > Actions**.
-3. Ajoutez le secret `GH_BLOCKER_TOKEN` avec votre Personal Access Token.
-4. Activez **GitHub Pages** (Source : `GitHub Actions`).
-5. Votre tableau de bord sera disponible sur `https://<utilisateur>.github.io/<depot>/` !
+1. Créez votre dépôt public avec **Use this template**.
+2. Activez Actions si demandé. Dans Settings → Pages choisissez **GitHub Actions**, puis lancez **Deploy GitHub Pages** une fois.
+3. Ouvrez le tableau de bord, actualisez, confirmez **Run workflow** sur GitHub et revenez. **Aucun jeton dans le navigateur ni secret supplémentaire pour le radar.**
+4. Le blocage personnel est facultatif : [configuration Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 Licence
 Licence MIT © 2026 Sandra Lorena Santacruz & Contributeurs.

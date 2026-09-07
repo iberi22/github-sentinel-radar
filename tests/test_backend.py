@@ -116,5 +116,37 @@ class BackendTests(unittest.TestCase):
         self.assertTrue(any(url.endswith('/last-user') for url in seen))
 
 
+
+class OnboardingTests(unittest.TestCase):
+    def test_public_profile_uses_named_user_and_filters_private_repos(self):
+        cfg = common.load_config()
+        cfg['radar'].update(max_starred_to_analyze=3, max_releases_to_track=0, max_discoveries=0)
+        response = Mock(json=lambda: [
+            {'private':True,'language':'SecretLanguage','topics':['secret']},
+            {'private':False,'language':'Python','topics':['public']},
+        ])
+        with patch.dict(os.environ, {'GH_TOKEN':'automatic-token','RADAR_USERNAME':'example'}, clear=True), patch.object(sys,'argv',['radar.py','--force']), patch.object(radar,'load_config',return_value=cfg), patch.object(radar,'github_request',return_value=response) as request, patch.object(radar,'update_radar_files') as save:
+            radar.main()
+        self.assertEqual(request.call_args.args[1], 'https://api.github.com/users/example/starred')
+        data = save.call_args.args[0]
+        self.assertEqual(data['profile_dna']['top_languages'], ['Python'])
+        self.assertEqual(data['profile_user'], 'example')
+
+    def test_invalid_profile_rejected_before_api(self):
+        with patch.dict(os.environ, {'GH_TOKEN':'token','RADAR_USERNAME':'../user'}), patch.object(radar,'github_request') as request, self.assertRaises(ValueError):
+            radar.main()
+        request.assert_not_called()
+
+    def test_site_metadata_never_includes_environment_secrets(self):
+        from build_site import build_site
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/'data').mkdir(); (root/'docs').mkdir()
+            (root/'data/radar.json').write_text('{}')
+            with patch.dict(os.environ, {'GITHUB_REPOSITORY':'owner/fork','DEFAULT_BRANCH':'develop','GH_BLOCKER_TOKEN':'must-not-leak','GITHUB_TOKEN':'must-not-leak'}):
+                build_site(root)
+            self.assertEqual(json.loads((root/'docs/site.json').read_text()), {'repository':'owner/fork','default_branch':'develop'})
+            self.assertEqual((root/'docs/data/radar.json').read_text(), '{}')
+
 if __name__ == '__main__':
     unittest.main()

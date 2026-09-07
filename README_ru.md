@@ -35,11 +35,10 @@
 
 ## 🚀 Быстрый старт за 2 минуты
 
-1. Сделайте **Fork** этого репозитория (или нажмите **"Use this template"**).
-2. Перейдите в **Settings > Secrets and variables > Actions**.
-3. Добавьте секрет `GH_BLOCKER_TOKEN` с вашим токеном доступа GitHub.
-4. В разделе **Settings > Pages** укажите источник **GitHub Actions**.
-5. Ваша панель готова по адресу `https://<username>.github.io/<repo>/`!
+1. Создайте публичный репозиторий через **Use this template**.
+2. При необходимости включите Actions. В Settings → Pages выберите **GitHub Actions** и один раз запустите **Deploy GitHub Pages**.
+3. На панели нажмите обновление, подтвердите **Run workflow** в GitHub и вернитесь. **Токен в браузере и дополнительный секрет для радара не нужны.**
+4. Личная блокировка необязательна: [настройка Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 Лицензия
 Лицензия MIT © 2026 Sandra Lorena Santacruz и сообщество.

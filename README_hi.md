@@ -35,11 +35,10 @@
 
 ## 🚀 2 मिनट में सेटअप करें
 
-1. इस रिपॉजिटरी को **Fork** करें।
-2. **Settings > Secrets and variables > Actions** पर जाएं।
-3. `GH_BLOCKER_TOKEN` नाम से पर्सनल एक्सेस टोकन सीक्रेट जोड़ें।
-4. **Settings > Pages** में जाकर सोर्स को **GitHub Actions** चुनें।
-5. आपका डैशबोर्ड `https://<username>.github.io/<repo>/` पर सक्रिय हो जाएगा!
+1. **Use this template** से अपना सार्वजनिक रिपॉज़िटरी बनाएँ।
+2. कहे जाने पर Actions सक्षम करें। Settings → Pages में **GitHub Actions** चुनें और **Deploy GitHub Pages** एक बार चलाएँ।
+3. डैशबोर्ड में अपडेट दबाएँ, GitHub पर **Run workflow** की पुष्टि करें और लौटें। **ब्राउज़र टोकन या रडार का अतिरिक्त सीक्रेट नहीं चाहिए।**
+4. व्यक्तिगत ब्लॉकिंग वैकल्पिक है: [Sentinel सेटअप](DEPLOYMENT.md#sentinel)।
 
 ## 📜 लाइसेंस
 MIT License © 2026 Sandra Lorena Santacruz और समुदाय।

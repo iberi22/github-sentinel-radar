@@ -123,6 +123,19 @@
       "status": "completed",
       "priority": "HIGH",
       "assignee": "Codex"
+    },
+    {
+      "id": "AD-04",
+      "title": "Web sin PAT, onboarding guiado, Radar público sin secretos adicionales",
+      "priority": "HIGH",
+      "status": "in_progress",
+      "implementation_plan": [
+        "Purgar token web y sustituir dispatch REST por confirmación GitHub",
+        "Generar contexto público repo/rama y guía de tres pasos",
+        "Refrescar feed visible con espera máxima de cinco minutos",
+        "Usar GITHUB_TOKEN sólo para datos públicos; bloqueo requiere secreto personal",
+        "Probar y desplegar flujo completo"
+      ]
     }
   ],
   "validation": {
@@ -136,9 +149,7 @@
   "deployment": {
     "repository": "https://github.com/iberi22/github-sentinel-radar",
     "pages": "https://iberi22.github.io/github-sentinel-radar/",
-    "missing_secrets": [
-      "GH_BLOCKER_TOKEN"
-    ],
+    "missing_secrets": [],
     "live_scanners_tested": false
   }
 }

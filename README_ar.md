@@ -35,11 +35,10 @@
 
 ## 🚀 التثبيت السريع في دقيقتين
 
-1. انسخ المشروع عبر **Fork** أو اختر **"Use this template"**.
-2. انتقل إلى **Settings > Secrets and variables > Actions**.
-3. أضف الرمز السري باسم `GH_BLOCKER_TOKEN` مع رمز الوصول الخاص بك.
-4. فعّل **GitHub Pages** باختيار المصدر `GitHub Actions`.
-5. لوحة التحكم الخاصة بك ستكون جاهزة على الرابط المباشر!
+1. أنشئ مستودعك العام عبر **Use this template**.
+2. فعّل Actions عند الطلب، واختر **GitHub Actions** في Settings → Pages، ثم شغّل **Deploy GitHub Pages** مرة واحدة.
+3. افتح اللوحة واضغط تحديث، ثم أكّد **Run workflow** في GitHub وعد. **لا رمز في المتصفح ولا سر إضافي للرادار.**
+4. الحظر الشخصي اختياري: [إعداد Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 الترخيص
 رخصة MIT © 2026 Sandra Lorena Santacruz ومساهمو المجتمع.

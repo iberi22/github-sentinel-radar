@@ -35,11 +35,10 @@
 
 ## 🚀 দ্রুত সেটআপ (২ মিনিটে ফর্ক করুন)
 
-1. এই রিপোজিটরিটি **Fork** করুন।
-2. **Settings > Secrets and variables > Actions**-এ যান।
-3. `GH_BLOCKER_TOKEN` নামে একটি পার্সোনাল অ্যাক্সেস টোকেন সিক্রেট যুক্ত করুন।
-4. **Settings > Pages**-এ গিয়ে সোর্স হিসেবে **GitHub Actions** নির্বাচন করুন।
-5. আপনার ব্যক্তিগত ড্যাশবোর্ড প্রস্তুত!
+1. **Use this template** দিয়ে নিজের পাবলিক রিপোজিটরি তৈরি করুন।
+2. প্রয়োজনে Actions চালু করুন। Settings → Pages-এ **GitHub Actions** বাছুন এবং **Deploy GitHub Pages** একবার চালান।
+3. ড্যাশবোর্ডে আপডেট চাপুন, GitHub-এ **Run workflow** নিশ্চিত করে ফিরুন। **ব্রাউজার টোকেন বা রাডারের অতিরিক্ত সিক্রেট লাগবে না।**
+4. ব্যক্তিগত ব্লকিং ঐচ্ছিক: [Sentinel সেটআপ](DEPLOYMENT.md#sentinel)।
 
 ## 📜 লাইসেন্স
 MIT License © 2026 Sandra Lorena Santacruz ও কমিউনিটি।

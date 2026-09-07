@@ -88,3 +88,13 @@ _Última actualización: 2026-09-06_
 - Web: https://iberi22.github.io/github-sentinel-radar/
 - Despliegue verificado: https://github.com/iberi22/github-sentinel-radar/actions/runs/34078083746
 - Pendiente operativo: configurar GH_BLOCKER_TOKEN (Block another user: write y Starring: read). La web requiere un PAT independiente con Actions: write para el disparo manual. No se ejecutaron motores con credenciales reales.
+
+## AD-04 — Acceso sin token web y puesta en marcha guiada
+
+Estado: en curso. Plan previo a implementación:
+1. Eliminar captura/uso de PAT en navegador y purgar credenciales locales antiguas.
+2. Detectar repo y rama desde metadatos públicos del despliegue; guía Siguiente/Atrás con enlaces GitHub oficiales.
+3. Usar sesión GitHub para confirmar ejecución; comprobar sólo archivos estáticos al volver, con espera acotada y pausa al ocultarse.
+4. Ejecutar Radar público con GITHUB_TOKEN automático y perfil del propietario; reservar GH_BLOCKER_TOKEN para bloqueo personal.
+5. Validar rutas, ausencia de credenciales web, migración, diez idiomas/RTL, estado de carga/errores, límites de espera y API pública en Actions.
+6. Publicar y comprobar Pages/feed reales. OAuth mediante GitHub App requeriría servicio de autenticación adicional; no es necesario para esta fase.

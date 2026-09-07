@@ -1,4 +1,8 @@
 
+// Retire credentials saved by versions prior to token-free navigation.
+localStorage.removeItem('sentinel_pat');
+localStorage.removeItem('sentinel_repo');
+
 // State Management
 let currentLocale = localStorage.getItem('sentinel_locale') || 'en';
 let localeData = {};
@@ -77,10 +81,12 @@ function applyTranslations() {
     'btn-submit-project': 'btn_submit_project',
     'modal-title': 'modal_title',
     'modal-desc': 'modal_desc',
-    'btn-save-settings': 'save_btn',
+    'btn-guide-next': 'next_btn',
+    'btn-guide-back': 'back_btn',
+    'btn-copy-template': 'copy_btn',
+    'btn-sentinel-setup': 'sentinel_setup',
+    'refresh-help': 'refresh_help',
     'tech-dna-title': 'tech_dna_title',
-    'token-label': 'token_label',
-    'repo-label': 'repo_label',
   };
 
   for (const [elemId, key] of Object.entries(map)) {
@@ -90,11 +96,11 @@ function applyTranslations() {
     }
   }
 
-  document.getElementById('input-token').placeholder = localeData.token_placeholder;
-  document.getElementById('input-repo').placeholder = localeData.repo_placeholder;
   document.getElementById('btn-close-modal').setAttribute('aria-label', localeData.close_btn);
   document.getElementById('btn-open-settings').title = localeData.nav_settings;
   document.getElementById('theme-toggle').title = localeData.theme_label;
+  renderGuide();
+  renderFeedStatus();
   renderDirectory();
   renderBlocklist(document.getElementById('bot-search').value);
   const searchInput = document.getElementById('bot-search');
@@ -105,8 +111,8 @@ function applyTranslations() {
 
 async function fetchDataFile(name) {
   let response;
-  try { response = await fetch(`data/${name}.json`, { cache: 'no-store' }); } catch {}
-  if (!response?.ok) response = await fetch(`../data/${name}.json`, { cache: 'no-store' });
+  try { response = await fetch(`data/${name}.json?v=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(10000) }); } catch {}
+  if (!response?.ok) response = await fetch(`../data/${name}.json?v=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(10000) });
   return response;
 }
 
@@ -118,15 +124,19 @@ async function fetchLocalData() {
       fetchDataFile('verified_projects')
     ]);
 
-    if (rRes.ok) radarData = await rRes.json();
+    if (!rRes.ok) throw new Error(`Feed HTTP ${rRes.status}`);
+    radarData = await rRes.json();
     if (bRes.ok) blocklistData = await bRes.json();
     if (vRes.ok) verifiedData = await vRes.json();
 
     renderRadar();
+    renderFeedStatus();
     renderBlocklist();
     renderDirectory();
   } catch (e) {
     console.error('Data loading error:', e);
+    feedStatus = 'load_error';
+    renderFeedStatus();
   }
 }
 
@@ -249,80 +259,157 @@ function renderDirectory() {
   });
 }
 
-// On-Demand Dispatch Logic
-document.getElementById('btn-dispatch-radar').addEventListener('click', async () => {
-  const token = localStorage.getItem('sentinel_pat');
-  const repo = localStorage.getItem('sentinel_repo') || 'iberi22/github-sentinel-radar';
+// GitHub owns authentication. Pages only links to the workflow and reads public files.
+let site = null;
+let guideStep = 0;
+let guideTrigger = null;
+let feedStatus = '';
+let refreshTimer = null;
+let refreshChecking = false;
+let pendingRefresh = null;
+try { pendingRefresh = JSON.parse(sessionStorage.getItem('sentinel_refresh')); } catch {}
+if (!pendingRefresh || !Number.isFinite(pendingRefresh.until)) pendingRefresh = null;
 
-  if (!token) {
-    document.getElementById('modal-settings').classList.remove('hidden');
-    return;
-  }
-
-  if (!/^[A-Za-z0-9-]+\/[A-Za-z0-9_.-]+$/.test(repo)) {
-    showToast(localeData.toast_error || 'Invalid repository.', 'error');
-    return;
-  }
-  const button = document.getElementById('btn-dispatch-radar');
-  if (button.disabled) return;
-  button.disabled = true;
-  const btnText = document.getElementById('btn-refresh-text');
-  btnText.textContent = localeData['btn_updating'] || 'Dispatching...';
-
-  try {
-    const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/radar.yml/dispatches`, {
-      method: 'POST',
-      signal: AbortSignal.timeout(20000),
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json',
-        'X-GitHub-Api-Version': '2026-03-10'
-      },
-      body: JSON.stringify({ ref: 'main', inputs: { force: true } })
-    });
-
-    if (res.ok) {
-      showToast(localeData['toast_success'] || 'Dispatched successfully!', 'success');
-    } else {
-      showToast(localeData['toast_error'] || 'Error dispatching job.', 'error');
-    }
-  } catch (e) {
-    showToast(localeData['toast_error'] || 'Network error.', 'error');
-  } finally {
-    button.disabled = false;
-    btnText.textContent = localeData['btn_refresh'] || 'Update Feed ⚡';
-  }
-});
-
-function showToast(msg, type) {
-  const toast = document.getElementById('toast');
-  const toastMsg = document.getElementById('toast-msg');
-  toastMsg.textContent = msg;
-  toast.classList.remove('hidden');
-  setTimeout(() => toast.classList.add('hidden'), 5000);
+function validRepository(value) {
+  return typeof value === 'string' && /^[A-Za-z0-9-]+\/[A-Za-z0-9_.-]+$/.test(value);
 }
 
-// Settings Modal Handlers
-document.getElementById('btn-open-settings').addEventListener('click', () => {
-  document.getElementById('input-token').value = localStorage.getItem('sentinel_pat') || '';
-  document.getElementById('input-repo').value = localStorage.getItem('sentinel_repo') || '';
-  document.getElementById('modal-settings').classList.remove('hidden');
+async function loadSite() {
+  try {
+    const response = await fetch('site.json', {cache: 'no-store', signal: AbortSignal.timeout(10000)});
+    if (!response.ok) throw new Error('No deployment metadata');
+    const config = await response.json();
+    if (!validRepository(config.repository) || typeof config.default_branch !== 'string' || !config.default_branch) {
+      throw new Error('Invalid deployment metadata');
+    }
+    site = config;
+  } catch {
+    const owner = location.hostname.endsWith('.github.io') ? location.hostname.split('.')[0] : null;
+    const name = location.pathname.split('/').filter(Boolean)[0] || `${owner}.github.io`;
+    // Local preview has a known source; custom domains require build metadata.
+    const repository = owner ? `${owner}/${name}` :
+      ['localhost', '127.0.0.1'].includes(location.hostname) ? 'iberi22/github-sentinel-radar' : null;
+    if (!validRepository(repository)) {
+      feedStatus = 'setup_error'; renderFeedStatus(); return;
+    }
+    site = {repository, default_branch: 'main'};
+  }
+  document.getElementById('btn-dispatch-radar').href = workflowURL();
+  document.getElementById('btn-dispatch-radar').removeAttribute('aria-disabled');
+  document.getElementById('btn-submit-project').href = `https://github.com/${site.repository}/pulls`;
+  document.getElementById('btn-sentinel-setup').href = `https://github.com/${site.repository}/blob/${encodeURIComponent(site.default_branch)}/DEPLOYMENT.md#sentinel`;
+  renderGuide();
+}
+
+function workflowURL() {
+  return `https://github.com/${site.repository}/actions/workflows/radar.yml`;
+}
+
+function renderFeedStatus() {
+  const status = document.getElementById('feed-status');
+  if (!status) return;
+  const key = pendingRefresh ? 'waiting_feed' : feedStatus || (radarData?.last_updated ? 'feed_ready' : 'feed_empty');
+  status.textContent = localeData[key] || '';
+  const date = document.getElementById('feed-updated');
+  const timestamp = Date.parse(radarData?.last_updated);
+  date.textContent = Number.isFinite(timestamp) ? new Date(timestamp).toLocaleString(currentLocale) : '';
+  date.dateTime = Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : '';
+}
+
+function finishRefresh(status) {
+  clearTimeout(refreshTimer);
+  refreshTimer = null;
+  pendingRefresh = null;
+  sessionStorage.removeItem('sentinel_refresh');
+  feedStatus = status;
+  renderFeedStatus();
+}
+
+async function checkFeedUpdate() {
+  clearTimeout(refreshTimer);
+  refreshTimer = null;
+  if (!pendingRefresh) return;
+  if (Date.now() >= pendingRefresh.until) { finishRefresh('wait_finished'); return; }
+  if (document.hidden || refreshChecking) return;
+  refreshChecking = true;
+  const request = pendingRefresh;
+  try {
+    const response = await fetchDataFile('radar');
+    if (!response.ok) throw new Error(`Feed HTTP ${response.status}`);
+    const data = await response.json();
+    if (pendingRefresh !== request) return;
+    if (data.last_updated && data.last_updated !== request.baseline) {
+      radarData = data;
+      renderRadar();
+      finishRefresh('feed_updated');
+      return;
+    }
+  } catch {
+    // Transient network failures do not report a successful refresh.
+  } finally {
+    refreshChecking = false;
+    if (pendingRefresh && !document.hidden) refreshTimer = setTimeout(checkFeedUpdate, 20000);
+  }
+}
+
+function requestRefresh(event) {
+  if (!site) { event.preventDefault(); return; }
+  // Normal link navigation preserves GitHub login, popup handling and keyboard access.
+  pendingRefresh = {baseline: radarData?.last_updated || null, until: Date.now() + 5 * 60000};
+  sessionStorage.setItem('sentinel_refresh', JSON.stringify(pendingRefresh));
+  feedStatus = '';
+  renderFeedStatus();
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(checkFeedUpdate, 20000);
+}
+
+document.getElementById('btn-dispatch-radar').addEventListener('click', requestRefresh);
+window.addEventListener('focus', checkFeedUpdate);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { clearTimeout(refreshTimer); refreshTimer = null; }
+  else checkFeedUpdate();
 });
 
-document.getElementById('btn-close-modal').addEventListener('click', () => {
-  document.getElementById('modal-settings').classList.add('hidden');
-});
+function renderGuide() {
+  const title = document.getElementById('guide-step-title');
+  if (!title) return;
+  document.getElementById('guide-progress').textContent = `${guideStep + 1} / 3`;
+  document.getElementById('guide-repository').textContent = site?.repository || '';
+  title.textContent = localeData[`step_${guideStep + 1}_title`] || '';
+  document.getElementById('guide-step-body').textContent = localeData[`step_${guideStep + 1}_body`] || '';
+  const link = document.getElementById('guide-action');
+  link.textContent = localeData[`step_${guideStep + 1}_action`] || '';
+  link.removeAttribute('href');
+  if (site) link.href = [
+    `https://github.com/${site.repository}`,
+    `https://github.com/${site.repository}/settings/pages`,
+    workflowURL()
+  ][guideStep];
+  document.getElementById('btn-guide-back').disabled = guideStep === 0;
+  document.getElementById('btn-guide-next').textContent = localeData[guideStep === 2 ? 'done_btn' : 'next_btn'] || '';
+}
 
-document.getElementById('btn-save-settings').addEventListener('click', () => {
-  const token = document.getElementById('input-token').value.trim();
-  const repo = document.getElementById('input-repo').value.trim();
-  if (token) localStorage.setItem('sentinel_pat', token);
-  else localStorage.removeItem('sentinel_pat');
-  if (repo) localStorage.setItem('sentinel_repo', repo);
-  else localStorage.removeItem('sentinel_repo');
-  document.getElementById('modal-settings').classList.add('hidden');
-  showToast(localeData.save_btn || 'Saved', 'success');
+function closeGuide() {
+  document.getElementById('modal-settings').close();
+  guideTrigger?.focus();
+}
+document.getElementById('btn-open-settings').addEventListener('click', event => {
+  guideTrigger = event.currentTarget;
+  guideStep = 0;
+  renderGuide();
+  document.getElementById('modal-settings').showModal();
+});
+document.getElementById('btn-close-modal').addEventListener('click', closeGuide);
+document.getElementById('btn-guide-next').addEventListener('click', () => {
+  if (guideStep === 2) closeGuide();
+  else { guideStep++; renderGuide(); }
+});
+document.getElementById('btn-guide-back').addEventListener('click', () => {
+  guideStep = Math.max(0, guideStep - 1); renderGuide();
+});
+document.getElementById('guide-action').addEventListener('click', event => {
+  if (!site) event.preventDefault();
+  else if (guideStep === 2) requestRefresh(event);
 });
 
 // Theme Toggle
@@ -369,5 +456,8 @@ if (localStorage.getItem('sentinel_theme') === 'dark' || (!localStorage.getItem(
   document.documentElement.classList.remove('dark');
 }
 
-loadLocale(currentLocale);
-fetchLocalData();
+(async () => {
+  await Promise.all([loadLocale(currentLocale), loadSite(), fetchLocalData()]);
+  renderFeedStatus();
+  checkFeedUpdate();
+})();

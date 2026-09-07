@@ -27,19 +27,18 @@
 
 1. **🛡️ Anti-Bot Sentinel Shield**: Flags and blocks suspected mass-following accounts using account age and follower ratios. Heuristics can produce false positives; commit backdating is not analyzed.
 2. **📡 On-Demand Tech Radar**: Analyzes your starred repositories, tracks latest tool releases, and discovers rising open-source projects tailored to your technical DNA.
-3. **⚡ Zero API Abuse & Hibernation**: Heavy scraping runs strictly **on-demand** with a single click from the web UI. Automatically pauses if unused for more than 7 days.
+3. **⚡ Zero API Abuse & Hibernation**: Heavy scraping runs strictly **on-demand** from the dashboard with confirmation in GitHub. Automatically pauses if unused for more than 7 days.
 4. **🌐 Borderless & Multilingual UI**: Modern, clean, borderless web interface with Light/Dark mode and native localization in the 10 most spoken languages.
 5. **🤝 Web of Trust Directory**: Flat-file Git-backed database to showcase verified real developers and open-source projects.
 
 ---
 
-## 🚀 Quick Setup (Fork & Run in 2 Minutes)
+## 🚀 Quick Setup (No Browser Token)
 
-1. **Fork this repository** (or click **"Use this template"**).
-2. Go to **Settings > Secrets and variables > Actions**.
-3. Add a **Repository Secret** named `GH_BLOCKER_TOKEN` with your GitHub Personal Access Token (Permissions: user **Block another user: write**; browser token: repository **Actions: write**).
-4. Enable **GitHub Pages** under **Settings > Pages** (Source: `GitHub Actions`).
-5. Your custom dashboard will be live at `https://<your-username>.github.io/<repo-name>/`!
+1. Create your own public repository with **Use this template**.
+2. Enable Actions if prompted, then select **GitHub Actions** in Settings → Pages. Run **Deploy GitHub Pages** once.
+3. Open the dashboard, click **Update Feed ⚡**, confirm **Run workflow** on GitHub and return. The feed refreshes automatically. **No browser token or extra radar secret needed.**
+4. Personal blocking is optional: see [Sentinel setup](DEPLOYMENT.md#sentinel).
 
 ---
 

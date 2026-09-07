@@ -45,6 +45,7 @@
 
     }
     :focus-visible { outline: 2px solid #6366F1; outline-offset: 3px; }
+    dialog::backdrop { background: rgb(0 0 0 / 0.4); backdrop-filter: blur(4px); }
     .surface-card {
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -82,7 +83,7 @@
       </div>
 
       <!-- Actions & Nav Controls -->
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <!-- Language Selector -->
         <select id="lang-select" class="text-xs font-medium bg-surface-mutedLight dark:bg-surface-mutedDark text-slate-700 dark:text-slate-200 py-2 px-3 rounded-xl cursor-pointer">
           <option value="en">English (US)</option>
@@ -116,17 +117,23 @@
         </button>
 
         <!-- On-Demand Dispatch Button -->
-        <button id="btn-dispatch-radar" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-medium text-xs py-2.5 px-4 rounded-xl shadow-lg shadow-indigo-500/25 flex items-center gap-1.5 transition">
+        <a id="btn-dispatch-radar" target="_blank" rel="noopener noreferrer" aria-disabled="true" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-medium text-xs py-2.5 px-4 rounded-xl shadow-lg shadow-indigo-500/25 flex items-center gap-1.5 transition">
           <span id="btn-refresh-text">Update Feed ⚡</span>
-        </button>
+        </a>
 
       </div>
     </div>
   </header>
 
+  <div class="max-w-6xl mx-auto px-6 pt-4 text-xs space-y-1">
+    <p id="refresh-help" class="text-slate-500 dark:text-slate-400"></p>
+    <p id="feed-status" role="status" aria-live="polite" class="font-medium"></p>
+    <time id="feed-updated" class="text-slate-400 block"></time>
+  </div>
+
   <!-- Navigation Tabs (Pills) -->
   <main class="max-w-6xl mx-auto px-6 py-6">
-    <div class="flex items-center gap-2 mb-8 bg-surface-mutedLight dark:bg-surface-mutedDark p-1.5 rounded-2xl w-fit">
+    <div class="flex flex-wrap items-center gap-2 mb-8 bg-surface-mutedLight dark:bg-surface-mutedDark p-1.5 rounded-2xl w-fit">
       <button class="nav-tab active px-5 py-2.5 rounded-xl font-medium text-xs transition bg-white dark:bg-surface-cardDark text-indigo-600 dark:text-indigo-400 shadow-sm" data-tab="tab-radar">
         <span id="nav-radar">Tech Radar</span>
       </button>
@@ -263,33 +270,29 @@
 
   </main>
 
-  <!-- Settings Modal (Token & Repo) -->
-  <div id="modal-settings" class="hidden fixed inset-0 z-50 backdrop-blur-md bg-black/40 flex items-center justify-center p-4">
-    <div class="bg-surface-cardLight dark:bg-surface-cardDark p-6 rounded-3xl shadow-2xl max-w-md w-full space-y-5">
-      <div class="flex items-center justify-between">
-        <h3 id="modal-title" class="font-bold text-base">On-Demand GitHub Dispatch Token</h3>
-        <button id="btn-close-modal" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg font-bold">&times;</button>
+  <!-- Optional setup guide; credentials stay on GitHub. -->
+  <dialog id="modal-settings" aria-labelledby="modal-title" class="bg-surface-cardLight dark:bg-surface-cardDark text-slate-800 dark:text-slate-100 p-6 rounded-3xl shadow-2xl max-w-md w-[calc(100%-2rem)]">
+    <div class="space-y-5">
+      <div class="flex items-center justify-between gap-4">
+        <h3 id="modal-title" class="font-bold text-base">Get started</h3>
+        <button id="btn-close-modal" class="text-lg" aria-label="Close">&times;</button>
       </div>
-      <p id="modal-desc" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-        Enter a fine-grained GitHub Personal Access Token (with Actions: Write permission). It is stored solely in your browser's localStorage.
-      </p>
-      <div class="space-y-3 text-xs">
-        <div>
-          <label id="token-label" for="input-token" class="block font-medium text-slate-400 mb-1">GitHub Token (PAT)</label>
-          <input type="password" id="input-token" placeholder="ghp_xxxxxxxxxxxx" class="w-full bg-surface-mutedLight dark:bg-surface-mutedDark p-3 rounded-xl font-mono text-xs">
-        </div>
-        <div>
-          <label id="repo-label" for="input-repo" class="block font-medium text-slate-400 mb-1">Target Repository (Owner/Repo)</label>
-          <input type="text" id="input-repo" placeholder="username/repo-name" class="w-full bg-surface-mutedLight dark:bg-surface-mutedDark p-3 rounded-xl font-mono text-xs">
-        </div>
+      <p id="modal-desc" class="text-xs text-slate-500 dark:text-slate-400"></p>
+      <p id="guide-repository" class="text-xs font-mono break-all"></p>
+      <div aria-live="polite" class="space-y-3">
+        <span id="guide-progress" class="text-xs text-indigo-500"></span>
+        <h4 id="guide-step-title" class="font-bold"></h4>
+        <p id="guide-step-body" class="text-sm text-slate-500 dark:text-slate-400"></p>
       </div>
-      <div class="flex justify-end gap-2 pt-2">
-        <button id="btn-save-settings" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-md transition">
-          Save Locally
-        </button>
+      <a id="guide-action" target="_blank" rel="noopener noreferrer" class="block bg-indigo-600 text-white text-sm px-4 py-3 rounded-xl text-center"></a>
+      <div class="flex justify-between gap-3">
+        <button id="btn-guide-back" class="text-sm p-2 disabled:opacity-40">Back</button>
+        <button id="btn-guide-next" class="text-sm p-2 font-bold">Next</button>
       </div>
+      <a id="btn-copy-template" href="https://github.com/iberi22/github-sentinel-radar/generate" target="_blank" rel="noopener noreferrer" class="block text-xs text-indigo-500"></a>
+      <a id="btn-sentinel-setup" target="_blank" rel="noopener noreferrer" class="block text-xs text-slate-500"></a>
     </div>
-  </div>
+  </dialog>
 
   <script src="app.js"></script>
 </body>

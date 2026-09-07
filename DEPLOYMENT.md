@@ -1,90 +1,94 @@
-# Deployment and validation / Despliegue y validación
+# Puesta en marcha sin token web
 
-## Estado de esta entrega
+## Usar este dashboard
 
-Extraído de `apps/github-sentinel-radar.zip` el 2026-09-07 UTC. Publicación autorizada por el mantenedor mediante gh CLI. La consulta inicial
-como `iberi22` confirmó que era necesario crear el repositorio.
-Repositorio creado y main subido con gh/git. Pages desplegado correctamente:
-https://github.com/iberi22/github-sentinel-radar/actions/runs/34078083746
+1. Abre [la web](https://iberi22.github.io/github-sentinel-radar/). Leer el feed no requiere iniciar sesión.
+2. Pulsa **Actualizar Feed ⚡**. Se abre el workflow en GitHub, usando tu sesión habitual.
+3. Pulsa **Run workflow** y confirma. Vuelve a la web: recogerá el feed nuevo cuando terminen Radar y Pages.
 
-Web verificada con Chromium: https://iberi22.github.io/github-sentinel-radar/
-No se ejecutaron bloqueos reales. GH_BLOCKER_TOKEN aún no está configurado.
+GitHub exige permiso de escritura en el repositorio para ejecutar el workflow.
+Si no lo tienes, crea tu propia copia. El dashboard incluye **Primeros pasos**,
+con botones Siguiente/Atrás y enlaces al repositorio correcto.
 
-La plantilla se publica con datos vacíos. Los ejemplos heredados del ZIP no
-acreditaban bloqueos, releases o verificaciones reales y siguen conservados
-en el ZIP local original. Revisa la URL upstream antes de activar Sentinel.
-Las heurísticas actuales sólo usan antigüedad y ratio de seguidores; no analizan
-commits retrofechados ni la velocidad de seguimiento.
+La web nunca recibe credenciales. Los PAT guardados por versiones anteriores se
+eliminan al cargarla. Tema e idioma permanecen en localStorage; la espera de un
+feed nuevo sólo se conserva durante la sesión. La comprobación consulta un JSON
+cada 20 segundos, únicamente con la pestaña visible, y termina al recibir datos
+nuevos o al pasar cinco minutos. No dispara escaneos automáticamente ni considera
+que abrir GitHub sea prueba de que el workflow se ejecutó.
 
-## Tokens y permisos
+## Crear tu copia
 
-- `GH_BLOCKER_TOKEN`: secreto de Actions con un PAT **del usuario protegido**.
-  Para bloqueo personal, permiso de usuario fine-grained **Block another user:
-  write**. El radar requiere también permiso de usuario **Starring: read** para leer sus repositorios con estrella. No se sustituye
-  por `GITHUB_TOKEN`: éste representa al repositorio y no al usuario protegido.
-- Token de la web: PAT independiente limitado al repositorio destino con
-  **Actions: write**. No necesita permiso para bloquear usuarios.
-- `GITHUB_TOKEN`: sólo `contents: write` en los jobs que guardan datos. Pages
-  tiene `contents: read`, `pages: write`, `id-token: write`.
-- El token web persiste en `localStorage`, accesible a scripts del mismo origen
-  (incluido Tailwind CDN). Usa un token de alcance mínimo y vencimiento corto;
-  guardar el campo vacío lo elimina. Nunca se copia a los archivos del repo.
+1. Usa **Use this template → Create a new repository** y crea un repositorio público.
+2. Abre Actions y habilita los workflows si GitHub lo solicita. En Settings → Pages,
+   selecciona **GitHub Actions** como origen. Ejecuta **Deploy GitHub Pages** una vez.
+3. Abre la web de tu copia y pulsa Actualizar Feed. No hace falta crear ni pegar tokens.
 
-Referencias oficiales:
-[Block a user](https://docs.github.com/en/rest/users/blocking#block-a-user),
-[Workflow dispatch](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event),
-[GITHUB_TOKEN y triggers](https://docs.github.com/en/actions/concepts/security/github_token).
+GitHub no permite habilitar Pages inicialmente con el GITHUB_TOKEN automático;
+por eso el paso de Settings → Pages se hace una vez desde tu sesión de GitHub.
+El despliegue genera `site.json` con repositorio y rama, por lo que la web funciona
+en copias y dominios personalizados sin editar JavaScript. Para la plantilla,
+conserva `main`: los triggers de Pages todavía filtran esa rama.
 
-## Sincronización y publicación
+## Radar
 
-1. Crear o habilitar acceso a `iberi22/github-sentinel-radar` en GitHub. El repo
-   local contiene `main` y `origin` preparado. No crear otro README remoto si se
-   va a subir este historial inicial.
-2. `git push -u origin main` desde este directorio. Si hay historial remoto,
-   revisarlo e integrarlo; no forzar el push.
-3. Configurar `GH_BLOCKER_TOKEN` con los permisos anteriores.
-4. Settings → Pages → Source: **GitHub Actions**. Ejecutar `pages.yml` manualmente
-   si el push inicial ocurrió antes de habilitar Pages.
-5. Abrir `https://iberi22.github.io/github-sentinel-radar/`, guardar el PAT web y
-   `iberi22/github-sentinel-radar`. Pulsar Actualizar Feed y comprobar `radar.yml`.
-6. Pages se ejecuta al completarse correctamente Radar o Sentinel mediante
-   `workflow_run`. Los pushes hechos con `GITHUB_TOKEN` no bastan para disparar
-   otro workflow. Recargar la web cuando terminen ambos jobs; el dispatch sólo
-   confirma la solicitud, no la publicación terminada.
+El workflow usa el **GITHUB_TOKEN automático de Actions**, con `contents: write`
+para guardar el feed. Consulta las estrellas **públicas del propietario** mediante
+`GET /users/{username}/starred`. No usa GH_BLOCKER_TOKEN y no exporta metadatos
+privados. Para una organización o un perfil distinto, configura la variable de
+Actions **RADAR_USERNAME** con el usuario deseado. Un perfil privado puede dar un
+feed vacío; no es un error de autenticación del navegador.
 
-Los workflows de escritura comparten exclusión mutua y tienen un límite de
-10 minutos. La plantilla usa `main` para dispatch/Pages. Si cambias la rama por
-defecto, ajusta ambos. El radar no tiene cron ni servicio residente: consume sólo
-cuando se solicita y termina al acabar. `--force` registra actividad manual;
-una ejecución sin ese argumento hiberna tras 7 días (configurable), y no renueva
-la fecha de actividad. El input manual `force: false` respeta esa hibernación.
+No tiene cron ni servidor residente. Cada ejecución termina al acabar, con límite
+de 10 minutos. La ejecución manual fuerza el despertar de forma predeterminada.
+`force: false` respeta la hibernación de 7 días y no renueva actividad manual.
+Pages se ejecuta después del workflow mediante `workflow_run`; los commits hechos
+con GITHUB_TOKEN por sí solos no disparan otro workflow.
 
-## Validación local reproducible
+## Sentinel
 
-Python 3.11+; validado aquí con Python 3.12.12 y requests 2.33.0. La única
-dependencia de ejecución es requests (`>=2.32.4,<3`). Node 22+ y Chromium se usan
-sólo para las pruebas de navegador. No se necesita npm ni descargar navegadores.
+El bloqueo personal es **opcional** y requiere autorización del usuario protegido.
+Configura una sola vez el secreto de Actions **GH_BLOCKER_TOKEN**, con un PAT de
+usuario fine-grained y permiso **Block another user: write**. No se pega en esta
+web. GITHUB_TOKEN representa al repositorio y no permite bloquear en tu nombre.
+La presencia del secreto no demuestra que sus permisos sean correctos.
+
+En `iberi22/github-sentinel-radar` se confirmó que ese secreto ya existe. Esta
+entrega prueba el radar real, pero no ejecuta bloqueos para probar la interfaz.
+Las heurísticas usan antigüedad y ratio de seguidores; no detectan commits
+retrofechados. Revisa los umbrales y la lista upstream antes de activar bloqueos.
+
+## Por qué queda una confirmación en GitHub
+
+GitHub Pages sólo sirve archivos estáticos. Un clic que ejecute un workflow dentro
+del dashboard necesitaría credenciales en el navegador o un servicio de
+GitHub App/OAuth que autentique al usuario y guarde las credenciales. En esta
+arquitectura, GitHub gestiona esa sesión y confirmación. No hay un endpoint público
+que permita a cualquier visitante gastar la cuota de Actions del propietario.
+Una GitHub App con backend es una posible ampliación si se prioriza ese clic sobre
+el coste y mantenimiento de otra capa; no forma parte de esta implementación.
+
+## Validación reproducible
+
+Python 3.11+, requests `>=2.32.4,<3`; Node 22+ y Chromium sólo para pruebas.
 
 ```sh
 uv venv --python python .venv
 uv pip install --python .venv/bin/python -r requirements.txt
-uv pip check --python .venv/bin/python
 xavier exec '.venv/bin/python -m unittest discover -s tests -v'
 xavier exec 'node tests/browser.mjs'
-python -m http.server 8080 --bind 127.0.0.1
-# Abrir http://127.0.0.1:8080/docs/index.html
-```
-
-Las pruebas de backend sustituyen la API y la escritura de datos. Las de Chromium
-sirven la web real y sustituyen exclusivamente las llamadas a la API GitHub;
-no usan un PAT real. La interfaz conserva Tailwind y fuentes por CDN, por lo que
-la revisión visual requiere red. Los diccionarios y datos son locales.
-
-TD-01 (webhooks organizacionales) y TD-02 (LLM local) siguen pendientes, con planes
-paso a paso sincronizados en `TASK.md` y `.gitcore/planning/tasks.json`.
-
-Prueba sobre el despliegue público (API GitHub simulada):
-
-```sh
 SENTINEL_URL=https://iberi22.github.io/github-sentinel-radar/ xavier exec 'node tests/browser.mjs'
 ```
+
+La prueba de navegador verifica 10 idiomas/RTL, guía, migración de credenciales,
+repositorios alternativos, navegación sin llamadas a la API GitHub, carga del feed,
+pausa y límite de espera, y XSS. No envía solicitudes de escaneo reales.
+
+## Referencias oficiales
+
+- [Ejecutar workflows manualmente](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
+- [Estrellas públicas por usuario](https://docs.github.com/en/rest/activity/starring#list-repositories-starred-by-a-user).
+- [Bloqueo personal](https://docs.github.com/en/rest/users/blocking#block-a-user).
+- [GITHUB_TOKEN y triggers](https://docs.github.com/en/actions/concepts/security/github_token).
+- [Restricción de nombres GITHUB_ en secretos](https://docs.github.com/en/actions/reference/security/secrets).
+- [Habilitación de Pages y permisos](https://github.com/actions/configure-pages/blob/main/action.yml).

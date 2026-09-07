@@ -18,10 +18,10 @@ GitHub Sentinel & Radar es una plataforma distribuida, modular y ejecutada bajo 
    - Doble almacenamiento: `data/blocklist.json` (máquinas/UI) y `BLOCKED_ACCOUNTS.md` (lectura humana).
 
 2. **Capa 2: Radar de Inteligencia Técnica (Feed Bajo Demanda)**
-   - Extracción del ADN técnico del usuario analizando repositorios con estrella (`GET /user/starred`).
+   - Extracción del ADN técnico del usuario analizando repositorios con estrella (`GET /users/{username}/starred`, sólo datos públicos).
    - Radar de lanzamientos: Detección de nuevos releases y notas de versión en bibliotecas seguidas.
    - Motor de descubrimiento: Búsqueda de proyectos emergentes en los mismos tópicos y lenguajes.
-   - Activación **100% bajo demanda**: Disparado desde la web mediante token local en el navegador o workflow manual, con modo hibernación automático tras inactividad.
+   - Activación **100% bajo demanda**: Disparado mediante enlace desde la web y confirmación con la sesión de GitHub, con modo hibernación automático tras inactividad.
 
 3. **Capa 3: Directorio de Nodos y Red de Confianza (*Web of Trust*)**
    - Registro distribuido descentralizado sobre Git (`data/verified_projects.json` y `VERIFIED_PROJECTS.md`).
@@ -32,7 +32,7 @@ GitHub Sentinel & Radar es una plataforma distribuida, modular y ejecutada bajo 
    - Estilo moderno *borderless* (sin bordes duros, elevación suave por superficie, tipografía Geist/Inter).
    - Soporte nativo para modo claro y oscuro con persistencia.
    - Internacionalización (i18n) completa en los 10 idiomas más hablados del mundo.
-   - Persistencia opcional del token de disparo en `localStorage`, accesible a scripts del mismo origen. Token limitado a Actions: write; campos vacíos eliminan credenciales guardadas.
+   - Sin credenciales en el navegador. Guía de tres pasos, contexto público de despliegue y actualización del feed al volver de GitHub, acotada a cinco minutos y pausada en pestañas ocultas.
 
 ---
 

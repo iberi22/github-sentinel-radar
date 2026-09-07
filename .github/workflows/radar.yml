@@ -40,7 +40,8 @@ jobs:
       - name: Run Radar Engine
         env:
           FORCE_RUN: ${{ inputs.force }}
-          GH_TOKEN: ${{ secrets.GH_BLOCKER_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          RADAR_USERNAME: ${{ vars.RADAR_USERNAME || github.repository_owner }}
         run: |
           if [ "$FORCE_RUN" = "true" ]; then
             python src/radar.py --force

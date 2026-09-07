@@ -35,11 +35,10 @@
 
 ## 🚀 Puesta en Marcha Rápida (Fork en 2 Minutos)
 
-1. Haz un **Fork** de este repositorio (o haz clic en **"Use this template"**).
-2. Ve a **Settings > Secrets and variables > Actions**.
-3. Añade un **Repository Secret** llamado `GH_BLOCKER_TOKEN` con tu Personal Access Token de GitHub (Permisos: user **Block another user: write**; browser token: repository **Actions: write**).
-4. Activa **GitHub Pages** en **Settings > Pages** (Origen: `GitHub Actions`).
-5. ¡Tu panel personalizado estará activo en `https://<tu-usuario>.github.io/<nombre-del-repo>/`!
+1. Crea tu repositorio público con **Use this template**.
+2. Habilita Actions si GitHub lo solicita. En Settings → Pages elige **GitHub Actions** y ejecuta **Deploy GitHub Pages** una vez.
+3. Abre el dashboard, pulsa **Actualizar Feed ⚡**, confirma **Run workflow** en GitHub y vuelve. El feed se refresca automáticamente. **Sin token web ni secreto adicional para el radar.**
+4. El bloqueo personal es opcional: consulta [configuración de Sentinel](DEPLOYMENT.md#sentinel).
 
 ---
 

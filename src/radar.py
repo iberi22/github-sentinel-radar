@@ -9,7 +9,7 @@ Features an automatic hibernation mechanism to avoid API quota waste when inacti
 import os
 import sys
 import json
-import requests
+import re
 from datetime import datetime, timezone, timedelta
 from collections import Counter
 
@@ -79,7 +79,10 @@ def main():
     cfg = load_config()
     if not cfg["radar"]["enabled"]:
         return
-    token = os.environ.get("GH_BLOCKER_TOKEN") or os.environ.get("GH_TOKEN")
+    username = os.environ.get("RADAR_USERNAME", "").strip()
+    if username and not re.fullmatch(r"[A-Za-z0-9-]+", username):
+        raise ValueError("RADAR_USERNAME must be a GitHub username")
+    token = os.environ.get("GH_TOKEN") or os.environ.get("GH_BLOCKER_TOKEN")
     if not token:
         print("[ERROR] GH_TOKEN requerido.")
         raise SystemExit(1)
@@ -93,11 +96,12 @@ def main():
     headers = get_headers(token)
 
     # 1. Obtener starred repos
+    starred_url = f"https://api.github.com/users/{username}/starred" if username else "https://api.github.com/user/starred"
     starred_repos = []
     limit = cfg["radar"]["max_starred_to_analyze"]
     page = 1
     while len(starred_repos) < limit:
-        response = github_request("GET", "https://api.github.com/user/starred", headers=headers,
+        response = github_request("GET", starred_url, headers=headers,
                                   params={"per_page": min(limit, 100), "page": page})
         batch = response.json()
         starred_repos.extend(batch[:limit - len(starred_repos)])
@@ -108,6 +112,8 @@ def main():
     languages_counter = Counter()
     releases = []
 
+    # A public dashboard must never publish private repository metadata.
+    starred_repos = [repo for repo in starred_repos if not repo.get("private", False)]
     for index, repo in enumerate(starred_repos):
         lang = repo.get("language")
         if lang:
@@ -142,6 +148,8 @@ def main():
         s_resp = github_request("GET", f"https://api.github.com/search/repositories?q={search_query}&sort=stars&order=desc&per_page={min(cfg['radar']['max_discoveries'], 100)}", headers=headers)
         if s_resp.status_code == 200:
             for item in s_resp.json().get("items", [])[:cfg["radar"]["max_discoveries"]]:
+                if item.get("private", False):
+                    continue
                 discoveries.append({
                     "full_name": item["full_name"],
                     "html_url": item["html_url"],
@@ -157,6 +165,7 @@ def main():
             last_dispatched = json.load(stream).get("last_dispatched_at")
 
     radar_payload = {
+        "profile_user": username or None,
         "last_updated": datetime.now(timezone.utc).isoformat(),
         "last_dispatched_at": last_dispatched,
         "profile_dna": {

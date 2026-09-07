@@ -35,11 +35,10 @@
 
 ## 🚀 فوری آغاز (2 منٹ میں سیٹ اپ)
 
-1. اس ریپوزٹری کو **Fork** کریں۔
-2. **Settings > Secrets and variables > Actions** پر جائیں۔
-3. `GH_BLOCKER_TOKEN` کے نام سے پرسنل ایکسیس ٹوکن شامل کریں۔
-4. **Settings > Pages** میں سورس کو **GitHub Actions** منتخب کریں۔
-5. آپ کا ڈیش بورڈ تیار ہے!
+1. **Use this template** سے اپنی عوامی ریپوزٹری بنائیں۔
+2. ضرورت پر Actions فعال کریں۔ Settings → Pages میں **GitHub Actions** منتخب کریں اور **Deploy GitHub Pages** ایک بار چلائیں۔
+3. ڈیش بورڈ میں اپ ڈیٹ دبائیں، GitHub پر **Run workflow** کی تصدیق کرکے واپس آئیں۔ **براؤزر ٹوکن یا رڈار کا اضافی سیکرٹ نہیں چاہیے۔**
+4. ذاتی بلاکنگ اختیاری ہے: [Sentinel سیٹ اپ](DEPLOYMENT.md#sentinel)۔
 
 ## 📜 لائسنس
 MIT License © 2026 Sandra Lorena Santacruz اور کمیونٹی۔

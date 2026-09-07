@@ -11,3 +11,4 @@ venv/
 *.db
 *.sqlite*
 docs/data/
+docs/site.json

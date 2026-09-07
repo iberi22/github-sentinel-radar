@@ -35,11 +35,10 @@
 
 ## 🚀 Configuração Rápida em 2 Minutos
 
-1. Faça um **Fork** deste repositório (ou use **"Use this template"**).
-2. Vá em **Settings > Secrets and variables > Actions**.
-3. Adicione o segredo `GH_BLOCKER_TOKEN` com o seu Personal Access Token do GitHub.
-4. Em **Settings > Pages**, selecione o deploy via **GitHub Actions**.
-5. Acesse seu painel em `https://<seu-usuario>.github.io/<seu-repo>/`!
+1. Crie seu repositório público com **Use this template**.
+2. Habilite Actions se solicitado. Em Settings → Pages escolha **GitHub Actions** e execute **Deploy GitHub Pages** uma vez.
+3. Abra o painel, atualize, confirme **Run workflow** no GitHub e volte. **Sem token no navegador nem segredo adicional para o radar.**
+4. O bloqueio pessoal é opcional: [configuração do Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 Licença
 Licença MIT © 2026 Sandra Lorena Santacruz e Contribuidores.

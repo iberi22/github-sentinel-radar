@@ -35,11 +35,10 @@
 
 ## 🚀 两分钟极速上手
 
-1. **Fork 本仓库**（或点击 **"Use this template"**）。
-2. 进入仓库设置 **Settings > Secrets and variables > Actions**。
-3. 添加名为 `GH_BLOCKER_TOKEN` 的密钥（具有 用户 **Block another user: write**；浏览器令牌：仓库 **Actions: write** 权限）。
-4. 在 **Settings > Pages** 中将部署源选为 **GitHub Actions**。
-5. 您的专属面板即可通过 `https://<您的用户名>.github.io/<仓库名>/` 访问！
+1. 用 **Use this template** 创建自己的公开仓库。
+2. 按提示启用 Actions，在 Settings → Pages 选择 **GitHub Actions**，然后运行一次 **Deploy GitHub Pages**。
+3. 打开仪表板，点击更新，在 GitHub 确认 **Run workflow** 后返回，动态会自动刷新。**浏览器无需令牌，雷达无需额外密钥。**
+4. 个人屏蔽可选：[Sentinel 设置](DEPLOYMENT.md#sentinel)。
 
 ## 📜 许可证
 MIT License © 2026 Sandra Lorena Santacruz 与社区贡献者。

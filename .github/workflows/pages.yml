@@ -8,6 +8,7 @@ on:
       - 'docs/**'
       - 'data/**'
       - '.github/workflows/pages.yml'
+      - 'src/build_site.py'
   workflow_run:
     workflows: ['GitHub Sentinel - Anti-Bot Blocker', 'GitHub Radar - On-Demand Technical Feed']
     types: [completed]
@@ -38,10 +39,11 @@ jobs:
           ref: main
           persist-credentials: false
 
-      - name: Copy data to docs for frontend access
-        run: |
-          mkdir -p docs/data
-          cp -r data/* docs/data/
+      - name: Prepare public site and repository context
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: python src/build_site.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
