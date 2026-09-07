@@ -84,8 +84,7 @@ jobs:
           git push -u origin "$BRANCH"
           PR_URL=$(gh pr create --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" \
             --title "🛡️ Block request: ${{ inputs.targets }}" \
-            --body "Solicitud de bloqueo generada desde la Cola de Revisión (run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). Revisa el diff: cada login queda marcado como \`approved\` en \`data/review_queue.json\`. **Pulsa Merge para ejecutar los bloqueos**; cerrar sin merge no bloquea a nadie." \
-            --delete-branch)
+            --body "Solicitud de bloqueo generada desde la Cola de Revisión (run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). Revisa el diff: cada login queda marcado como \`approved\` en \`data/review_queue.json\`. **Pulsa Merge para ejecutar los bloqueos**; cerrar sin merge no bloquea a nadie.")
           echo "Abre el PR para revisar y confirmar: $PR_URL"
           echo "## 🛡️ Block request" >> "$GITHUB_STEP_SUMMARY"
           echo "Revisa y pulsa Merge para ejecutar: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
