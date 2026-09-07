@@ -1,5 +1,5 @@
 # 📡 GitHub Tech Radar & Developer Feed
-_Última actualización: 2026-09-07T03:41:36 UTC_
+_Última actualización: 2026-09-07T04:06:28 UTC_
 
 ## 🚀 Últimos Lanzamientos y Releases (Tus Herramientas)
 
@@ -69,16 +69,16 @@ Replace `<target>` with your platform (e.g., `aarch64-apple-darwin` or `x86_64-u
 
 ## 💡 Proyectos Descubiertos Afines a tu Stack
 
-- **[n8n-io/n8n](https://github.com/n8n-io/n8n)** (★ 203579) - Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.
+- **[n8n-io/n8n](https://github.com/n8n-io/n8n)** (★ 203580) - Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.
   *Lenguaje:* `TypeScript` | *Topics:* ai, apis, automation, cli
 
 - **[ohmyzsh/ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)** (★ 189602) - 🙃   A delightful community-driven (with 2,500+ contributors) framework for managing your zsh configuration. Includes 300+ optional plugins (rails, git, macOS, hub, docker, homebrew, node, php, python, etc), 140+ themes to spice up your morning, and an auto-update tool that makes it easy to keep up with the latest updates from the community.
   *Lenguaje:* `Shell` | *Topics:* cli, cli-app, oh-my-zsh, oh-my-zsh-plugin
 
-- **[yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp)** (★ 189474) - A feature-rich command-line audio/video downloader
+- **[yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp)** (★ 189479) - A feature-rich command-line audio/video downloader
   *Lenguaje:* `Python` | *Topics:* cli, downloader, python, sponsorblock
 
-- **[google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)** (★ 106840) - An open-source AI agent that brings the power of Gemini directly into your terminal.
+- **[google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)** (★ 106841) - An open-source AI agent that brings the power of Gemini directly into your terminal.
   *Lenguaje:* `TypeScript` | *Topics:* ai, ai-agents, cli, gemini
 
 - **[sherlock-project/sherlock](https://github.com/sherlock-project/sherlock)** (★ 91036) - Hunt down social media accounts by username across social networks
@@ -87,14 +87,14 @@ Replace `<target>` with your platform (e.g., `aarch64-apple-darwin` or `x86_64-u
 - **[OpenHands/OpenHands](https://github.com/OpenHands/OpenHands)** (★ 86389) - 🙌 OpenHands: AI-Driven Development
   *Lenguaje:* `TypeScript` | *Topics:* agent, artificial-intelligence, chatgpt, claude-ai
 
-- **[junegunn/fzf](https://github.com/junegunn/fzf)** (★ 82850) - :cherry_blossom: A command-line fuzzy finder
+- **[junegunn/fzf](https://github.com/junegunn/fzf)** (★ 82848) - :cherry_blossom: A command-line fuzzy finder
   *Lenguaje:* `Go` | *Topics:* bash, cli, fish, fzf
 
 - **[jesseduffield/lazygit](https://github.com/jesseduffield/lazygit)** (★ 82084) - simple terminal UI for git commands
   *Lenguaje:* `Go` | *Topics:* cli, git, terminal
 
-- **[rtk-ai/rtk](https://github.com/rtk-ai/rtk)** (★ 79130) - CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies
+- **[rtk-ai/rtk](https://github.com/rtk-ai/rtk)** (★ 79135) - CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies
   *Lenguaje:* `Rust` | *Topics:* agentic-coding, ai-coding, anthropic, claude-code
 
-- **[Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach)** (★ 78465) - Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.
+- **[Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach)** (★ 78468) - Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.
   *Lenguaje:* `Python` | *Topics:* agent-infrastructure, ai-agent, ai-search, automation

@@ -1,7 +1,7 @@
 {
   "profile_user": "iberi22",
-  "last_updated": "2026-09-07T03:41:36.192112+00:00",
-  "last_dispatched_at": "2026-09-07T03:41:36.192089+00:00",
+  "last_updated": "2026-09-07T04:06:28.998268+00:00",
+  "last_dispatched_at": "2026-09-07T04:06:28.998247+00:00",
   "profile_dna": {
     "top_languages": [
       "Python",
@@ -80,7 +80,7 @@
     {
       "full_name": "n8n-io/n8n",
       "html_url": "https://github.com/n8n-io/n8n",
-      "stars": 203579,
+      "stars": 203580,
       "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
       "language": "TypeScript",
       "topics": [
@@ -133,7 +133,7 @@
     {
       "full_name": "yt-dlp/yt-dlp",
       "html_url": "https://github.com/yt-dlp/yt-dlp",
-      "stars": 189474,
+      "stars": 189479,
       "description": "A feature-rich command-line audio/video downloader",
       "language": "Python",
       "topics": [
@@ -149,7 +149,7 @@
     {
       "full_name": "google-gemini/gemini-cli",
       "html_url": "https://github.com/google-gemini/gemini-cli",
-      "stars": 106840,
+      "stars": 106841,
       "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
       "language": "TypeScript",
       "topics": [
@@ -208,7 +208,7 @@
     {
       "full_name": "junegunn/fzf",
       "html_url": "https://github.com/junegunn/fzf",
-      "stars": 82850,
+      "stars": 82848,
       "description": ":cherry_blossom: A command-line fuzzy finder",
       "language": "Go",
       "topics": [
@@ -239,7 +239,7 @@
     {
       "full_name": "rtk-ai/rtk",
       "html_url": "https://github.com/rtk-ai/rtk",
-      "stars": 79130,
+      "stars": 79135,
       "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies",
       "language": "Rust",
       "topics": [
@@ -261,7 +261,7 @@
     {
       "full_name": "Panniantong/Agent-Reach",
       "html_url": "https://github.com/Panniantong/Agent-Reach",
-      "stars": 78465,
+      "stars": 78468,
       "description": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
       "language": "Python",
       "topics": [
