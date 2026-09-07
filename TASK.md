@@ -51,7 +51,7 @@ _Última actualización: 2026-09-06_
 | F3-01 | `audit.py --propose/--execute-approved` (marcar vs ejecutar)   | ALTA      | ✅ Completado | Hermes      |
 | F3-02 | `audit.yml` con cron diario + rama/PR auto + `block-on-merge.yml` | ALTA   | ✅ Completado | Hermes      |
 | F3-03 | Web: enlace View block requests + ayuda del flujo PR en 10 idiomas | ALTA  | ✅ Completado | Hermes      |
-| F3-04 | Validación en vivo con login fantasma (PR → merge → fallo 404 limpio) | ALTA | ⬜ Pendiente | Hermes   |
+| F3-04 | Validación en vivo con login fantasma (PR → merge → fallo limpio) | ALTA | ✅ Completado | Hermes |
 
 ---
 
@@ -148,3 +148,10 @@ Estado: completado y publicado. Plan aplicado:
 - Pages redesplegado tras la revisión: https://github.com/iberi22/github-sentinel-radar/actions/runs/34085611816 — cola visible en la pestaña Review Queue.
 - Sospechosos: arvelquigley99 (0%), arpitrajjj (17%), Lxcardoza993 (30%), bludnic / Connor9994 / standardgalactic (45% — veteranos con follow masivo, decide el humano).
 - Pendiente: Belalcazar valida si su bot conocido está entre los 6 y decide bloqueos.
+
+## Validación Fase 3 en producción — 2026-09-07 UTC
+
+- Requirió activar en el repo "Allow GitHub Actions to create and approve pull requests" (más `delete_branch_on_merge=true`); sin eso el PR nace muerto. Dos tropiezos previos documentados: flag inexistente en `gh pr create` y ese permiso.
+- Flujo fantasma completo con `ghost-login-404-xyz`: run propose 34092792680 → PR #1 auto-creado con diff exacto (solo cola, estado `approved`) → Merge → `Execute Approved Blocks` run 34092862152 intentó el PUT y falló limpio (403 de GitHub ante usuario inexistente, registrado, exit 1, sin commits basura, rama auto-borrada).
+- Cola limpiada del fantasma (78/72/6/0 de nuevo) y Pages republica solo. Cerrar un PR sin merge no bloquea a nadie por diseño.
+- Pendiente: Belalcazar valida si su bot conocido está entre los 6 y decide bloqueos con el flujo PR.
