@@ -137,6 +137,9 @@
       <button class="nav-tab active px-5 py-2.5 rounded-xl font-medium text-xs transition bg-white dark:bg-surface-cardDark text-indigo-600 dark:text-indigo-400 shadow-sm" data-tab="tab-radar">
         <span id="nav-radar">Tech Radar</span>
       </button>
+      <button class="nav-tab px-5 py-2.5 rounded-xl font-medium text-xs transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-tab="tab-review">
+        <span id="nav-review">Review Queue</span>
+      </button>
       <button class="nav-tab px-5 py-2.5 rounded-xl font-medium text-xs transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-tab="tab-sentinel">
         <span id="nav-sentinel">Bot Sentinel</span>
       </button>
@@ -207,7 +210,68 @@
       </div>
     </section>
 
-    <!-- 2. TAB: SENTINEL (ANTI-BOT) -->
+    <!-- 2. TAB: REVIEW QUEUE (human decision, never auto-blocks) -->
+    <section id="tab-review" class="tab-content hidden space-y-6">
+
+      <!-- Metrics Bar -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-5 rounded-3xl shadow-sm">
+          <p id="label-scanned" class="text-xs text-slate-400">Scanned</p>
+          <p id="metric-scanned" class="text-3xl font-extrabold text-indigo-500 mt-1 font-mono">0</p>
+        </div>
+        <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-5 rounded-3xl shadow-sm">
+          <p id="label-trusted" class="text-xs text-slate-400">Trusted</p>
+          <p id="metric-trusted" class="text-3xl font-extrabold text-emerald-500 mt-1 font-mono">0</p>
+        </div>
+        <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-5 rounded-3xl shadow-sm">
+          <p id="label-suspicious" class="text-xs text-slate-400">Suspicious</p>
+          <p id="metric-suspicious" class="text-3xl font-extrabold text-red-500 mt-1 font-mono">0</p>
+        </div>
+      </div>
+
+      <!-- Review Card -->
+      <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-6 rounded-3xl shadow-sm space-y-5">
+        <div>
+          <h2 id="review-title" class="text-lg font-bold">Follower Review Queue</h2>
+          <p id="review-desc" class="text-xs text-slate-400 mt-1">Every follower and account you follow, scored with a trust %.</p>
+          <p id="review-scan-help" class="text-xs text-slate-500 dark:text-slate-400 mt-2"></p>
+          <p id="review-block-help" class="text-xs text-slate-500 dark:text-slate-400"></p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+          <input type="text" id="review-search" placeholder="Search username..." class="bg-surface-mutedLight dark:bg-surface-mutedDark text-xs py-2.5 px-4 rounded-xl w-full sm:w-64 placeholder-slate-400">
+          <div class="flex flex-wrap gap-2">
+            <button id="btn-copy-targets" class="bg-surface-mutedLight dark:bg-surface-mutedDark hover:opacity-80 text-xs font-semibold py-2.5 px-4 rounded-xl transition">Copy selected</button>
+            <a id="btn-open-audit" target="_blank" rel="noopener noreferrer" aria-disabled="true" class="bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-lg shadow-red-500/25 transition">Open block workflow ↗</a>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 id="suspicious-header" class="text-sm font-bold uppercase tracking-wider text-red-400">Possible bots</h3>
+            <span id="suspicious-count" class="text-xs text-slate-400 font-mono">0</span>
+          </div>
+          <div id="suspicious-table" class="space-y-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 id="trusted-header" class="text-sm font-bold uppercase tracking-wider text-emerald-500">Trusted accounts</h3>
+            <span id="trusted-count" class="text-xs text-slate-400 font-mono">0</span>
+          </div>
+          <div id="trusted-table" class="space-y-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <p id="review-empty" class="text-xs text-slate-400"></p>
+      </div>
+
+    </section>
+
+    <!-- 3. TAB: SENTINEL (ANTI-BOT) -->
     <section id="tab-sentinel" class="tab-content hidden space-y-6">
 
       <!-- Metrics Bar -->
@@ -249,7 +313,7 @@
 
     </section>
 
-    <!-- 3. TAB: DIRECTORY (WEB OF TRUST) -->
+    <!-- 4. TAB: DIRECTORY (WEB OF TRUST) -->
     <section id="tab-directory" class="tab-content hidden space-y-6">
 
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

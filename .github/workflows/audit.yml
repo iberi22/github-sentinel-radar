@@ -1,0 +1,66 @@
+name: GitHub Review - Scan and Block
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'scan = rebuild the review queue (never blocks). block = block the logins in targets (human decision).'
+        required: true
+        default: 'scan'
+        type: choice
+        options:
+          - scan
+          - block
+      targets:
+        description: 'Comma separated GitHub logins to block (only used with mode=block).'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sentinel-data
+  cancel-in-progress: false
+
+jobs:
+  run-audit:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Review Engine
+        env:
+          GH_TOKEN: ${{ secrets.GH_BLOCKER_TOKEN }}
+        run: |
+          if [ "${{ inputs.mode }}" = "block" ]; then
+            if [ -z "${{ inputs.targets }}" ]; then
+              echo "targets is required in block mode" >&2
+              exit 1
+            fi
+            python src/audit.py --block "${{ inputs.targets }}"
+          else
+            python src/audit.py
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/review_queue.json REVIEW_QUEUE.md data/blocklist.json BLOCKED_ACCOUNTS.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(review): update trust queue and block decisions" && git push)

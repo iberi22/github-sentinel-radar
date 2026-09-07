@@ -9,6 +9,26 @@ let localeData = {};
 let radarData = null;
 let blocklistData = null;
 let verifiedData = null;
+let reviewData = null;
+
+// English fallback for per-user reason codes (backend emits code + detail;
+// locales override each reason_<code> template, {d} = factual detail).
+const FALLBACK_REASONS = {
+  reason_young_mass_follow: 'Very new account ({d}) with mass following',
+  reason_new_account: 'New account ({d} old)',
+  reason_extreme_ratio: 'Extreme follow-farming ratio ({d})',
+  reason_mass_follow: 'Mass following, few followers ({d})',
+  reason_lonely_hunter: 'Follows many ({d}) but nobody follows back',
+  reason_empty_profile: 'No public repositories',
+  reason_unknown_age: 'Account age unknown',
+  reason_upstream: 'Flagged by the community blocklist',
+  reason_manual: 'Blocked by your manual decision',
+  reason_mutual: 'You follow each other',
+  reason_veteran: 'Long-standing account ({d})',
+  reason_established: 'Solid follower base ({d})',
+  reason_active_creator: 'Active creator ({d} public repos)'
+};
+const LOGIN_RE = /^[A-Za-z0-9]([A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/;
 
 // RTL Locales
 const RTL_LOCALES = ['ar', 'ur'];
@@ -76,6 +96,19 @@ function applyTranslations() {
     'sentinel-title': 'sentinel_title',
     'sentinel-desc': 'sentinel_desc',
     'label-total-blocked': 'total_blocked',
+    'nav-review': 'nav_review',
+    'review-title': 'review_title',
+    'review-desc': 'review_desc',
+    'review-scan-help': 'review_scan_help',
+    'review-block-help': 'review_block_help',
+    'label-scanned': 'metric_scanned',
+    'label-trusted': 'metric_trusted',
+    'label-suspicious': 'metric_suspicious',
+    'suspicious-header': 'suspicious_header',
+    'trusted-header': 'trusted_header',
+    'btn-copy-targets': 'copy_targets',
+    'btn-open-audit': 'open_audit_workflow',
+    'review-empty': 'review_empty',
     'directory-title': 'directory_title',
     'directory-desc': 'directory_desc',
     'btn-submit-project': 'btn_submit_project',
@@ -103,9 +136,14 @@ function applyTranslations() {
   renderFeedStatus();
   renderDirectory();
   renderBlocklist(document.getElementById('bot-search').value);
+  renderReview(document.getElementById('review-search')?.value || '');
   const searchInput = document.getElementById('bot-search');
   if (searchInput && localeData['search_placeholder']) {
     searchInput.placeholder = localeData['search_placeholder'];
+  }
+  const reviewSearch = document.getElementById('review-search');
+  if (reviewSearch && localeData['review_search_placeholder']) {
+    reviewSearch.placeholder = localeData['review_search_placeholder'];
   }
 }
 
@@ -118,21 +156,24 @@ async function fetchDataFile(name) {
 
 async function fetchLocalData() {
   try {
-    const [rRes, bRes, vRes] = await Promise.all([
+    const [rRes, bRes, vRes, qRes] = await Promise.all([
       fetchDataFile('radar'),
       fetchDataFile('blocklist'),
-      fetchDataFile('verified_projects')
+      fetchDataFile('verified_projects'),
+      fetchDataFile('review_queue')
     ]);
 
     if (!rRes.ok) throw new Error(`Feed HTTP ${rRes.status}`);
     radarData = await rRes.json();
     if (bRes.ok) blocklistData = await bRes.json();
     if (vRes.ok) verifiedData = await vRes.json();
+    if (qRes.ok) reviewData = await qRes.json();
 
     renderRadar();
     renderFeedStatus();
     renderBlocklist();
     renderDirectory();
+    renderReview();
   } catch (e) {
     console.error('Data loading error:', e);
     feedStatus = 'load_error';
@@ -227,6 +268,92 @@ function renderBlocklist(filter = '') {
   });
 }
 
+function profileURL(login) {
+  return (typeof login === 'string' && LOGIN_RE.test(login)) ? `https://github.com/${login}` : '#';
+}
+
+function reasonText(reason) {
+  const template = localeData['reason_' + reason.code] || FALLBACK_REASONS['reason_' + reason.code] || reason.code;
+  return String(template).replace('{d}', reason.detail || '');
+}
+
+function trustColor(trust) {
+  return trust >= 60 ? 'bg-emerald-500' : trust >= 40 ? 'bg-amber-500' : 'bg-red-500';
+}
+
+function reviewTooltip(user) {
+  const stats = user.stats || {};
+  const age = stats.age_days == null ? '?' : `${stats.age_days}d`;
+  const lines = (user.reasons || []).map(r => `${r.tone === 'good' ? '+' : '-'} ${reasonText(r)}`);
+  lines.push(`${localeData.trust_label || 'Trust'}: ${user.trust}% · ${age} · ${stats.following ?? '?'}➜/${stats.followers ?? '?'} · repos ${stats.public_repos ?? '?'}`);
+  return lines.join('\n');
+}
+
+function reviewRow(user) {
+  const blocked = user.status === 'blocked';
+  const suspicious = user.verdict === 'suspicious';
+  const direction = localeData['direction_' + user.direction] || user.direction;
+  const firstBad = (user.reasons || []).find(r => r.tone !== 'good');
+  const why = firstBad ? reasonText(firstBad) : '';
+  const initial = (user.login || '?').charAt(0).toUpperCase();
+  const badge = suspicious
+    ? 'bg-red-500/10 text-red-500'
+    : 'bg-emerald-500/10 text-emerald-500';
+  return `
+      <div class="review-row flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-surface-mutedLight/60 dark:bg-surface-mutedDark/60 rounded-2xl gap-3 text-xs" title="${escapeHTML(reviewTooltip(user))}">
+        <div class="flex items-center gap-3 min-w-0">
+          ${!blocked && suspicious ? `<input type="checkbox" class="review-pick w-4 h-4 accent-red-500 shrink-0" value="${escapeHTML(user.login)}" aria-label="${escapeHTML(user.login)}">` : ''}
+          <div class="w-8 h-8 rounded-xl ${badge} flex items-center justify-center font-bold shrink-0">${escapeHTML(initial)}</div>
+          <div class="min-w-0">
+            <p class="font-bold text-slate-800 dark:text-slate-200 truncate"><a href="${profileURL(user.login)}" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-500 transition">@${escapeHTML(user.login)}</a></p>
+            <p class="text-[11px] text-slate-400 truncate">${escapeHTML((localeData.why_label || 'Why?') + ' ' + why)}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-surface-mutedLight dark:bg-surface-mutedDark text-slate-500">${escapeHTML(direction)}</span>
+          <span class="flex items-center gap-1.5" title="${escapeHTML(String(user.trust) + '%')}">
+            <span class="w-16 h-1.5 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden inline-block"><span class="block h-full rounded-full ${trustColor(user.trust)}" style="width:${Math.max(0, Math.min(100, user.trust))}%"></span></span>
+            <span class="font-mono text-[11px] text-slate-500">${escapeHTML(user.trust)}%</span>
+          </span>
+          ${blocked
+            ? `<span class="text-[11px] font-semibold text-slate-400">${escapeHTML(localeData.blocked_label || 'Blocked')}</span>`
+            : `<a href="${profileURL(user.login)}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-red-500 hover:underline">${escapeHTML(localeData.block_on_github || 'Block on GitHub ↗')}</a>`}
+        </div>
+      </div>
+    `;
+}
+
+function renderReview(filter = '') {
+  const emptyEl = document.getElementById('review-empty');
+  const users = reviewData?.users || [];
+  const totals = reviewData?.totals || {scanned: users.length, trusted: 0, suspicious: 0, blocked: 0};
+  document.getElementById('metric-scanned').textContent = totals.scanned ?? users.length;
+  document.getElementById('metric-trusted').textContent = totals.trusted ?? 0;
+  document.getElementById('metric-suspicious').textContent = totals.suspicious ?? 0;
+  if (emptyEl) emptyEl.textContent = users.length ? '' : (localeData.review_empty || '');
+
+  const query = filter.toLowerCase();
+  const match = user => user.login.toLowerCase().includes(query);
+  const suspicious = users.filter(u => u.verdict === 'suspicious' && match(u));
+  const trusted = users.filter(u => u.verdict !== 'suspicious' && match(u));
+  document.getElementById('suspicious-count').textContent = suspicious.length;
+  document.getElementById('trusted-count').textContent = trusted.length;
+  document.getElementById('suspicious-table').innerHTML = suspicious.map(reviewRow).join('');
+  document.getElementById('trusted-table').innerHTML = trusted.map(reviewRow).join('');
+}
+
+let toastTimer = null;
+function showToast(message) {
+  document.getElementById('toast-msg').textContent = message;
+  document.getElementById('toast').classList.remove('hidden');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => document.getElementById('toast').classList.add('hidden'), 4000);
+}
+
+function auditURL() {
+  return `https://github.com/${site.repository}/actions/workflows/audit.yml`;
+}
+
 function renderDirectory() {
   if (!verifiedData) return;
   const container = document.getElementById('projects-grid');
@@ -296,6 +423,8 @@ async function loadSite() {
   }
   document.getElementById('btn-dispatch-radar').href = workflowURL();
   document.getElementById('btn-dispatch-radar').removeAttribute('aria-disabled');
+  document.getElementById('btn-open-audit').href = auditURL();
+  document.getElementById('btn-open-audit').removeAttribute('aria-disabled');
   document.getElementById('btn-submit-project').href = `https://github.com/${site.repository}/pulls`;
   document.getElementById('btn-sentinel-setup').href = `https://github.com/${site.repository}/blob/${encodeURIComponent(site.default_branch)}/DEPLOYMENT.md#sentinel`;
   renderGuide();
@@ -442,6 +571,33 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 // Search filter for bots
 document.getElementById('bot-search').addEventListener('input', (e) => {
   renderBlocklist(e.target.value);
+});
+
+// Search filter for the review queue
+document.getElementById('review-search').addEventListener('input', (e) => {
+  renderReview(e.target.value);
+});
+
+// Copy selected (or all pending suspicious) logins for the block workflow form
+document.getElementById('btn-copy-targets').addEventListener('click', async () => {
+  const picked = [...document.querySelectorAll('.review-pick:checked')].map(box => box.value);
+  const pending = (reviewData?.users || [])
+    .filter(u => u.verdict === 'suspicious' && u.status !== 'blocked')
+    .map(u => u.login);
+  const list = picked.length ? picked : pending;
+  if (!list.length) return;
+  const text = list.join(',');
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const area = document.createElement('textarea');
+    area.value = text;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+  showToast(localeData.copied_msg || 'Copied.');
 });
 
 // Init

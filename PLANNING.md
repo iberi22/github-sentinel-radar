@@ -14,8 +14,13 @@ GitHub Sentinel & Radar es una plataforma distribuida, modular y ejecutada bajo 
 1. **Capa 1: Centinela Defensivo (Seguridad & Anti-Bot)**
    - Monitoreo periódico ligero de nuevos seguidores (`GET /user/followers`).
    - Motor de análisis heurístico (antigüedad y ratio seguidos/seguidores; análisis temporal de follows y commits aún no implementado).
-   - Bloqueo preventivo automático (`PUT /user/blocks/{username}`).
+   - **Modo revisión por defecto (`anti_bot.review_mode=true`): nada se bloquea solo.** Los sospechosos van a `data/review_queue.json` para decisión humana en la web. Poner `review_mode=false` restaura el auto-bloqueo.
    - Doble almacenamiento: `data/blocklist.json` (máquinas/UI) y `BLOCKED_ACCOUNTS.md` (lectura humana).
+
+1b. **Auditoría bajo demanda (Cola de Revisión)**
+   - `src/audit.py` escanea seguidos + seguidores (`GET /user/following`, `GET /user/followers`, detalle por `GET /users/{login}`) y calcula % de confianza por usuario con motivos trazables (`src/review.py`).
+   - Dos listas: confiables (≥ `review.trust_threshold`, defecto 60) y posibles bots. Cada fila: vínculo (seguidor/seguido/mutuo), % con barra, tooltip con motivos y stats, enlace al perfil.
+   - Bloqueo sólo por decisión explícita: selección en la web → copiar lista → workflow `audit.yml` en modo `block` con `targets`, o bloqueo nativo en el perfil de GitHub. El workflow registra en la cola, `blocklist.json` y `BLOCKED_ACCOUNTS.md`.
 
 2. **Capa 2: Radar de Inteligencia Técnica (Feed Bajo Demanda)**
    - Extracción del ADN técnico del usuario analizando repositorios con estrella (`GET /users/{username}/starred`, sólo datos públicos).
@@ -29,6 +34,7 @@ GitHub Sentinel & Radar es una plataforma distribuida, modular y ejecutada bajo 
 
 4. **Capa 4: Interfaz de Usuario Borderless & Multilingüe (GitHub Pages)**
    - SPA estática ultra-liviana sin dependencias de compilación (`docs/index.html`).
+   - Pestaña Cola de Revisión: tabla de confiables/sospechosos con % de confianza, tooltip de motivos, enlace al perfil, checkboxes, copiar lista y apertura del workflow de bloqueo. Cero llamadas a `api.github.com` desde el navegador (sólo enlaces).
    - Estilo moderno *borderless* (sin bordes duros, elevación suave por superficie, tipografía Geist/Inter).
    - Soporte nativo para modo claro y oscuro con persistencia.
    - Internacionalización (i18n) completa en los 10 idiomas más hablados del mundo.

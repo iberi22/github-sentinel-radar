@@ -3,7 +3,7 @@ Gestión de Tareas: GitHub Sentinel & Radar
 _Última actualización: 2026-09-06_
 
 ## 🎯 Resumen Ejecutivo y Estado Actual
-**Estado General:** Web sin PAT publicada; Radar público ejecutado y Pages verificado. GH_BLOCKER_TOKEN existe para protección personal opcional. Las afirmaciones originales de 100% no estaban respaldadas por pruebas incluidas.
+**Estado General:** Web sin PAT publicada y habilitada como template; Radar público ejecutado y Pages verificado. Fase 2 (Cola de Revisión con decisión humana, sin auto-bloqueo) implementada y validada en local: 22 pruebas Python + regresión Chromium. Pendiente: publicar Fase 2 y correr el primer escaneo real.
 
 ---
 
@@ -29,10 +29,24 @@ _Última actualización: 2026-09-06_
 
 ---
 
+## 🔍 Fase 2: Cola de Revisión (decisión humana, sin auto-bloqueo)
+**Objetivo:** Escanear seguidos + seguidores en informe por usuario (confiables vs posibles bots, % de confianza, motivos, enlace al perfil) y bloquear sólo lo que el usuario elija (uno a uno o todos).
+
+| ID    | Tarea                                                          | Prioridad | Estado        | Responsable |
+|-------|----------------------------------------------------------------|-----------|---------------|-------------|
+| F2-01 | Scoring de confianza + cola en `src/review.py`                 | ALTA      | ✅ Completado | Hermes      |
+| F2-02 | Motor `src/audit.py` (scan sin bloquear + `--block` explícito) | ALTA      | ✅ Completado | Hermes      |
+| F2-03 | `blocker.py` en modo revisión por defecto (sin PUT automático) | ALTA      | ✅ Completado | Hermes      |
+| F2-04 | Workflow `audit.yml` (scan/block) + Pages tras revisión       | ALTA      | ✅ Completado | Hermes      |
+| F2-05 | Pestaña Review en la web (tabla, tooltip, checkboxes, copiar)  | ALTA      | ✅ Completado | Hermes      |
+| F2-06 | i18n de la cola en los 10 idiomas + tests (22 py + Chromium)   | ALTA      | ✅ Completado | Hermes      |
+
+---
+
 ## ✅ Hitos Principales Completados
 - Hito 1: Creación del núcleo heurístico contra granjas de bots y manipulación de commits.
 - Hito 2: Implementación de la ejecución bajo demanda (*on-demand*) para evitar consumo abusivo de recursos.
-- Hito 3: Creación de la interfaz sin bordes (*borderless*) con integración de token en `localStorage`.
+- Hito 3: Creación de la interfaz sin bordes (*borderless*); el token de navegador se eliminó en AD-04 (dispatch vía sesión GitHub, cero PAT en la web).
 - Hito 4: Soporte nativo de internacionalización en 10 idiomas para interfaz y documentación.
 
 ---
@@ -107,3 +121,10 @@ Estado: completado y publicado. Plan aplicado:
 - Pages posterior al Radar: https://github.com/iberi22/github-sentinel-radar/actions/runs/34080509221
 - Repositorio habilitado como template. GH_BLOCKER_TOKEN confirmado existente, no leído ni copiado; no se ejecutaron bloqueos como prueba.
 - Límites explícitos: se confirma Run workflow en GitHub con permiso de escritura; primera copia requiere habilitar Pages; GitHub App/OAuth con servidor sería otra arquitectura.
+
+## Validación Fase 2 — 2026-09-07 UTC (local, sin publicar)
+
+- 22 pruebas Python OK (`python -m unittest discover -s tests`): 14 heredadas + 8 nuevas (scoring por niveles, `parse_targets`, merge que preserva bloqueados, modo revisión sin PUT, bloqueo con fallo parcial, scan sin bloquear).
+- Regresión Chromium local PASS: pestaña Review (cambio de tab, métricas, enlace a `audit.yml`, render con login malicioso sin XSS), más todo lo anterior (10 idiomas/RTL, guía, purga de PAT, cero llamadas a `api.github.com`).
+- 4 workflows con YAML válido y `audit.yml` registrado en el trigger `workflow_run` de Pages.
+- Pendiente: `git push`, correr `audit.yml` en modo `scan` con GH_BLOCKER_TOKEN real y verificar la cola publicada.

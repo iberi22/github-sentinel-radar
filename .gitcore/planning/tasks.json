@@ -2,8 +2,8 @@
   "project": "GitHub Sentinel & Radar",
   "last_updated": "2026-09-07T03:43:02.891388+00:00",
   "executive_summary": {
-    "status": "published",
-    "focus": "Acceso sin token web y guía; Radar público con GITHUB_TOKEN validado en producción"
+    "status": "review_queue_validated_locally",
+    "focus": "Fase 2 implementada y validada en local (22 tests + Chromium); pendiente push y primer scan real"
   },
   "progress_by_component": {
     "Infraestructura_Workflows": "locally_validated",
@@ -136,11 +136,23 @@
         "Usar GITHUB_TOKEN sólo para datos públicos; bloqueo requiere secreto personal",
         "Probar y desplegar flujo completo"
       ]
+    },
+    {
+      "id": "F2-01",
+      "title": "Cola de Revisión: informe por usuario (trusted/sospechosos, % confianza, motivos, perfil) sin auto-bloqueo; bloqueo por selección o total vía audit.yml",
+      "priority": "HIGH",
+      "status": "completed",
+      "implementation_plan": [
+        "Scoring en src/review.py y motor src/audit.py (scan + --block)",
+        "blocker.py en modo revisión por defecto; workflow audit.yml; Pages tras revisión",
+        "Pestaña Review en la web con i18n en 10 idiomas, sin llamadas API desde el navegador",
+        "22 pruebas Python + regresión Chromium locales en verde"
+      ]
     }
   ],
   "validation": {
-    "python_tests": 14,
-    "browser": "Chromium local y público: 10 locales/RTL, guía, móvil, purga de PAT, rutas de copias, espera acotada, pausa, errores, XSS",
+    "python_tests": 22,
+    "browser": "Chromium local: 10 locales/RTL, guía, móvil, purga de PAT, rutas de copias, espera acotada, pausa, errores, XSS + pestaña Review",
     "workflows": "YAML parsed, permissions and triggers reviewed",
     "remote_deployment": "success",
     "pages_run": 34080509221,

@@ -30,6 +30,7 @@
 3. **⚡ Zero API Abuse & Hibernation**: Heavy scraping runs strictly **on-demand** from the dashboard with confirmation in GitHub. Automatically pauses if unused for more than 7 days.
 4. **🌐 Borderless & Multilingual UI**: Modern, clean, borderless web interface with Light/Dark mode and native localization in the 10 most spoken languages.
 5. **🤝 Web of Trust Directory**: Flat-file Git-backed database to showcase verified real developers and open-source projects.
+6. **🔍 Review Queue (human decision)**: Scans your followers and following into trusted / possible-bot lists with trust %, reasons, tooltips and profile links. Nothing auto-blocks: tick, copy and block via the audit workflow, or block natively on GitHub.
 
 ---
 
@@ -46,11 +47,13 @@
 
 ```text
 ├── .github/workflows/
-│   ├── anti_bot.yml       # Periodic lightweight bot blocker (every 2h)
+│   ├── anti_bot.yml       # Periodic lightweight bot blocker (every 2h, review-first by default)
+│   ├── audit.yml          # On-demand follower audit (scan) and human-approved blocking
 │   ├── radar.yml          # On-demand tech feed scanner
 │   └── pages.yml          # Automated GitHub Pages deployer
 ├── data/
 │   ├── blocklist.json     # Machine-readable bot blacklist
+│   ├── review_queue.json  # Per-user trust report (trusted vs suspicious)
 │   ├── radar.json         # Technical DNA, releases & discoveries
 │   └── verified_projects.json # Community developer registry
 ├── docs/                  # Static borderless Web UI
@@ -58,7 +61,9 @@
 │   ├── app.js             # Reactive client & GitHub dispatch handler
 │   └── locales/           # i18n JSON files for 10 world languages
 ├── src/
-│   ├── blocker.py         # Bot detection engine
+│   ├── blocker.py         # Bot detection engine (review-first)
+│   ├── audit.py           # Follower/following scanner and approved block runner
+│   ├── review.py          # Trust scoring and queue persistence
 │   └── radar.py           # Technical intelligence & release scanner
 ├── PLANNING.md            # Vision, constraints & architectural roadmap
 ├── TASK.md                # Task tracking & milestones

@@ -58,6 +58,29 @@ entrega prueba el radar real, pero no ejecuta bloqueos para probar la interfaz.
 Las heurísticas usan antigüedad y ratio de seguidores; no detectan commits
 retrofechados. Revisa los umbrales y la lista upstream antes de activar bloqueos.
 
+## Cola de Revisión (Review Queue)
+
+Por defecto **nada se bloquea solo** (`anti_bot.review_mode=true` en
+`config.json`). Los sospechosos del cron van a `data/review_queue.json` y el
+informe completo se genera bajo demanda:
+
+1. En GitHub abre Actions → **GitHub Review - Scan and Block** → Run workflow
+   con `mode=scan`. Escanea a quién sigues y quién te sigue, calcula % de
+   confianza por usuario y publica la cola (Pages se actualiza solo).
+2. En la web, pestaña **Review Queue**: lista de confiables y posibles bots con
+   % de confianza, tooltip con motivos y estadísticas, y enlace al perfil.
+3. Para bloquear: marca checkboxes (o nada = todos los sospechosos pendientes),
+   pulsa **Copy selected**, abre **Open block workflow ↗**, elige `mode=block`,
+   pega la lista en `targets` y confirma. El workflow bloquea con
+   GH_BLOCKER_TOKEN y registra la decisión en la cola, `blocklist.json` y
+   `BLOCKED_ACCOUNTS.md`. También puedes bloquear nativamente en cada perfil.
+4. Ajustes en `config.json`: `review.trust_threshold` (defecto 60),
+   `review.max_users_to_scan` (defecto 200, 0 = sin límite). Un re-escaneo
+   conserva el estado `blocked` y refresca el resto.
+
+Si prefieres el auto-bloqueo clásico, pon `review_mode=false` (no recomendado:
+asumes falsos positivos sin revisión).
+
 ## Por qué queda una confirmación en GitHub
 
 GitHub Pages sólo sirve archivos estáticos. Un clic que ejecute un workflow dentro
@@ -82,7 +105,8 @@ SENTINEL_URL=https://iberi22.github.io/github-sentinel-radar/ xavier exec 'node 
 
 La prueba de navegador verifica 10 idiomas/RTL, guía, migración de credenciales,
 repositorios alternativos, navegación sin llamadas a la API GitHub, carga del feed,
-pausa y límite de espera, y XSS. No envía solicitudes de escaneo reales.
+pausa y límite de espera, pestaña Review (tabs, métricas, enlace a `audit.yml`,
+render con login malicioso) y XSS. No envía solicitudes de escaneo reales.
 
 ## Referencias oficiales
 

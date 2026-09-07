@@ -1,0 +1,11 @@
+{
+  "last_updated": null,
+  "totals": {
+    "scanned": 0,
+    "trusted": 0,
+    "suspicious": 0,
+    "blocked": 0
+  },
+  "threshold": 60,
+  "users": []
+}

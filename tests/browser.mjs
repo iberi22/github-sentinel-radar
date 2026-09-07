@@ -94,6 +94,27 @@ try {
   const theme = await evaluate(`(() => {const before = document.documentElement.classList.contains('dark'); document.getElementById('theme-toggle').click(); return {changed: before !== document.documentElement.classList.contains('dark'), saved: localStorage.getItem('sentinel_theme')};})()`);
   assert.ok(theme.changed); assert.ok(['dark', 'light'].includes(theme.saved));
   assert.deepEqual(await evaluate(`({token:localStorage.getItem('sentinel_pat'), repo:localStorage.getItem('sentinel_repo'), input:!!document.getElementById('input-token')})`), {token:null,repo:null,input:false});
+  await evaluate(`document.querySelector('[data-tab="tab-review"]').click()`);
+  assert.equal(await evaluate(`document.getElementById('tab-review').classList.contains('hidden')`), false);
+  assert.equal(await evaluate(`document.getElementById('tab-radar').classList.contains('hidden')`), true);
+  assert.match(await evaluate(`document.getElementById('btn-open-audit').href`), /actions\/workflows\/audit\.yml$/);
+  const review = await evaluate(`(() => {
+    reviewData = {last_updated:'2026-09-07T00:00:00Z', threshold:60,
+      totals:{scanned:2,trusted:1,suspicious:1,blocked:0},
+      users:[
+        {login:'evil<img src=x>', profile_url:'https://github.com/evil', direction:'follower', trust:12, verdict:'suspicious', status:'pending', reasons:[{code:'young_mass_follow',tone:'bad',detail:'2d - 500/3'}], stats:{followers:3,following:500,public_repos:0,age_days:2}},
+        {login:'mentor', profile_url:'https://github.com/mentor', direction:'mutual', trust:95, verdict:'trusted', status:'pending', reasons:[{code:'mutual',tone:'good',detail:''}], stats:{followers:800,following:120,public_repos:45,age_days:900}}
+      ]};
+    renderReview();
+    return {sus:document.querySelectorAll('#suspicious-table .review-row').length,
+      tru:document.querySelectorAll('#trusted-table .review-row').length,
+      imgs:document.querySelectorAll('#tab-review img').length,
+      badLinks:[...document.querySelectorAll('#tab-review a')].filter(a=>a.href.startsWith('javascript:')).length,
+      picks:document.querySelectorAll('#suspicious-table .review-pick').length,
+      metric:document.getElementById('metric-suspicious').textContent,
+      empty:document.getElementById('review-empty').textContent};
+  })()`);
+  assert.deepEqual(review, {sus:1,tru:1,imgs:0,badLinks:0,picks:1,metric:'1',empty:''});
   await evaluate(`document.getElementById('btn-open-settings').click()`);
   assert.equal(await evaluate(`document.getElementById('modal-settings').open`), true);
   assert.equal(await evaluate(`document.getElementById('guide-progress').textContent`), '1 / 3');
@@ -160,7 +181,7 @@ try {
   const style = await evaluate(`({background:getComputedStyle(document.body).backgroundColor, border:getComputedStyle(document.getElementById('btn-dispatch-radar')).borderTopWidth})`);
   assert.equal(style.border, '0px');
   assert.ok(['rgb(9, 10, 15)', 'rgb(248, 249, 250)'].includes(style.background), 'Tailwind theme styles loaded');
-  console.log('PASS: 10 locales/RTL, theme, token migration, wizard, fork metadata, GitHub navigation without API calls, bounded refresh, hidden-tab pause, XSS, borderless.', style);
+  console.log('PASS: 10 locales/RTL, theme, token migration, wizard, fork metadata, GitHub navigation without API calls, bounded refresh, hidden-tab pause, XSS, borderless, review queue.', style);
 } finally {
   ws?.close();
   chrome.kill('SIGTERM');

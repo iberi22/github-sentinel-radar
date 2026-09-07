@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "anti_bot": {
     "enabled": true,
+    "review_mode": true,
     "max_account_age_days": 10,
     "min_following_for_suspicion": 400,
     "max_followers_for_suspicion": 40,
@@ -15,6 +16,11 @@
     "max_starred_to_analyze": 50,
     "max_releases_to_track": 15,
     "max_discoveries": 10
+  },
+  "review": {
+    "enabled": true,
+    "trust_threshold": 60,
+    "max_users_to_scan": 200
   },
   "i18n": {
     "default_locale": "en",

@@ -12,6 +12,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 import common
 import blocker
 import radar
+import audit
+import review
 
 
 class BackendTests(unittest.TestCase):
@@ -34,9 +36,9 @@ class BackendTests(unittest.TestCase):
                 common.load_config()
 
     def test_disabled_engines_do_not_call_api(self):
-        for engine, section in ((blocker, 'anti_bot'), (radar, 'radar')):
+        for engine, section in ((blocker, 'anti_bot'), (radar, 'radar'), (audit, 'review')):
             self.cfg[section]['enabled'] = False
-            with patch.object(engine, 'load_config', return_value=self.cfg), patch.object(engine, 'github_request') as request:
+            with patch.object(engine, 'load_config', return_value=self.cfg), patch.object(engine, 'github_request') as request, patch.object(sys, 'argv', ['engine.py']):
                 engine.main()
                 request.assert_not_called()
 
@@ -147,6 +149,154 @@ class OnboardingTests(unittest.TestCase):
                 build_site(root)
             self.assertEqual(json.loads((root/'docs/site.json').read_text()), {'repository':'owner/fork','default_branch':'develop'})
             self.assertEqual((root/'docs/data/radar.json').read_text(), '{}')
+
+class ReviewTests(unittest.TestCase):
+    def setUp(self):
+        self.cfg = common.load_config()
+
+    def fresh_bot(self):
+        return {'login': 'farm-01',
+                'created_at': datetime.now(timezone.utc).isoformat(),
+                'following': 450, 'followers': 10, 'public_repos': 0}
+
+    def veteran_human(self):
+        return {'login': 'mentor',
+                'created_at': (datetime.now(timezone.utc) - timedelta(days=900)).isoformat(),
+                'following': 120, 'followers': 800, 'public_repos': 45}
+
+    def test_young_mass_follower_is_suspicious(self):
+        trust, reasons, stats = review.score_user(self.fresh_bot(), 'follower', self.cfg)
+        self.assertEqual(review.score_user(self.fresh_bot(), 'follower', self.cfg)[1][0]['code'], 'young_mass_follow')
+        self.assertLess(trust, self.cfg['review']['trust_threshold'])
+        self.assertEqual(stats['following'], 450)
+
+    def test_mutual_veteran_is_trusted(self):
+        trust, reasons, verdict_stats = review.score_user(self.veteran_human(), 'mutual', self.cfg)
+        codes = {r['code'] for r in reasons}
+        self.assertIn('mutual', codes)
+        self.assertIn('veteran', codes)
+        self.assertGreaterEqual(trust, self.cfg['review']['trust_threshold'])
+
+    def test_missing_profile_data_never_crashes(self):
+        trust, reasons, stats = review.score_user({}, 'follower', self.cfg)
+        self.assertTrue(0 <= trust <= 100)
+        self.assertIn('unknown_age', {r['code'] for r in reasons})
+        self.assertIsNone(stats['age_days'])
+
+    def test_parse_targets_accepts_mixed_separators_and_rejects_bad_logins(self):
+        self.assertEqual(review.parse_targets('Alice, bob\nalice;BOB  carol-99'),
+                         ['alice', 'bob', 'carol-99'])
+        for bad in ('', '   ', 'evil!user', 'a' * 40, '-lead', 'trail-', 'a..b', 'a--b'):
+            with self.assertRaises(ValueError, msg=bad):
+                review.parse_targets(bad if bad.strip() else bad or ' , ')
+
+    def test_merge_preserves_blocked_status_but_refreshes_stats(self):
+        old = [{'login': 'farm-01', 'status': 'blocked', 'blocked_at': '2026-01-01T00:00:00+00:00',
+                'trust': 4, 'verdict': 'suspicious', 'direction': 'follower',
+                'profile_url': 'https://github.com/farm-01', 'reasons': [], 'stats': {}}]
+        fresh = [{'login': 'FARM-01', 'status': 'pending', 'blocked_at': None,
+                  'trust': 9, 'verdict': 'suspicious', 'direction': 'follower',
+                  'profile_url': 'https://github.com/farm-01',
+                  'reasons': [{'code': 'mass_follow', 'detail': '1/0', 'tone': 'bad'}],
+                  'stats': {'followers': 0}}]
+        merged = review.merge_users(old, fresh)
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]['status'], 'blocked')
+        self.assertEqual(merged[0]['blocked_at'], '2026-01-01T00:00:00+00:00')
+        self.assertEqual(merged[0]['stats'], {'followers': 0})
+
+    def test_blocker_review_mode_never_puts_blocks(self):
+        self.cfg['anti_bot']['review_mode'] = True
+        bot = self.fresh_bot()
+        pages = [[{'login': 'farm-01'}], []]
+        calls = []
+
+        def request(method, url, **kwargs):
+            calls.append((method, url))
+            if url.endswith('/user/followers'):
+                page = kwargs['params']['page']
+                return Mock(json=lambda p=page: pages[p - 1] if p - 1 < len(pages) else [])
+            return Mock(status_code=200, json=lambda: dict(bot))
+
+        saved = {}
+
+        def save(users, threshold):
+            saved['users'] = users
+            return {'totals': {'suspicious': len(users)}}
+
+        with patch.dict(os.environ, {'GH_TOKEN': 'test'}), \
+             patch.object(blocker, 'load_config', return_value=self.cfg), \
+             patch.object(blocker, 'fetch_upstream_blocklist', return_value=set()), \
+             patch.object(blocker, 'github_request', side_effect=request), \
+             patch.object(blocker, 'update_blocklist_files'), \
+             patch.object(review, 'load_queue', return_value={'users': []}), \
+             patch.object(review, 'save_queue', side_effect=save):
+            blocker.main()
+        self.assertFalse(any(m == 'PUT' and '/user/blocks/' in u for m, u in calls))
+        self.assertEqual(len(saved['users']), 1)
+        self.assertEqual(saved['users'][0]['verdict'], 'suspicious')
+
+    def test_audit_block_records_decision_and_continues_on_failure(self):
+        self.cfg['review']['enabled'] = True
+        queue = {'users': [{'login': 'farm-01', 'trust': 12, 'status': 'pending',
+                            'profile_url': 'https://github.com/farm-01'}]}
+
+        def request(method, url, **kwargs):
+            if url.endswith('/user/blocks/farm-01'):
+                return Mock(status_code=204)
+            raise common.requests.HTTPError('gone')
+
+        saved = {}
+        with patch.dict(os.environ, {'GH_TOKEN': 'test'}), \
+             patch.object(audit, 'load_config', return_value=self.cfg), \
+             patch.object(audit, 'github_request', side_effect=request), \
+             patch.object(review, 'load_queue', return_value=queue), \
+             patch.object(review, 'save_queue',
+                          side_effect=lambda users, threshold: saved.setdefault('users', users)), \
+             patch.object(audit, 'update_blocklist_files') as persist:
+            with self.assertRaises(SystemExit) as error:
+                audit.main(['--block', 'farm-01, ghost-404'])
+            self.assertEqual(error.exception.code, 1)
+        self.assertEqual(queue['users'][0]['status'], 'blocked')
+        self.assertIsNotNone(queue['users'][0]['blocked_at'])
+        self.assertEqual(saved['users'], queue['users'])
+        self.assertTrue(any(b['username'] == 'farm-01' for b in persist.call_args.args[0]))
+
+    def test_audit_scan_writes_queue_without_blocking(self):
+        self.cfg['review'].update(enabled=True, max_users_to_scan=0)
+        bot, human = self.fresh_bot(), self.veteran_human()
+        profiles = {'farm-01': bot, 'mentor': human}
+
+        def request(method, url, **kwargs):
+            if url.endswith('/user/followers'):
+                return Mock(json=lambda: [{'login': 'farm-01'}] if kwargs['params']['page'] == 1 else [])
+            if url.endswith('/user/following'):
+                return Mock(json=lambda: [{'login': 'mentor'}] if kwargs['params']['page'] == 1 else [])
+            login = url.rsplit('/', 1)[-1]
+            return Mock(status_code=200, json=lambda: profiles[login])
+
+        saved = {}
+
+        def fake_save(users, threshold):
+            payload = {'totals': {'scanned': len(users),
+                                  'trusted': sum(1 for u in users if u['verdict'] == 'trusted'),
+                                  'suspicious': sum(1 for u in users if u['verdict'] == 'suspicious'),
+                                  'blocked': 0}}
+            saved['payload'] = (users, threshold)
+            return payload
+
+        with patch.dict(os.environ, {'GH_TOKEN': 'test'}), \
+             patch.object(audit, 'load_config', return_value=self.cfg), \
+             patch.object(audit, 'github_request', side_effect=request) as api, \
+             patch.object(review, 'load_queue', return_value={'users': []}), \
+             patch.object(review, 'save_queue', side_effect=fake_save):
+            audit.main([])
+        self.assertFalse(any(m == 'PUT' for m, _ in
+                             ((c.args[0], c.args[1]) for c in api.call_args_list)))
+        users, threshold = saved['payload']
+        by_login = {u['login']: u for u in users}
+        self.assertEqual(by_login['farm-01']['verdict'], 'suspicious')
+        self.assertEqual(by_login['mentor']['direction'], 'following')
 
 if __name__ == '__main__':
     unittest.main()

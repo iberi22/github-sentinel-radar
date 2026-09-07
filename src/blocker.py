@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """
 GitHub Sentinel - Anti-Bot Blocker Module
-Monitors new followers, evaluates heuristic spam rules, blocks confirmed bot accounts,
-and updates both data/blocklist.json and BLOCKED_ACCOUNTS.md.
+Monitors followers, evaluates heuristic spam rules and updates both
+data/blocklist.json and BLOCKED_ACCOUNTS.md.
+
+Default mode is review-first (anti_bot.review_mode=true): suspects are
+queued in data/review_queue.json and nothing is blocked until a human
+decides in the web UI. Set review_mode=false to restore auto-blocking.
 """
 
 import os
@@ -11,6 +15,7 @@ import requests
 from datetime import datetime, timezone
 
 from common import load_config, github_request
+import review
 
 def get_headers(token):
     return {
@@ -116,10 +121,27 @@ def main():
 
     blocked_usernames = {b["username"] for b in current_bots}
 
+    review_mode = cfg["anti_bot"].get("review_mode", True)
+    review_hits = []
+
+    def queue_candidate(username, trust, reasons):
+        trust_shown = trust
+        review_hits.append({"login": username,
+                            "profile_url": f"https://github.com/{username}",
+                            "direction": "follower", "trust": trust_shown,
+                            "verdict": "suspicious", "status": "pending",
+                            "blocked_at": None, "reasons": reasons,
+                            "stats": {"followers": 0, "following": 0,
+                                      "public_repos": 0, "age_days": None}})
+
     # 1. Bloquear según lista comunitaria upstream
     upstream_bots = fetch_upstream_blocklist(cfg["anti_bot"].get("upstream_blocklist_url"))
     for bot_user in upstream_bots:
         if bot_user not in blocked_usernames:
+            if review_mode:
+                print(f"[REVISIÓN] Candidato upstream a la cola: {bot_user}")
+                queue_candidate(bot_user, 5, [{"code": "upstream", "detail": "", "tone": "bad"}])
+                continue
             resp = github_request("PUT", f"https://api.github.com/user/blocks/{bot_user}", headers=headers)
             if resp.status_code in (204, 201):
                 print(f"[COMUNIDAD] Bloqueado bot upstream: {bot_user}")
@@ -155,6 +177,16 @@ def main():
         u_data = u_resp.json()
         is_bot, reason = evaluate_bot_heuristics(u_data, cfg)
         if is_bot:
+            if review_mode:
+                trust, reasons, stats = review.score_user(u_data, "follower", cfg)
+                print(f"[REVISIÓN] Sospechoso a la cola: {username} (confianza {trust}%) - {reason}")
+                review_hits.append({"login": username,
+                                    "profile_url": f"https://github.com/{username}",
+                                    "direction": "follower", "trust": trust,
+                                    "verdict": "suspicious" if trust < cfg["review"]["trust_threshold"] else "trusted",
+                                    "status": "pending", "blocked_at": None,
+                                    "reasons": reasons, "stats": stats})
+                continue
             b_resp = github_request("PUT", f"https://api.github.com/user/blocks/{username}", headers=headers)
             if b_resp.status_code in (204, 201):
                 print(f"[AUTODETECT] Bot bloqueado con éxito: {username} - {reason}")
@@ -167,6 +199,12 @@ def main():
                 new_blocks += 1
 
     print(f"[COMPLETADO] Proceso finalizado. Nuevos bots bloqueados: {new_blocks}. Total: {len(current_bots)}")
+    if review_mode and review_hits:
+        stored = review.load_queue()["users"]
+        payload = review.save_queue(review.merge_users(stored, review_hits),
+                                    cfg["review"]["trust_threshold"])
+        print(f"[REVISIÓN] {len(review_hits)} candidatos guardados en la cola "
+              f"(sospechosos totales: {payload['totals']['suspicious']}). Nada bloqueado: decide en la web.")
     update_blocklist_files(current_bots)
 
 if __name__ == "__main__":

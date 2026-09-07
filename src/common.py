@@ -9,9 +9,17 @@ ROOT = Path(__file__).resolve().parent.parent
 def load_config():
     with (ROOT / 'config.json').open(encoding='utf-8') as stream:
         cfg = json.load(stream)
-    for section in ('anti_bot', 'radar'):
+    for section in ('anti_bot', 'radar', 'review'):
         if not isinstance(cfg[section]['enabled'], bool):
             raise ValueError(f'{section}.enabled must be a boolean')
+    if not isinstance(cfg['anti_bot'].get('review_mode'), bool):
+        raise ValueError('anti_bot.review_mode must be a boolean')
+    threshold = cfg['review']['trust_threshold']
+    if isinstance(threshold, bool) or not isinstance(threshold, int) or not 0 <= threshold <= 100:
+        raise ValueError('review.trust_threshold must be an integer 0-100')
+    cap = cfg['review']['max_users_to_scan']
+    if isinstance(cap, bool) or not isinstance(cap, int) or cap < 0:
+        raise ValueError('review.max_users_to_scan must be a nonnegative integer')
     for section, keys in {
         'anti_bot': ('max_account_age_days', 'min_following_for_suspicion',
                      'max_followers_for_suspicion', 'following_to_followers_ratio'),
