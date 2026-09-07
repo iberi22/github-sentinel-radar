@@ -1,0 +1,56 @@
+name: GitHub Radar - On-Demand Technical Feed
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Forzar actualización saltando hibernación'
+        required: false
+        default: 'true'
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sentinel-data
+  cancel-in-progress: false
+
+jobs:
+  run-radar:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Radar Engine
+        env:
+          FORCE_RUN: ${{ inputs.force }}
+          GH_TOKEN: ${{ secrets.GH_BLOCKER_TOKEN }}
+        run: |
+          if [ "$FORCE_RUN" = "true" ]; then
+            python src/radar.py --force
+          else
+            python src/radar.py
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/radar.json RADAR.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(radar): update tech feed and discoveries" && git push)

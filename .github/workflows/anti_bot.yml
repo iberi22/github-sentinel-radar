@@ -1,0 +1,47 @@
+name: GitHub Sentinel - Anti-Bot Blocker
+
+on:
+  schedule:
+    - cron: '0 */2 * * *' # Cada 2 horas
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sentinel-data
+  cancel-in-progress: false
+
+jobs:
+  run-blocker:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Blocker Engine
+        env:
+          GH_TOKEN: ${{ secrets.GH_BLOCKER_TOKEN }}
+        run: |
+          python src/blocker.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/blocklist.json BLOCKED_ACCOUNTS.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(sentinel): update blocklist and audit log" && git push)

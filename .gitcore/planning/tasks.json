@@ -1,0 +1,134 @@
+{
+  "project": "GitHub Sentinel & Radar",
+  "last_updated": "2026-09-07T02:52:00Z",
+  "executive_summary": {
+    "status": "local_validation_passed",
+    "focus": "Publicación autorizada con gh CLI y verificación de GitHub Pages"
+  },
+  "progress_by_component": {
+    "Infraestructura_Workflows": "locally_validated",
+    "Backend_Scripts": "locally_validated",
+    "Frontend_UI": "locally_validated",
+    "Testing_Validacion": "locally_validated",
+    "Documentacion_Multilingue": "locally_validated"
+  },
+  "current_phase": {
+    "name": "Distribución y Despliegue de la Plantilla",
+    "objective": "Publicar la suite completa con soporte multi-idioma nativo y arquitectura bajo demanda.",
+    "tasks": [
+      {
+        "id": "F1-01",
+        "title": "Diseñar arquitectura y capas simples en PLANNING.md",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      },
+      {
+        "id": "F1-02",
+        "title": "Implementar motor de detección y bloqueo (blocker.py)",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      },
+      {
+        "id": "F1-03",
+        "title": "Implementar radar técnico bajo demanda (radar.py)",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      },
+      {
+        "id": "F1-04",
+        "title": "Crear workflows de GitHub Actions (anti_bot/radar/page)",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      },
+      {
+        "id": "F1-05",
+        "title": "Desarrollar UI estática borderless con Dark/Light mode",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      },
+      {
+        "id": "F1-06",
+        "title": "Configurar diccionarios i18n para los 10 idiomas",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      },
+      {
+        "id": "F1-07",
+        "title": "Redactar README completo en los 10 idiomas del mundo",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      },
+      {
+        "id": "F1-08",
+        "title": "Empaquetar y sincronizar proyecto en Google Drive",
+        "priority": "HIGH",
+        "status": "completed",
+        "assignee": "Cascade"
+      }
+    ]
+  },
+  "technical_debt": [
+    {
+      "id": "TD-01",
+      "title": "Soporte para Webhooks en organizaciones de GitHub",
+      "priority": "MEDIUM",
+      "status": "pending",
+      "assignee": "Community",
+      "implementation_plan": [
+        "Definir eventos de organización y permisos mínimos de una GitHub App; separar bloqueo personal y organizacional.",
+        "Diseñar receptor opcional con validación HMAC SHA-256, deduplicación y rechazo de replays.",
+        "Encolar únicamente eventos relevantes y ejecutar workers bajo demanda con apagado tras inactividad.",
+        "Probar firmas inválidas, duplicados, rate limits y aislamiento entre organizaciones antes del despliegue."
+      ]
+    },
+    {
+      "id": "TD-02",
+      "title": "Filtro adicional de análisis semántico con LLM local",
+      "priority": "LOW",
+      "status": "pending",
+      "assignee": "Community",
+      "implementation_plan": [
+        "Definir contrato opcional de clasificación semántica; heurísticas actuales como fallback.",
+        "Conectar a un LLM local existente mediante adaptador con timeout y límites de entrada; sin descargas automáticas.",
+        "Activar sólo bajo demanda, limitar concurrencia y liberar recursos tras inactividad; nunca bloquear cuentas sólo por salida del LLM.",
+        "Evaluar falsos positivos con fixtures, probar indisponibilidad y medir consumo antes de habilitar."
+      ]
+    }
+  ],
+  "discovered_tasks": [
+    {
+      "id": "AD-01",
+      "title": "Incorporar botón de disparo directo con localStorage",
+      "priority": "HIGH",
+      "status": "completed",
+      "assignee": "Cascade"
+    },
+    {
+      "id": "AD-02",
+      "title": "Modo de hibernación por inactividad tras 7 días",
+      "priority": "HIGH",
+      "status": "completed",
+      "assignee": "Cascade"
+    },
+    {
+      "id": "AD-03",
+      "title": "Corregir límites, hibernación, renderizado seguro, dispatch y actualización Pages; añadir pruebas offline",
+      "status": "completed",
+      "priority": "HIGH",
+      "assignee": "Codex"
+    }
+  ],
+  "validation": {
+    "python_tests": 11,
+    "browser": "Chromium: 10 locales, RTL, theme, dispatch, token deletion, XSS",
+    "workflows": "YAML parsed, permissions and triggers reviewed",
+    "remote_deployment": "in_progress"
+  }
+}

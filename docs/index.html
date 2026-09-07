@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Sentinel & Radar</title>
+  <!-- Google Fonts: Inter / Geist style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            surface: {
+              light: '#F8F9FA',
+              cardLight: '#FFFFFF',
+              mutedLight: '#F1F3F5',
+              dark: '#090A0F',
+              cardDark: '#12141C',
+              mutedDark: '#1A1D28',
+            },
+            accent: {
+              primary: '#6366F1',
+              hover: '#4F46E5',
+              glow: 'rgba(99, 102, 241, 0.15)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Estilos Borderless: sin bordes duros, elevación suave */
+    * {
+      border: none !important;
+
+    }
+    :focus-visible { outline: 2px solid #6366F1; outline-offset: 3px; }
+    .surface-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .surface-card:hover {
+      transform: translateY(-2px);
+    }
+    /* Estilo de scroll sutil */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(150, 150, 150, 0.2);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300 font-sans antialiased">
+
+  <!-- Header Flotante Borderless -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 px-6 py-4 shadow-sm">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 id="app-title" class="font-bold text-lg leading-tight tracking-tight">GitHub Sentinel & Radar</h1>
+          <p id="app-tagline" class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">On-demand intelligence & anti-bot shield</p>
+        </div>
+      </div>
+
+      <!-- Actions & Nav Controls -->
+      <div class="flex items-center gap-2">
+        <!-- Language Selector -->
+        <select id="lang-select" class="text-xs font-medium bg-surface-mutedLight dark:bg-surface-mutedDark text-slate-700 dark:text-slate-200 py-2 px-3 rounded-xl cursor-pointer">
+          <option value="en">English (US)</option>
+          <option value="es">Español</option>
+          <option value="zh">中文 (Chinese)</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="fr">Français</option>
+          <option value="ar">العربية (Arabic)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="pt">Português</option>
+          <option value="ru">Русский</option>
+          <option value="ur">اردو (Urdu)</option>
+        </select>
+
+        <!-- Dark/Light Mode Toggle -->
+        <button id="theme-toggle" class="p-2.5 rounded-xl bg-surface-mutedLight dark:bg-surface-mutedDark text-slate-600 dark:text-slate-300 hover:opacity-80 transition" title="Toggle Theme">
+          <svg id="theme-icon-sun" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <svg id="theme-icon-moon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+
+        <!-- Settings Modal Toggle -->
+        <button id="btn-open-settings" class="p-2.5 rounded-xl bg-surface-mutedLight dark:bg-surface-mutedDark text-slate-600 dark:text-slate-300 hover:opacity-80 transition" title="Settings">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </button>
+
+        <!-- On-Demand Dispatch Button -->
+        <button id="btn-dispatch-radar" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-medium text-xs py-2.5 px-4 rounded-xl shadow-lg shadow-indigo-500/25 flex items-center gap-1.5 transition">
+          <span id="btn-refresh-text">Update Feed ⚡</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs (Pills) -->
+  <main class="max-w-6xl mx-auto px-6 py-6">
+    <div class="flex items-center gap-2 mb-8 bg-surface-mutedLight dark:bg-surface-mutedDark p-1.5 rounded-2xl w-fit">
+      <button class="nav-tab active px-5 py-2.5 rounded-xl font-medium text-xs transition bg-white dark:bg-surface-cardDark text-indigo-600 dark:text-indigo-400 shadow-sm" data-tab="tab-radar">
+        <span id="nav-radar">Tech Radar</span>
+      </button>
+      <button class="nav-tab px-5 py-2.5 rounded-xl font-medium text-xs transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-tab="tab-sentinel">
+        <span id="nav-sentinel">Bot Sentinel</span>
+      </button>
+      <button class="nav-tab px-5 py-2.5 rounded-xl font-medium text-xs transition text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-tab="tab-directory">
+        <span id="nav-directory">Verified Nodes</span>
+      </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" role="status" aria-live="polite" class="hidden fixed bottom-6 right-6 z-50 p-4 rounded-2xl bg-surface-cardLight dark:bg-surface-cardDark shadow-2xl text-xs max-w-sm flex items-center gap-3 transition">
+      <div id="toast-icon" class="w-8 h-8 rounded-xl flex items-center justify-center bg-indigo-500/10 text-indigo-500">
+        ✓
+      </div>
+      <p id="toast-msg" class="text-slate-700 dark:text-slate-200"></p>
+    </div>
+
+    <!-- 1. TAB: RADAR (LANDING PAGE) -->
+    <section id="tab-radar" class="tab-content block space-y-8">
+      
+      <!-- Tech DNA Banner -->
+      <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-6 rounded-3xl shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 id="radar-title" class="text-xl font-bold tracking-tight">Personal Tech Radar</h2>
+            <p id="radar-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-1">Curated updates from your starred repos and tech stack.</p>
+          </div>
+          <span class="text-xs px-3 py-1 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-full font-medium">On-Demand Engine</span>
+        </div>
+
+        <div class="pt-2 flex flex-wrap items-center gap-3 text-xs">
+          <span id="dna-lang-label" class="font-semibold text-slate-400">Languages:</span>
+          <div id="dna-languages" class="flex flex-wrap gap-1.5">
+            <!-- Rendered by JS -->
+          </div>
+          <span class="text-slate-300 dark:text-slate-700">|</span>
+          <span id="dna-topic-label" class="font-semibold text-slate-400">Topics:</span>
+          <div id="dna-topics" class="flex flex-wrap gap-1.5">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Grid: Releases & Discoveries -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Column 1: Releases -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 id="releases-header" class="text-sm font-bold uppercase tracking-wider text-slate-400">Latest Tool Releases</h3>
+            <span id="releases-count" class="text-xs text-slate-400 font-mono">0</span>
+          </div>
+          <div id="releases-list" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Column 2: Discoveries -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 id="discoveries-header" class="text-sm font-bold uppercase tracking-wider text-slate-400">Projects Matching Your DNA</h3>
+            <span id="discoveries-count" class="text-xs text-slate-400 font-mono">0</span>
+          </div>
+          <div id="discoveries-list" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. TAB: SENTINEL (ANTI-BOT) -->
+    <section id="tab-sentinel" class="tab-content hidden space-y-6">
+      
+      <!-- Metrics Bar -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-5 rounded-3xl shadow-sm">
+          <p id="label-total-blocked" class="text-xs text-slate-400">Neutralized Bots</p>
+          <p id="metric-blocked-count" class="text-3xl font-extrabold text-indigo-500 mt-1 font-mono">0</p>
+        </div>
+        <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-5 rounded-3xl shadow-sm">
+          <p class="text-xs text-slate-400">Protection Status</p>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Active Shield</span>
+          </div>
+        </div>
+        <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-5 rounded-3xl shadow-sm">
+          <p class="text-xs text-slate-400">Upstream Consensus</p>
+          <p class="text-sm font-semibold mt-2">Decentralized Feed</p>
+        </div>
+      </div>
+
+      <!-- Search & Table Card -->
+      <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-6 rounded-3xl shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 id="sentinel-title" class="text-lg font-bold">Anti-Bot Sentinel Shield</h2>
+            <p id="sentinel-desc" class="text-xs text-slate-400">Heuristic mitigation against mass-following and backdated commit farms.</p>
+          </div>
+          <input type="text" id="bot-search" placeholder="Search blocked username..." class="bg-surface-mutedLight dark:bg-surface-mutedDark text-xs py-2.5 px-4 rounded-xl w-full sm:w-64 placeholder-slate-400">
+        </div>
+
+        <!-- Table / Cards List -->
+        <div class="overflow-x-auto pt-2">
+          <div id="bots-table" class="space-y-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 3. TAB: DIRECTORY (WEB OF TRUST) -->
+    <section id="tab-directory" class="tab-content hidden space-y-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 id="directory-title" class="text-xl font-bold tracking-tight">Verified Developer Network</h2>
+          <p id="directory-desc" class="text-xs text-slate-400 mt-1">A decentralized Web of Trust connecting real creators.</p>
+        </div>
+        <a href="https://github.com/iberi22/github-sentinel-radar/edit/main/data/verified_projects.json" target="_blank" id="btn-submit-project" class="bg-surface-cardLight dark:bg-surface-cardDark hover:bg-slate-100 dark:hover:bg-surface-mutedDark text-xs font-semibold py-2.5 px-4 rounded-xl shadow-sm w-fit transition">
+          Submit Your Project ↗
+        </a>
+      </div>
+
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered by JS -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Settings Modal (Token & Repo) -->
+  <div id="modal-settings" class="hidden fixed inset-0 z-50 backdrop-blur-md bg-black/40 flex items-center justify-center p-4">
+    <div class="bg-surface-cardLight dark:bg-surface-cardDark p-6 rounded-3xl shadow-2xl max-w-md w-full space-y-5">
+      <div class="flex items-center justify-between">
+        <h3 id="modal-title" class="font-bold text-base">On-Demand GitHub Dispatch Token</h3>
+        <button id="btn-close-modal" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg font-bold">&times;</button>
+      </div>
+      <p id="modal-desc" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+        Enter a fine-grained GitHub Personal Access Token (with Actions: Write permission). It is stored solely in your browser's localStorage.
+      </p>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label id="token-label" for="input-token" class="block font-medium text-slate-400 mb-1">GitHub Token (PAT)</label>
+          <input type="password" id="input-token" placeholder="ghp_xxxxxxxxxxxx" class="w-full bg-surface-mutedLight dark:bg-surface-mutedDark p-3 rounded-xl font-mono text-xs">
+        </div>
+        <div>
+          <label id="repo-label" for="input-repo" class="block font-medium text-slate-400 mb-1">Target Repository (Owner/Repo)</label>
+          <input type="text" id="input-repo" placeholder="username/repo-name" class="w-full bg-surface-mutedLight dark:bg-surface-mutedDark p-3 rounded-xl font-mono text-xs">
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button id="btn-save-settings" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow-md transition">
+          Save Locally
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
