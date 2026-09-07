@@ -1,11 +1,2378 @@
 {
-  "last_updated": null,
+  "last_updated": "2026-09-07T05:07:48.101349+00:00",
   "totals": {
-    "scanned": 0,
-    "trusted": 0,
-    "suspicious": 0,
+    "scanned": 78,
+    "trusted": 72,
+    "suspicious": 6,
     "blocked": 0
   },
   "threshold": 60,
-  "users": []
+  "users": [
+    {
+      "login": "0Darkn",
+      "profile_url": "https://github.com/0Darkn",
+      "direction": "follower",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "4372",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "59",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 4372,
+        "following": 23373,
+        "public_repos": 59,
+        "age_days": 896
+      }
+    },
+    {
+      "login": "arpitrajjj",
+      "profile_url": "https://github.com/arpitrajjj",
+      "direction": "follower",
+      "trust": 17,
+      "verdict": "suspicious",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "new_account",
+          "detail": "43d",
+          "tone": "bad"
+        },
+        {
+          "code": "extreme_ratio",
+          "detail": "53:1",
+          "tone": "bad"
+        },
+        {
+          "code": "established",
+          "detail": "931",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 931,
+        "following": 49010,
+        "public_repos": 8,
+        "age_days": 43
+      }
+    },
+    {
+      "login": "arvelquigley99",
+      "profile_url": "https://github.com/arvelquigley99",
+      "direction": "follower",
+      "trust": 0,
+      "verdict": "suspicious",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "new_account",
+          "detail": "3d",
+          "tone": "bad"
+        },
+        {
+          "code": "extreme_ratio",
+          "detail": "490:1",
+          "tone": "bad"
+        }
+      ],
+      "stats": {
+        "followers": 41,
+        "following": 20097,
+        "public_repos": 6,
+        "age_days": 3
+      }
+    },
+    {
+      "login": "BEPb",
+      "profile_url": "https://github.com/BEPb",
+      "direction": "mutual",
+      "trust": 100,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "6y",
+          "tone": "good"
+        },
+        {
+          "code": "mutual",
+          "detail": "",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "27302",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "43",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 27302,
+        "following": 32906,
+        "public_repos": 43,
+        "age_days": 2499
+      }
+    },
+    {
+      "login": "bludnic",
+      "profile_url": "https://github.com/bludnic",
+      "direction": "follower",
+      "trust": 45,
+      "verdict": "suspicious",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "9y",
+          "tone": "good"
+        },
+        {
+          "code": "extreme_ratio",
+          "detail": "45:1",
+          "tone": "bad"
+        },
+        {
+          "code": "established",
+          "detail": "3006",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "49",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 3006,
+        "following": 135861,
+        "public_repos": 49,
+        "age_days": 3489
+      }
+    },
+    {
+      "login": "Connor9994",
+      "profile_url": "https://github.com/Connor9994",
+      "direction": "follower",
+      "trust": 45,
+      "verdict": "suspicious",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "8y",
+          "tone": "good"
+        },
+        {
+          "code": "extreme_ratio",
+          "detail": "54:1",
+          "tone": "bad"
+        },
+        {
+          "code": "established",
+          "detail": "10822",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "23",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 10822,
+        "following": 583743,
+        "public_repos": 23,
+        "age_days": 3026
+      }
+    },
+    {
+      "login": "cura4",
+      "profile_url": "https://github.com/cura4",
+      "direction": "follower",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "5y",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1,
+        "following": 3,
+        "public_repos": 7,
+        "age_days": 2182
+      }
+    },
+    {
+      "login": "fish-filet",
+      "profile_url": "https://github.com/fish-filet",
+      "direction": "follower",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "8y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "21",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 6,
+        "following": 2,
+        "public_repos": 21,
+        "age_days": 3085
+      }
+    },
+    {
+      "login": "Foxapet1980",
+      "profile_url": "https://github.com/Foxapet1980",
+      "direction": "follower",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "5y",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1,
+        "following": 3,
+        "public_repos": 3,
+        "age_days": 2061
+      }
+    },
+    {
+      "login": "guten-tag-100",
+      "profile_url": "https://github.com/guten-tag-100",
+      "direction": "follower",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "1y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "194",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 0,
+        "following": 0,
+        "public_repos": 194,
+        "age_days": 520
+      }
+    },
+    {
+      "login": "IDouble",
+      "profile_url": "https://github.com/IDouble",
+      "direction": "follower",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "10y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "59322",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "61",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 59322,
+        "following": 578701,
+        "public_repos": 61,
+        "age_days": 3811
+      }
+    },
+    {
+      "login": "KI-Gilde",
+      "profile_url": "https://github.com/KI-Gilde",
+      "direction": "follower",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "1y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "26",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 3,
+        "following": 2,
+        "public_repos": 26,
+        "age_days": 373
+      }
+    },
+    {
+      "login": "Lxcardoza993",
+      "profile_url": "https://github.com/Lxcardoza993",
+      "direction": "follower",
+      "trust": 30,
+      "verdict": "suspicious",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "extreme_ratio",
+          "detail": "151:1",
+          "tone": "bad"
+        },
+        {
+          "code": "established",
+          "detail": "661",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "22",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 661,
+        "following": 99989,
+        "public_repos": 22,
+        "age_days": 186
+      }
+    },
+    {
+      "login": "madetocreate",
+      "profile_url": "https://github.com/madetocreate",
+      "direction": "follower",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "1y",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1,
+        "following": 7,
+        "public_repos": 7,
+        "age_days": 420
+      }
+    },
+    {
+      "login": "max-passion",
+      "profile_url": "https://github.com/max-passion",
+      "direction": "follower",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "6y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1042",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "20",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1042,
+        "following": 11575,
+        "public_repos": 20,
+        "age_days": 2209
+      }
+    },
+    {
+      "login": "nelbeu",
+      "profile_url": "https://github.com/nelbeu",
+      "direction": "follower",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "1y",
+          "tone": "good"
+        },
+        {
+          "code": "empty_profile",
+          "detail": "",
+          "tone": "bad"
+        },
+        {
+          "code": "established",
+          "detail": "7305",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 7305,
+        "following": 59849,
+        "public_repos": 0,
+        "age_days": 513
+      }
+    },
+    {
+      "login": "nixblick",
+      "profile_url": "https://github.com/nixblick",
+      "direction": "follower",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "12y",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1,
+        "following": 5,
+        "public_repos": 7,
+        "age_days": 4581
+      }
+    },
+    {
+      "login": "nullptrException100",
+      "profile_url": "https://github.com/nullptrException100",
+      "direction": "follower",
+      "trust": 80,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "6180",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 6180,
+        "following": 27649,
+        "public_repos": 4,
+        "age_days": 964
+      }
+    },
+    {
+      "login": "raviwijerathna1",
+      "profile_url": "https://github.com/raviwijerathna1",
+      "direction": "follower",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "established",
+          "detail": "3668",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "16",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 3668,
+        "following": 26146,
+        "public_repos": 16,
+        "age_days": 96
+      }
+    },
+    {
+      "login": "sarahofai",
+      "profile_url": "https://github.com/sarahofai",
+      "direction": "follower",
+      "trust": 80,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "1y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "2738",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 2738,
+        "following": 45415,
+        "public_repos": 7,
+        "age_days": 420
+      }
+    },
+    {
+      "login": "standardgalactic",
+      "profile_url": "https://github.com/standardgalactic",
+      "direction": "follower",
+      "trust": 45,
+      "verdict": "suspicious",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "7y",
+          "tone": "good"
+        },
+        {
+          "code": "extreme_ratio",
+          "detail": "47:1",
+          "tone": "bad"
+        },
+        {
+          "code": "established",
+          "detail": "27780",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "24339",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 27780,
+        "following": 1314948,
+        "public_repos": 24339,
+        "age_days": 2905
+      }
+    },
+    {
+      "login": "StefanHritcu",
+      "profile_url": "https://github.com/StefanHritcu",
+      "direction": "follower",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1312",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "41",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1312,
+        "following": 5773,
+        "public_repos": 41,
+        "age_days": 1048
+      }
+    },
+    {
+      "login": "udiedrichsen",
+      "profile_url": "https://github.com/udiedrichsen",
+      "direction": "follower",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "13y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "35",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 40,
+        "following": 48,
+        "public_repos": 35,
+        "age_days": 4868
+      }
+    },
+    {
+      "login": "0KnowledgeNetwork",
+      "profile_url": "https://github.com/0KnowledgeNetwork",
+      "direction": "following",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 11,
+        "following": 0,
+        "public_repos": 2,
+        "age_days": 1010
+      }
+    },
+    {
+      "login": "0x27",
+      "profile_url": "https://github.com/0x27",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "11y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "671",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "77",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 671,
+        "following": 33,
+        "public_repos": 77,
+        "age_days": 4351
+      }
+    },
+    {
+      "login": "AndreaGriffiths11",
+      "profile_url": "https://github.com/AndreaGriffiths11",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "10y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1087",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "156",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1087,
+        "following": 69,
+        "public_repos": 156,
+        "age_days": 3694
+      }
+    },
+    {
+      "login": "anomalyco",
+      "profile_url": "https://github.com/anomalyco",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "6y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "5990",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "78",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 5990,
+        "following": 0,
+        "public_repos": 78,
+        "age_days": 2282
+      }
+    },
+    {
+      "login": "chrisarts",
+      "profile_url": "https://github.com/chrisarts",
+      "direction": "following",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "13y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "12",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 41,
+        "following": 11,
+        "public_repos": 12,
+        "age_days": 4948
+      }
+    },
+    {
+      "login": "coleam00",
+      "profile_url": "https://github.com/coleam00",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "7y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "7414",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "72",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 7414,
+        "following": 2,
+        "public_repos": 72,
+        "age_days": 2773
+      }
+    },
+    {
+      "login": "CyberPunkMetalHead",
+      "profile_url": "https://github.com/CyberPunkMetalHead",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "7y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1568",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "37",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1568,
+        "following": 5,
+        "public_repos": 37,
+        "age_days": 2831
+      }
+    },
+    {
+      "login": "dcramer",
+      "profile_url": "https://github.com/dcramer",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "18y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "3449",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "246",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 3449,
+        "following": 11,
+        "public_repos": 246,
+        "age_days": 6572
+      }
+    },
+    {
+      "login": "dexhorthy",
+      "profile_url": "https://github.com/dexhorthy",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "13y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1905",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "163",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1905,
+        "following": 47,
+        "public_repos": 163,
+        "age_days": 4938
+      }
+    },
+    {
+      "login": "dilums",
+      "profile_url": "https://github.com/dilums",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "8y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "704",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "114",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 704,
+        "following": 18,
+        "public_repos": 114,
+        "age_days": 2977
+      }
+    },
+    {
+      "login": "DusKing1",
+      "profile_url": "https://github.com/DusKing1",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "9y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "108",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "79",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 108,
+        "following": 139,
+        "public_repos": 79,
+        "age_days": 3301
+      }
+    },
+    {
+      "login": "educlopez",
+      "profile_url": "https://github.com/educlopez",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "11y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "168",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "56",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 168,
+        "following": 57,
+        "public_repos": 56,
+        "age_days": 4070
+      }
+    },
+    {
+      "login": "facebookresearch",
+      "profile_url": "https://github.com/facebookresearch",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "10y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "37339",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "1441",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 37339,
+        "following": 0,
+        "public_repos": 1441,
+        "age_days": 3874
+      }
+    },
+    {
+      "login": "fastai",
+      "profile_url": "https://github.com/fastai",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "10y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "5405",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "124",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 5405,
+        "following": 0,
+        "public_repos": 124,
+        "age_days": 3701
+      }
+    },
+    {
+      "login": "Fosowl",
+      "profile_url": "https://github.com/Fosowl",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "7y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "657",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "20",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 657,
+        "following": 41,
+        "public_repos": 20,
+        "age_days": 2717
+      }
+    },
+    {
+      "login": "Gentleman-Programming",
+      "profile_url": "https://github.com/Gentleman-Programming",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "4y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "3939",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "87",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 3939,
+        "following": 0,
+        "public_repos": 87,
+        "age_days": 1706
+      }
+    },
+    {
+      "login": "google-gemini",
+      "profile_url": "https://github.com/google-gemini",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "15168",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "48",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 15168,
+        "following": 0,
+        "public_repos": 48,
+        "age_days": 920
+      }
+    },
+    {
+      "login": "guchangan1",
+      "profile_url": "https://github.com/guchangan1",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "7y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "291",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "11",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 291,
+        "following": 40,
+        "public_repos": 11,
+        "age_days": 2558
+      }
+    },
+    {
+      "login": "hackermondev",
+      "profile_url": "https://github.com/hackermondev",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "6y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1511",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "180",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1511,
+        "following": 36,
+        "public_repos": 180,
+        "age_days": 2402
+      }
+    },
+    {
+      "login": "HackUnderway",
+      "profile_url": "https://github.com/HackUnderway",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "5y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "507",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "45",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 507,
+        "following": 0,
+        "public_repos": 45,
+        "age_days": 2100
+      }
+    },
+    {
+      "login": "HKUDS",
+      "profile_url": "https://github.com/HKUDS",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "3y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "13394",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "92",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 13394,
+        "following": 0,
+        "public_repos": 92,
+        "age_days": 1392
+      }
+    },
+    {
+      "login": "jlengstorf",
+      "profile_url": "https://github.com/jlengstorf",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "16y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "4469",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "496",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 4469,
+        "following": 5,
+        "public_repos": 496,
+        "age_days": 6118
+      }
+    },
+    {
+      "login": "jyopari",
+      "profile_url": "https://github.com/jyopari",
+      "direction": "following",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "11y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "18",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 73,
+        "following": 4,
+        "public_repos": 18,
+        "age_days": 4186
+      }
+    },
+    {
+      "login": "langwatch",
+      "profile_url": "https://github.com/langwatch",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "178",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "43",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 178,
+        "following": 0,
+        "public_repos": 43,
+        "age_days": 1070
+      }
+    },
+    {
+      "login": "LeaderOnePro",
+      "profile_url": "https://github.com/LeaderOnePro",
+      "direction": "following",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "3y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "34",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 70,
+        "following": 274,
+        "public_repos": 34,
+        "age_days": 1298
+      }
+    },
+    {
+      "login": "leaningtech",
+      "profile_url": "https://github.com/leaningtech",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "12y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "651",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "52",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 651,
+        "following": 0,
+        "public_repos": 52,
+        "age_days": 4695
+      }
+    },
+    {
+      "login": "lissy93",
+      "profile_url": "https://github.com/lissy93",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "14y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "7436",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "132",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 7436,
+        "following": 159,
+        "public_repos": 132,
+        "age_days": 5193
+      }
+    },
+    {
+      "login": "lynx-family",
+      "profile_url": "https://github.com/lynx-family",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "1y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "2524",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "25",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 2524,
+        "following": 0,
+        "public_repos": 25,
+        "age_days": 557
+      }
+    },
+    {
+      "login": "marshtompsxd",
+      "profile_url": "https://github.com/marshtompsxd",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "10y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "132",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "18",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 132,
+        "following": 42,
+        "public_repos": 18,
+        "age_days": 3689
+      }
+    },
+    {
+      "login": "MiaAI-Lab",
+      "profile_url": "https://github.com/MiaAI-Lab",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "5y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1034",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "85",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1034,
+        "following": 33,
+        "public_repos": 85,
+        "age_days": 1963
+      }
+    },
+    {
+      "login": "microsoft",
+      "profile_url": "https://github.com/microsoft",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "12y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "129190",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "8296",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 129190,
+        "following": 0,
+        "public_repos": 8296,
+        "age_days": 4653
+      }
+    },
+    {
+      "login": "midudev",
+      "profile_url": "https://github.com/midudev",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "14y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "39362",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "239",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 39362,
+        "following": 2,
+        "public_repos": 239,
+        "age_days": 5282
+      }
+    },
+    {
+      "login": "mtxr",
+      "profile_url": "https://github.com/mtxr",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "15y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "455",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "69",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 455,
+        "following": 20,
+        "public_repos": 69,
+        "age_days": 5635
+      }
+    },
+    {
+      "login": "paslandau",
+      "profile_url": "https://github.com/paslandau",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "12y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "129",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "35",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 129,
+        "following": 0,
+        "public_repos": 35,
+        "age_days": 4482
+      }
+    },
+    {
+      "login": "patrick-michelberger",
+      "profile_url": "https://github.com/patrick-michelberger",
+      "direction": "following",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "14y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "79",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 78,
+        "following": 83,
+        "public_repos": 79,
+        "age_days": 5225
+      }
+    },
+    {
+      "login": "paucaro",
+      "profile_url": "https://github.com/paucaro",
+      "direction": "following",
+      "trust": 75,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "11y",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "57",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 44,
+        "following": 8,
+        "public_repos": 57,
+        "age_days": 4028
+      }
+    },
+    {
+      "login": "penberg",
+      "profile_url": "https://github.com/penberg",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "17y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "2009",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "51",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 2009,
+        "following": 55,
+        "public_repos": 51,
+        "age_days": 6331
+      }
+    },
+    {
+      "login": "playcanvas",
+      "profile_url": "https://github.com/playcanvas",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "15y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "4538",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "77",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 4538,
+        "following": 0,
+        "public_repos": 77,
+        "age_days": 5479
+      }
+    },
+    {
+      "login": "ProdFact",
+      "profile_url": "https://github.com/ProdFact",
+      "direction": "following",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "5y",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 2,
+        "following": 0,
+        "public_repos": 3,
+        "age_days": 2119
+      }
+    },
+    {
+      "login": "rtk-ai",
+      "profile_url": "https://github.com/rtk-ai",
+      "direction": "following",
+      "trust": 65,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "established",
+          "detail": "736",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 736,
+        "following": 0,
+        "public_repos": 7,
+        "age_days": 219
+      }
+    },
+    {
+      "login": "rust-lang",
+      "profile_url": "https://github.com/rust-lang",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "12y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "18228",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "246",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 18228,
+        "following": 0,
+        "public_repos": 246,
+        "age_days": 4744
+      }
+    },
+    {
+      "login": "sebastian-hofstaetter",
+      "profile_url": "https://github.com/sebastian-hofstaetter",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "12y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "214",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "16",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 214,
+        "following": 0,
+        "public_repos": 16,
+        "age_days": 4460
+      }
+    },
+    {
+      "login": "socrata",
+      "profile_url": "https://github.com/socrata",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "17y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "145",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "66",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 145,
+        "following": 0,
+        "public_repos": 66,
+        "age_days": 6403
+      }
+    },
+    {
+      "login": "steipete",
+      "profile_url": "https://github.com/steipete",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "17y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "52777",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "205",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 52777,
+        "following": 109,
+        "public_repos": 205,
+        "age_days": 6400
+      }
+    },
+    {
+      "login": "sydney-runkle",
+      "profile_url": "https://github.com/sydney-runkle",
+      "direction": "following",
+      "trust": 80,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "7y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "730",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 730,
+        "following": 57,
+        "public_repos": 7,
+        "age_days": 2574
+      }
+    },
+    {
+      "login": "thesysdev",
+      "profile_url": "https://github.com/thesysdev",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "258",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "24",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 258,
+        "following": 0,
+        "public_repos": 24,
+        "age_days": 978
+      }
+    },
+    {
+      "login": "torvalds",
+      "profile_url": "https://github.com/torvalds",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "15y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "320899",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "12",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 320899,
+        "following": 0,
+        "public_repos": 12,
+        "age_days": 5482
+      }
+    },
+    {
+      "login": "v2ray",
+      "profile_url": "https://github.com/v2ray",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "11y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1899",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "23",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1899,
+        "following": 0,
+        "public_repos": 23,
+        "age_days": 4021
+      }
+    },
+    {
+      "login": "weincoder",
+      "profile_url": "https://github.com/weincoder",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "9y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "181",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "92",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 181,
+        "following": 8,
+        "public_repos": 92,
+        "age_days": 3525
+      }
+    },
+    {
+      "login": "worldcoin",
+      "profile_url": "https://github.com/worldcoin",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "6y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "8277",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "151",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 8277,
+        "following": 0,
+        "public_repos": 151,
+        "age_days": 2399
+      }
+    },
+    {
+      "login": "yatendra2001",
+      "profile_url": "https://github.com/yatendra2001",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "6y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "116",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "63",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 116,
+        "following": 19,
+        "public_repos": 63,
+        "age_days": 2353
+      }
+    },
+    {
+      "login": "yichuan-w",
+      "profile_url": "https://github.com/yichuan-w",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "5y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "537",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "81",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 537,
+        "following": 269,
+        "public_repos": 81,
+        "age_days": 2136
+      }
+    },
+    {
+      "login": "zachary62",
+      "profile_url": "https://github.com/zachary62",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "8y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "1504",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "98",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 1504,
+        "following": 3,
+        "public_repos": 98,
+        "age_days": 3241
+      }
+    },
+    {
+      "login": "zerodytrash",
+      "profile_url": "https://github.com/zerodytrash",
+      "direction": "following",
+      "trust": 85,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "6y",
+          "tone": "good"
+        },
+        {
+          "code": "established",
+          "detail": "619",
+          "tone": "good"
+        },
+        {
+          "code": "active_creator",
+          "detail": "18",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 619,
+        "following": 17,
+        "public_repos": 18,
+        "age_days": 2446
+      }
+    },
+    {
+      "login": "ZeroKnowledgeNetwork",
+      "profile_url": "https://github.com/ZeroKnowledgeNetwork",
+      "direction": "following",
+      "trust": 70,
+      "verdict": "trusted",
+      "status": "pending",
+      "blocked_at": null,
+      "reasons": [
+        {
+          "code": "veteran",
+          "detail": "2y",
+          "tone": "good"
+        }
+      ],
+      "stats": {
+        "followers": 17,
+        "following": 0,
+        "public_repos": 8,
+        "age_days": 872
+      }
+    }
+  ]
 }
