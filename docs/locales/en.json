@@ -59,7 +59,7 @@
   "review_title": "Follower Review Queue",
   "review_desc": "Every follower and account you follow, scored with a trust %. Nothing is blocked automatically: inspect the reasons and decide.",
   "review_scan_help": "Queue empty? Run “GitHub Review - Scan and Block” (mode scan) on GitHub, then return here.",
-  "review_block_help": "Tick suspicious accounts, copy the list, then open the block workflow (mode block) and paste it. Profile links open GitHub where you can block natively.",
+  "review_block_help": "Tick suspects and Copy selected (empty = all pending). Open the block workflow (mode block), paste and confirm: a block-request PR opens in a new tab. Press Merge there to execute; nothing is blocked before the merge.",
   "metric_scanned": "Scanned",
   "metric_trusted": "Trusted",
   "metric_suspicious": "Suspicious",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "View block requests ↗"
 }

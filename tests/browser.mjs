@@ -98,6 +98,7 @@ try {
   assert.equal(await evaluate(`document.getElementById('tab-review').classList.contains('hidden')`), false);
   assert.equal(await evaluate(`document.getElementById('tab-radar').classList.contains('hidden')`), true);
   assert.match(await evaluate(`document.getElementById('btn-open-audit').href`), /actions\/workflows\/audit\.yml$/);
+  assert.match(await evaluate(`document.getElementById('btn-open-pulls').href`), /github\.com\/iberi22\/github-sentinel-radar\/pulls$/);
   const review = await evaluate(`(() => {
     reviewData = {last_updated:'2026-09-07T00:00:00Z', threshold:60,
       totals:{scanned:2,trusted:1,suspicious:1,blocked:0},

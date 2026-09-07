@@ -59,7 +59,7 @@
   "review_title": "ফলোয়ার পর্যালোচনা",
   "review_desc": "প্রতিটি ফলোয়ার ও আপনার অনুসরণ করা অ্যাকাউন্টের ট্রাস্ট স্কোর। কিছুই স্বয়ংক্রিয়ভাবে ব্লক হবে না: কারণ দেখে সিদ্ধান্ত নিন।",
   "review_scan_help": "তালিকা খালি? GitHub-এ “GitHub Review - Scan and Block” (scan মোড) চালিয়ে এখানে ফিরুন।",
-  "review_block_help": "সন্দেহজনক অ্যাকাউন্ট টিক দিন, তালিকা কপি করুন, ব্লক ওয়ার্কফ্লো (block মোড) খুলে পেস্ট করুন।",
+  "review_block_help": "সন্দেহজনক টিক দিন ও কপি করুন (খালি = সব মুলতুবি)। ওয়ার্কফ্লো (block মোড) খুলে পেস্ট করে নিশ্চিত করুন: নতুন ট্যাবে ব্লক-রিকোয়েস্ট PR খুলবে। কার্যকর করতে Merge চাপুন; মার্জের আগে কিছু ব্লক হবে না।",
   "metric_scanned": "স্ক্যানকৃত",
   "metric_trusted": "বিশ্বস্ত",
   "metric_suspicious": "সন্দেহজনক",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "ব্লক অনুরোধ দেখুন ↗"
 }

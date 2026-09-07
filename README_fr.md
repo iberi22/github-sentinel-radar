@@ -30,7 +30,7 @@
 3. **⚡ Économie d'Énergie et Hibernation** : L'analyse fonctionne **à la demande**. Elle se met en pause après 7 jours d'inactivité.
 4. **🌐 Interface Borderless Multilingue** : Design épuré sans bordures dures, mode clair/sombre et support complet des 10 langues les plus parlées.
 5. **🤝 Réseau de Confiance Décentralisé** : Répertoire communautaire appuyé sur Git pour valoriser les projets réels.
-6. **🔍 File de révision (décision humaine)** : Classe abonnés et suivis en fiables / bots possibles avec score, motifs et liens. Aucun blocage auto : cochez, copiez et bloquez via le workflow.
+6. **🔍 File de révision (décision humaine)** : Classe abonnés et suivis en fiables / bots possibles avec score, motifs et liens. Aucun blocage auto : cochez, copiez et bloquez via le workflow. Les blocages ne s'exécutent qu'après le Merge d'une PR de demande auto-créée.
 
 ---
 

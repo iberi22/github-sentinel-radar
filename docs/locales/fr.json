@@ -59,7 +59,7 @@
   "review_title": "Révision des abonnés",
   "review_desc": "Chaque abonné et compte suivi reçoit un score de confiance. Rien n'est bloqué automatiquement : examinez les motifs et décidez.",
   "review_scan_help": "File vide ? Lancez « GitHub Review - Scan and Block » (mode scan) sur GitHub, puis revenez ici.",
-  "review_block_help": "Cochez les suspects, copiez la liste, ouvrez le workflow de blocage (mode block) et collez-la.",
+  "review_block_help": "Cochez les suspects et Copier (vide = tous en attente). Ouvrez le workflow (mode block), collez, confirmez : une PR de demande s'ouvre dans un nouvel onglet. Cliquez Merge pour exécuter ; rien n'est bloqué avant.",
   "metric_scanned": "Analysés",
   "metric_trusted": "Fiables",
   "metric_suspicious": "Suspects",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "Voir les demandes ↗"
 }

@@ -59,7 +59,7 @@
   "review_title": "粉丝审核队列",
   "review_desc": "每位粉丝和你关注的账号都会有信任评分。不会自动封锁：查看原因后由你决定。",
   "review_scan_help": "队列为空？先在 GitHub 运行“GitHub Review - Scan and Block”（scan 模式），再回到这里。",
-  "review_block_help": "勾选可疑账号，复制名单，打开封锁工作流（block 模式）并粘贴。单个链接可在 GitHub 原生封锁。",
+  "review_block_help": "勾选可疑账号并复制（为空则全选）。打开工作流（block 模式）粘贴确认：新标签页会打开封锁请求 PR，点击 Merge 执行；合并前不会封锁任何人。",
   "metric_scanned": "已扫描",
   "metric_trusted": "可信",
   "metric_suspicious": "可疑",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "查看封锁请求 ↗"
 }

@@ -1,10 +1,12 @@
 name: GitHub Review - Scan and Block
 
 on:
+  schedule:
+    - cron: '0 6 * * *' # Escaneo diario 06:00 UTC; el bloqueo siempre exige PR + merge humano
   workflow_dispatch:
     inputs:
       mode:
-        description: 'scan = rebuild the review queue (never blocks). block = block the logins in targets (human decision).'
+        description: 'scan = rebuild the review queue (never blocks). block = open a block-request PR (blocks only on merge).'
         required: true
         default: 'scan'
         type: choice
@@ -12,12 +14,13 @@ on:
           - scan
           - block
       targets:
-        description: 'Comma separated GitHub logins to block (only used with mode=block).'
+        description: 'Comma separated GitHub logins for the block-request PR (only used with mode=block).'
         required: false
         default: ''
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: sentinel-data
@@ -48,19 +51,41 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_BLOCKER_TOKEN }}
         run: |
-          if [ "${{ inputs.mode }}" = "block" ]; then
+          if [ "${{ inputs.mode || 'scan' }}" = "block" ]; then
             if [ -z "${{ inputs.targets }}" ]; then
               echo "targets is required in block mode" >&2
               exit 1
             fi
-            python src/audit.py --block "${{ inputs.targets }}"
+            python src/audit.py --propose "${{ inputs.targets }}"
           else
             python src/audit.py
           fi
 
-      - name: Commit and push changes
+      - name: Commit scan to main
+        if: (inputs.mode || 'scan') == 'scan'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/review_queue.json REVIEW_QUEUE.md data/blocklist.json BLOCKED_ACCOUNTS.md
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(review): update trust queue and block decisions" && git push)
+          git add data/review_queue.json REVIEW_QUEUE.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(review): daily scan of trust queue" && git push)
+
+      - name: Open block-request PR
+        if: (inputs.mode || 'scan') == 'block'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          BRANCH="review/block-${{ github.run_id }}"
+          git checkout -b "$BRANCH"
+          git add data/review_queue.json REVIEW_QUEUE.md
+          git diff --quiet && git diff --staged --quiet && { echo "No hay cambios que proponer."; exit 1; }
+          git commit -m "proposal(review): block request for ${{ inputs.targets }}"
+          git push -u origin "$BRANCH"
+          PR_URL=$(gh pr create --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" \
+            --title "🛡️ Block request: ${{ inputs.targets }}" \
+            --body "Solicitud de bloqueo generada desde la Cola de Revisión (run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). Revisa el diff: cada login queda marcado como \`approved\` en \`data/review_queue.json\`. **Pulsa Merge para ejecutar los bloqueos**; cerrar sin merge no bloquea a nadie." \
+            --delete-branch)
+          echo "Abre el PR para revisar y confirmar: $PR_URL"
+          echo "## 🛡️ Block request" >> "$GITHUB_STEP_SUMMARY"
+          echo "Revisa y pulsa Merge para ejecutar: $PR_URL" >> "$GITHUB_STEP_SUMMARY"

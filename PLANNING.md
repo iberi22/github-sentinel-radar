@@ -20,7 +20,7 @@ GitHub Sentinel & Radar es una plataforma distribuida, modular y ejecutada bajo 
 1b. **Auditoría bajo demanda (Cola de Revisión)**
    - `src/audit.py` escanea seguidos + seguidores (`GET /user/following`, `GET /user/followers`, detalle por `GET /users/{login}`) y calcula % de confianza por usuario con motivos trazables (`src/review.py`).
    - Dos listas: confiables (≥ `review.trust_threshold`, defecto 60) y posibles bots. Cada fila: vínculo (seguidor/seguido/mutuo), % con barra, tooltip con motivos y stats, enlace al perfil.
-   - Bloqueo sólo por decisión explícita: selección en la web → copiar lista → workflow `audit.yml` en modo `block` con `targets`, o bloqueo nativo en el perfil de GitHub. El workflow registra en la cola, `blocklist.json` y `BLOCKED_ACCOUNTS.md`.
+   - Bloqueo sólo por decisión explícita con compuerta de PR: selección en la web → copiar lista → workflow `audit.yml` en modo `block` abre un PR con la lista marcada `approved` → el humano pulsa Merge → `block-on-merge.yml` ejecuta los PUT y registra en la cola, `blocklist.json` y `BLOCKED_ACCOUNTS.md`. Cerrar sin merge no bloquea a nadie. También vale el bloqueo nativo en el perfil de GitHub.
 
 2. **Capa 2: Radar de Inteligencia Técnica (Feed Bajo Demanda)**
    - Extracción del ADN técnico del usuario analizando repositorios con estrella (`GET /users/{username}/starred`, sólo datos públicos).

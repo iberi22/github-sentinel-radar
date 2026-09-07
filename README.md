@@ -30,7 +30,7 @@
 3. **⚡ Zero API Abuse & Hibernation**: Heavy scraping runs strictly **on-demand** from the dashboard with confirmation in GitHub. Automatically pauses if unused for more than 7 days.
 4. **🌐 Borderless & Multilingual UI**: Modern, clean, borderless web interface with Light/Dark mode and native localization in the 10 most spoken languages.
 5. **🤝 Web of Trust Directory**: Flat-file Git-backed database to showcase verified real developers and open-source projects.
-6. **🔍 Review Queue (human decision)**: Scans your followers and following into trusted / possible-bot lists with trust %, reasons, tooltips and profile links. Nothing auto-blocks: tick, copy and block via the audit workflow, or block natively on GitHub.
+6. **🔍 Review Queue (human decision)**: Scans your followers and following into trusted / possible-bot lists with trust %, reasons, tooltips and profile links. Nothing auto-blocks: tick, copy and block via the audit workflow, or block natively on GitHub. Blocks execute only when you merge an auto-created block-request PR.
 
 ---
 

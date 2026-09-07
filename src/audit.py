@@ -9,6 +9,12 @@ Block mode (--block login1,login2) blocks an explicit list given by a
 human (web UI selection or workflow input) and records the decision in
 the queue, data/blocklist.json and BLOCKED_ACCOUNTS.md.
 
+Propose mode (--propose login1,login2) only marks the list as approved
+in the queue so the workflow can open a pull request; nothing is
+blocked. Execute mode (--execute-approved) runs after that PR is merged
+and blocks every approved login. This keeps blocking human-gated with
+pure GitHub pieces and no backend.
+
 Needs GH_BLOCKER_TOKEN to be a user PAT with Followers read access
 (fine-grained PAT: Account permissions -> Followers -> Read-only) plus
 blocking permission for --block mode.
@@ -135,22 +141,111 @@ def block(token, cfg, targets):
         raise SystemExit(1)
 
 
+def propose(cfg, targets):
+    """Mark targets as approved without blocking anyone.
+
+    The workflow commits this state to a branch and opens a pull
+    request; blocking happens only if a human merges that PR.
+    """
+    queue = review.load_queue()
+    by_login = {u["login"].lower(): u for u in queue.get("users", [])}
+    marked = []
+    for login in targets:
+        entry = by_login.get(login)
+        if entry is None:
+            entry = {"login": login, "profile_url": f"https://github.com/{login}",
+                     "direction": "unknown", "trust": 0, "verdict": "suspicious",
+                     "reasons": [{"code": "manual", "detail": "", "tone": "bad"}],
+                     "stats": {"followers": 0, "following": 0, "public_repos": 0, "age_days": None}}
+            queue["users"].append(entry)
+            by_login[login] = entry
+        if entry.get("status") != "blocked":
+            entry["status"] = "approved"
+            entry.pop("blocked_at", None)
+            marked.append(login)
+    review.save_queue(queue["users"], cfg["review"]["trust_threshold"])
+    print(f"[PROPUESTA] {len(marked)} cuentas marcadas para bloqueo vía PR: {','.join(marked) or '—'}. Nada bloqueado todavía.")
+
+
+def execute_approved(token, cfg):
+    """Block every queue entry approved through a merged PR."""
+    from datetime import datetime, timezone
+    headers = get_headers(token)
+    queue = review.load_queue()
+    approved = [u for u in queue.get("users", []) if u.get("status") == "approved"]
+    if not approved:
+        print("[EJECUCIÓN] Sin aprobaciones pendientes. Nada que hacer.")
+        return
+
+    json_path = review.ROOT / "data" / "blocklist.json"
+    current_bots = []
+    if json_path.exists():
+        with json_path.open(encoding="utf-8") as stream:
+            current_bots = json.load(stream).get("bots", [])
+    blocked_usernames = {b["username"].lower() for b in current_bots}
+
+    failures, done = [], 0
+    for entry in approved:
+        login = entry["login"].lower()
+        try:
+            resp = github_request("PUT", f"https://api.github.com/user/blocks/{login}", headers=headers)
+        except Exception as exc:  # noqa: BLE001 - one bad login must not abort the rest
+            failures.append(f"{login} ({exc})")
+            continue
+        if resp.status_code not in (204, 201):
+            failures.append(f"{login} (HTTP {resp.status_code})")
+            continue
+        entry["status"] = "blocked"
+        entry["blocked_at"] = datetime.now(timezone.utc).isoformat()
+        if login not in blocked_usernames:
+            blocked_usernames.add(login)
+            current_bots.append({"username": login, "blocked_at": entry["blocked_at"],
+                                 "reason": f"Decisión humana aprobada en PR (confianza {entry.get('trust', 0)}%)"})
+        done += 1
+        print(f"[BLOCK] Bloqueado tras merge del PR: {login}")
+
+    if done:
+        update_blocklist_files(current_bots)
+        review.save_queue(queue["users"], cfg["review"]["trust_threshold"])
+    print(f"[COMPLETADO] Bloqueados: {done}. Fallos: {len(failures)}.")
+    for failure in failures:
+        print(f"[FALLO] {failure}")
+    if failures:
+        raise SystemExit(1)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="On-demand follower audit (never auto-blocks).")
     parser.add_argument("--block", metavar="login1,login2",
                         help="Comma separated logins to block by explicit human decision.")
+    parser.add_argument("--propose", metavar="login1,login2",
+                        help="Mark logins as approved for a block-request PR (blocks nothing).")
+    parser.add_argument("--execute-approved", action="store_true",
+                        help="Block every approved login (runs after the PR is merged).")
     args = parser.parse_args(argv)
 
     cfg = load_config()
     if not cfg["review"]["enabled"]:
         print("[AUDIT] Motor de revisión deshabilitado en config.json.")
         return
+
+    if args.propose is not None:
+        try:
+            targets = review.parse_targets(args.propose)
+        except ValueError as exc:
+            print(f"[ERROR] {exc}")
+            raise SystemExit(1)
+        propose(cfg, targets)
+        return
+
     token = os.environ.get("GH_BLOCKER_TOKEN") or os.environ.get("GH_TOKEN")
     if not token:
         print("[ERROR] No se encontró GH_TOKEN en las variables de entorno.")
         raise SystemExit(1)
 
-    if args.block is not None:
+    if args.execute_approved:
+        execute_approved(token, cfg)
+    elif args.block is not None:
         try:
             targets = review.parse_targets(args.block)
         except ValueError as exc:

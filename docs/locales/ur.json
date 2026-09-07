@@ -59,7 +59,7 @@
   "review_title": "فالوورز کا جائزہ",
   "review_desc": "ہر فالوور اور آپ کے فالو کردہ اکاؤنٹ کو اعتماد کا اسکور ملتا ہے۔ کچھ خودکار بلاک نہیں ہوگا: وجوہات دیکھیں اور فیصلہ کریں۔",
   "review_scan_help": "قطار خالی ہے؟ GitHub پر “GitHub Review - Scan and Block” (scan موڈ) چلائیں اور یہاں واپس آئیں۔",
-  "review_block_help": "مشکوک اکاؤنٹس منتخب کریں، فہرست کاپی کریں، بلاک ورک فلو (block موڈ) کھولیں اور پیسٹ کریں۔",
+  "review_block_help": "مشکوک منتخب کریں اور کاپی کریں (خالی = تمام زیر التواء)۔ ورک فلو (block موڈ) کھولیں، پیسٹ کرکے تصدیق کریں: نئے ٹیب میں بلاک PR کھلے گا۔ عمل کے لیے Merge دبائیں؛ مرج سے پہلے کچھ بلاک نہیں ہوگا۔",
   "metric_scanned": "اسکین شدہ",
   "metric_trusted": "قابل اعتماد",
   "metric_suspicious": "مشکوک",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "بلاک درخواستیں دیکھیں ↗"
 }

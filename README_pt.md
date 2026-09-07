@@ -30,7 +30,7 @@
 3. **⚡ Zero Desperdício e Hibernação**: O processamento pesado roda apenas **sob demanda**. Entra em modo econômico após 7 dias de inatividade.
 4. **🌐 Interface Borderless e Multilíngue**: Visual moderno sem bordas, alternância entre temas claro e escuro e suporte aos 10 idiomas mais falados.
 5. **🤝 Rede de Confiança (*Web of Trust*)**: Banco de dados descentralizado baseado em arquivos Git para divulgar projetos autênticos.
-6. **🔍 Fila de revisão (decisão humana)**: Classifica seguidores e seguidos em confiáveis / possíveis bots com % de confiança, motivos e links. Sem bloqueio automático: marque, copie e bloqueie via workflow.
+6. **🔍 Fila de revisão (decisão humana)**: Classifica seguidores e seguidos em confiáveis / possíveis bots com % de confiança, motivos e links. Sem bloqueio automático: marque, copie e bloqueie via workflow. Os bloqueios só executam após o Merge de um PR de solicitação autocriado.
 
 ---
 

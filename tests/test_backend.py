@@ -312,5 +312,58 @@ class ReviewTests(unittest.TestCase):
                 audit.main([])
         self.assertIn('Followers', buffer.getvalue())
 
+    def test_propose_marks_approved_without_any_api_call(self):
+        queue = {'users': [{'login': 'farm-01', 'trust': 12, 'status': 'pending',
+                            'profile_url': 'https://github.com/farm-01'}]}
+        saved = {}
+        with patch.object(audit, 'load_config', return_value=self.cfg), \
+             patch.object(audit, 'github_request') as api, \
+             patch.object(review, 'load_queue', return_value=queue), \
+             patch.object(review, 'save_queue',
+                          side_effect=lambda users, threshold: saved.setdefault('users', users)):
+            audit.main(['--propose', 'farm-01, newcomer-99'])
+        api.assert_not_called()
+        by_login = {u['login']: u for u in saved['users']}
+        self.assertEqual(by_login['farm-01']['status'], 'approved')
+        self.assertEqual(by_login['newcomer-99']['status'], 'approved')
+        self.assertNotIn('blocked_at', by_login['newcomer-99'])
+
+    def test_execute_approved_blocks_only_approved_and_skips_save_when_idle(self):
+        queue = {'users': [
+            {'login': 'farm-01', 'trust': 5, 'status': 'approved',
+             'profile_url': 'https://github.com/farm-01'},
+            {'login': 'mentor', 'trust': 95, 'status': 'pending',
+             'profile_url': 'https://github.com/mentor'},
+        ]}
+
+        def request(method, url, **kwargs):
+            return Mock(status_code=204)
+
+        saved = {}
+        with patch.dict(os.environ, {'GH_TOKEN': 'test'}), \
+             patch.object(audit, 'load_config', return_value=self.cfg), \
+             patch.object(audit, 'github_request', side_effect=request) as api, \
+             patch.object(review, 'load_queue', return_value=queue), \
+             patch.object(review, 'save_queue',
+                          side_effect=lambda users, threshold: saved.setdefault('users', users)), \
+             patch.object(audit, 'update_blocklist_files') as persist:
+            audit.main(['--execute-approved'])
+        puts = [c.args[1].rsplit('/', 1)[-1] for c in api.call_args_list]
+        self.assertEqual(puts, ['farm-01'])
+        self.assertEqual(queue['users'][0]['status'], 'blocked')
+        self.assertEqual(queue['users'][1]['status'], 'pending')
+        self.assertTrue(any(b['username'] == 'farm-01' for b in persist.call_args.args[0]))
+
+    def test_execute_approved_without_approvals_is_noop(self):
+        queue = {'users': [{'login': 'mentor', 'status': 'pending'}]}
+        with patch.dict(os.environ, {'GH_TOKEN': 'test'}), \
+             patch.object(audit, 'load_config', return_value=self.cfg), \
+             patch.object(audit, 'github_request') as api, \
+             patch.object(review, 'load_queue', return_value=queue), \
+             patch.object(review, 'save_queue') as save:
+            audit.main(['--execute-approved'])
+        api.assert_not_called()
+        save.assert_not_called()
+
 if __name__ == '__main__':
     unittest.main()

@@ -59,7 +59,7 @@
   "review_title": "Проверка подписчиков",
   "review_desc": "Каждый подписчик и отслеживаемый аккаунт получает % доверия. Автоблокировки нет: изучите причины и решайте сами.",
   "review_scan_help": "Очередь пуста? Запустите «GitHub Review - Scan and Block» (режим scan) на GitHub и вернитесь сюда.",
-  "review_block_help": "Отметьте подозрительных, скопируйте список, откройте workflow блокировки (режим block) и вставьте.",
+  "review_block_help": "Отметьте подозрительных и Копировать (пусто = все ожидающие). Откройте workflow (режим block), вставьте и подтвердите: в новой вкладке откроется PR-запрос. Нажмите Merge для исполнения; до слияния ничего не блокируется.",
   "metric_scanned": "Проверено",
   "metric_trusted": "Надёжные",
   "metric_suspicious": "Подозрительные",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "Запросы на блокировку ↗"
 }

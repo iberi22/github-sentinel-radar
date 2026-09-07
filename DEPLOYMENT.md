@@ -61,22 +61,24 @@ retrofechados. Revisa los umbrales y la lista upstream antes de activar bloqueos
 ## Cola de Revisión (Review Queue)
 
 Por defecto **nada se bloquea solo** (`anti_bot.review_mode=true` en
-`config.json`). Los sospechosos del cron van a `data/review_queue.json` y el
-informe completo se genera bajo demanda:
+`config.json`). El workflow `audit.yml` escanea a diario (cron 06:00 UTC) o
+bajo demanda (`mode=scan`) y publica la cola en la pestaña Review Queue.
 
-1. En GitHub abre Actions → **GitHub Review - Scan and Block** → Run workflow
-   con `mode=scan`. Escanea a quién sigues y quién te sigue, calcula % de
-   confianza por usuario y publica la cola (Pages se actualiza solo).
-2. En la web, pestaña **Review Queue**: lista de confiables y posibles bots con
-   % de confianza, tooltip con motivos y estadísticas, y enlace al perfil.
-3. Para bloquear: marca checkboxes (o nada = todos los sospechosos pendientes),
-   pulsa **Copy selected**, abre **Open block workflow ↗**, elige `mode=block`,
-   pega la lista en `targets` y confirma. El workflow bloquea con
-   GH_BLOCKER_TOKEN y registra la decisión en la cola, `blocklist.json` y
-   `BLOCKED_ACCOUNTS.md`. También puedes bloquear nativamente en cada perfil.
+Bloquear es una decisión humana con compuerta de PR, todo dentro de GitHub:
+
+1. En la web marca checkboxes (vacío = todos los sospechosos pendientes) y
+   pulsa **Copy selected**. Abre **Open block workflow ↗**, elige `mode=block`,
+   pega la lista en `targets` y confirma.
+2. El workflow marca la lista como `approved` (sin bloquear a nadie), la sube a
+   una rama `review/block-*` y **abre un PR automáticamente** con el diff y el
+   enlace en el resumen. Ábrelo en pestaña nueva (**View block requests ↗**).
+3. Revisa el diff y pulsa **Merge**: el workflow `Execute Approved Blocks`
+   bloquea con GH_BLOCKER_TOKEN, registra en la cola, `blocklist.json` y
+   `BLOCKED_ACCOUNTS.md`, y Pages republica. Cerrar el PR sin merge no bloquea
+   a nadie. También puedes bloquear nativamente en cada perfil.
 4. Ajustes en `config.json`: `review.trust_threshold` (defecto 60),
    `review.max_users_to_scan` (defecto 200, 0 = sin límite). Un re-escaneo
-   conserva el estado `blocked` y refresca el resto.
+   conserva `blocked` y refresca el resto.
 
 Si prefieres el auto-bloqueo clásico, pon `review_mode=false` (no recomendado:
 asumes falsos positivos sin revisión).

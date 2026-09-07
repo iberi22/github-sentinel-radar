@@ -59,7 +59,7 @@
   "review_title": "Revisión de Seguidores",
   "review_desc": "Cada seguidor y cuenta que sigues, con % de confianza. Nada se bloquea solo: revisa los motivos y decide.",
   "review_scan_help": "¿Cola vacía? Ejecuta «GitHub Review - Scan and Block» (modo scan) en GitHub y vuelve aquí.",
-  "review_block_help": "Marca sospechosos, copia la lista, abre el workflow de bloqueo (modo block) y pégala. Los enlaces abren GitHub para bloquear ahí mismo.",
+  "review_block_help": "Marca sospechosos y Copiar selección (vacío = todos los pendientes). Abre el workflow (modo block), pega y confirma: se abre un PR de solicitud en pestaña nueva. Pulsa Merge ahí para ejecutar; nada se bloquea antes del merge.",
   "metric_scanned": "Escaneados",
   "metric_trusted": "Confiables",
   "metric_suspicious": "Sospechosos",
@@ -89,5 +89,6 @@
   "reason_mutual": "Se siguen mutuamente",
   "reason_veteran": "Cuenta veterana ({d})",
   "reason_established": "Base sólida de seguidores ({d})",
-  "reason_active_creator": "Creador activo ({d} repos públicos)"
+  "reason_active_creator": "Creador activo ({d} repos públicos)",
+  "open_pulls": "Ver solicitudes de bloqueo ↗"
 }

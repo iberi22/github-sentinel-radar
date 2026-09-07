@@ -43,6 +43,18 @@ _Última actualización: 2026-09-06_
 
 ---
 
+## 🛡️ Fase 3: Bloqueo con compuerta de PR (sin backend)
+**Objetivo:** El bloqueo lo ejecuta GitHub de punta a punta: scan diario + manual, PR auto-creado que se abre en pestaña nueva, y el usuario solo pulsa Merge para ejecutar. Cerrar sin merge no bloquea a nadie.
+
+| ID    | Tarea                                                          | Prioridad | Estado        | Responsable |
+|-------|----------------------------------------------------------------|-----------|---------------|-------------|
+| F3-01 | `audit.py --propose/--execute-approved` (marcar vs ejecutar)   | ALTA      | ✅ Completado | Hermes      |
+| F3-02 | `audit.yml` con cron diario + rama/PR auto + `block-on-merge.yml` | ALTA   | ✅ Completado | Hermes      |
+| F3-03 | Web: enlace View block requests + ayuda del flujo PR en 10 idiomas | ALTA  | ✅ Completado | Hermes      |
+| F3-04 | Validación en vivo con login fantasma (PR → merge → fallo 404 limpio) | ALTA | ⬜ Pendiente | Hermes   |
+
+---
+
 ## ✅ Hitos Principales Completados
 - Hito 1: Creación del núcleo heurístico contra granjas de bots y manipulación de commits.
 - Hito 2: Implementación de la ejecución bajo demanda (*on-demand*) para evitar consumo abusivo de recursos.

@@ -59,7 +59,7 @@
   "review_title": "مراجعة المتابِعين",
   "review_desc": "كل متابِع وحساب تتابعه يحصل على نسبة ثقة. لا يتم الحظر تلقائيًا: راجع الأسباب وقرر بنفسك.",
   "review_scan_help": "القائمة فارغة؟ شغّل «GitHub Review - Scan and Block» (وضع scan) على GitHub ثم عد إلى هنا.",
-  "review_block_help": "حدّد الحسابات المشبوهة، انسخ القائمة، افتح سير عمل الحظر (وضع block) والصقها.",
+  "review_block_help": "حدّد المشبوهين وانسخ (فارغ = الكل). افتح سير العمل (وضع block) والصق وأكّد: سيُفتح PR طلب حظر في تبويب جديد. اضغط Merge للتنفيذ؛ لا حظر قبل الدمج.",
   "metric_scanned": "تم فحصهم",
   "metric_trusted": "موثوقون",
   "metric_suspicious": "مشبوهون",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "عرض طلبات الحظر ↗"
 }

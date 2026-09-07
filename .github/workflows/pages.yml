@@ -10,7 +10,7 @@ on:
       - '.github/workflows/pages.yml'
       - 'src/build_site.py'
   workflow_run:
-    workflows: ['GitHub Sentinel - Anti-Bot Blocker', 'GitHub Radar - On-Demand Technical Feed', 'GitHub Review - Scan and Block']
+    workflows: ['GitHub Sentinel - Anti-Bot Blocker', 'GitHub Radar - On-Demand Technical Feed', 'GitHub Review - Scan and Block', 'Execute Approved Blocks']
     types: [completed]
     branches: [main]
   workflow_dispatch:

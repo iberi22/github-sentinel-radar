@@ -30,7 +30,7 @@
 3. **⚡ Cero Abuso de Recursos e Hibernación**: El rastreo pesado se ejecuta **bajo demanda** con un solo clic desde la web. Entra en reposo automáticamente si no se consulta en más de 7 días.
 4. **🌐 Interfaz Borderless y Multilingüe**: Diseño limpio sin bordes duros (*borderless*), soporte para modo claro/oscuro e internacionalización en los 10 idiomas más hablados del mundo.
 5. **🤝 Red de Confianza (*Web of Trust*)**: Base de datos descentralizada basada en Git (*Flat-File DB*) para conectar creadores de código abierto y proyectos legítimos.
-6. **🔍 Cola de Revisión (decisión humana)**: Analiza a tus seguidores y seguidos en listas de confiables / posibles bots con % de confianza, motivos, tooltips y enlaces al perfil. Nada se bloquea solo: marca, copia y bloquea vía workflow de auditoría, o bloquea en GitHub.
+6. **🔍 Cola de Revisión (decisión humana)**: Analiza a tus seguidores y seguidos en listas de confiables / posibles bots con % de confianza, motivos, tooltips y enlaces al perfil. Nada se bloquea solo: marca, copia y bloquea vía workflow de auditoría, o bloquea en GitHub. Los bloqueos solo se ejecutan al hacer Merge a un PR de solicitud auto-creado.
 
 ---
 

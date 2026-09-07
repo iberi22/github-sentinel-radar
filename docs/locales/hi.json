@@ -59,7 +59,7 @@
   "review_title": "फॉलोअर समीक्षा",
   "review_desc": "हर फॉलोअर और आपके द्वारा फॉलो किए गए खातों का ट्रस्ट स्कोर। कुछ भी अपने-आप ब्लॉक नहीं होगा: कारण देखें और निर्णय लें।",
   "review_scan_help": "कतार खाली है? GitHub पर “GitHub Review - Scan and Block” (scan मोड) चलाएँ और यहाँ लौटें।",
-  "review_block_help": "संदिग्ध खाते चुनें, सूची कॉपी करें, ब्लॉक वर्कफ़्लो (block मोड) खोलें और पेस्ट करें।",
+  "review_block_help": "संदिग्ध चुनें और कॉपी करें (खाली = सभी लंबित)। वर्कफ़्लो (block मोड) खोलें, पेस्ट करके पुष्टि करें: नई टैब में ब्लॉक-रिक्वेस्ट PR खुलेगा। निष्पादन हेतु Merge दबाएँ; मर्ज से पहले कुछ ब्लॉक नहीं होगा।",
   "metric_scanned": "स्कैन किए",
   "metric_trusted": "विश्वसनीय",
   "metric_suspicious": "संदिग्ध",
@@ -89,5 +89,6 @@
   "reason_mutual": "You follow each other",
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
-  "reason_active_creator": "Active creator ({d} public repos)"
+  "reason_active_creator": "Active creator ({d} public repos)",
+  "open_pulls": "ब्लॉक अनुरोध देखें ↗"
 }

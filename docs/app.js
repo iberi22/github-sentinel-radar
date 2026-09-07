@@ -108,6 +108,7 @@ function applyTranslations() {
     'trusted-header': 'trusted_header',
     'btn-copy-targets': 'copy_targets',
     'btn-open-audit': 'open_audit_workflow',
+    'btn-open-pulls': 'open_pulls',
     'review-empty': 'review_empty',
     'directory-title': 'directory_title',
     'directory-desc': 'directory_desc',
@@ -354,6 +355,10 @@ function auditURL() {
   return `https://github.com/${site.repository}/actions/workflows/audit.yml`;
 }
 
+function pullsURL() {
+  return `https://github.com/${site.repository}/pulls`;
+}
+
 function renderDirectory() {
   if (!verifiedData) return;
   const container = document.getElementById('projects-grid');
@@ -425,6 +430,8 @@ async function loadSite() {
   document.getElementById('btn-dispatch-radar').removeAttribute('aria-disabled');
   document.getElementById('btn-open-audit').href = auditURL();
   document.getElementById('btn-open-audit').removeAttribute('aria-disabled');
+  document.getElementById('btn-open-pulls').href = pullsURL();
+  document.getElementById('btn-open-pulls').removeAttribute('aria-disabled');
   document.getElementById('btn-submit-project').href = `https://github.com/${site.repository}/pulls`;
   document.getElementById('btn-sentinel-setup').href = `https://github.com/${site.repository}/blob/${encodeURIComponent(site.default_branch)}/DEPLOYMENT.md#sentinel`;
   renderGuide();
