@@ -1,12 +1,13 @@
 # 🔍 Cola de Revisión — Sentinel
-_Última actualización: 2026-09-07T05:07:48.101349+00:00_
-**Escaneados:** 78 · **Confiables:** 72 · **Sospechosos:** 6 · **Bloqueados:** 0 · **Umbral:** 60%
+_Última actualización: 2026-09-07T06:52:58.807099+00:00_
+**Escaneados:** 79 · **Confiables:** 72 · **Sospechosos:** 7 · **Bloqueados:** 0 · **Umbral:** 60%
 
 ## 🚨 Posibles bots
 
 | Usuario | Perfil | Vínculo | Confianza | Motivos | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `arvelquigley99` | [arvelquigley99](https://github.com/arvelquigley99) | follower | 0% | -new_account 3d; -extreme_ratio 490:1 | pending |
+| `ghost-login-404-xyz` | [ghost-login-404-xyz](https://github.com/ghost-login-404-xyz) | unknown | 0% | -manual | approved |
 | `arpitrajjj` | [arpitrajjj](https://github.com/arpitrajjj) | follower | 17% | -new_account 43d; -extreme_ratio 53:1; +established 931 | pending |
 | `Lxcardoza993` | [Lxcardoza993](https://github.com/Lxcardoza993) | follower | 30% | -extreme_ratio 151:1; +established 661; +active_creator 22 | pending |
 | `bludnic` | [bludnic](https://github.com/bludnic) | follower | 45% | +veteran 9y; -extreme_ratio 45:1; +established 3006; +active_creator 49 | pending |
