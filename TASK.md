@@ -128,3 +128,11 @@ Estado: completado y publicado. Plan aplicado:
 - Regresión Chromium local PASS: pestaña Review (cambio de tab, métricas, enlace a `audit.yml`, render con login malicioso sin XSS), más todo lo anterior (10 idiomas/RTL, guía, purga de PAT, cero llamadas a `api.github.com`).
 - 4 workflows con YAML válido y `audit.yml` registrado en el trigger `workflow_run` de Pages.
 - Pendiente: `git push`, correr `audit.yml` en modo `scan` con GH_BLOCKER_TOKEN real y verificar la cola publicada.
+
+## Validación Fase 2 en producción — 2026-09-07 UTC
+
+- Scan real `audit.yml` modo `scan`: https://github.com/iberi22/github-sentinel-radar/actions/runs/34085579798 — 78 escaneados (72 confiables, 6 sospechosos, 0 omitidos). Nada bloqueado.
+- Requirió añadir permiso Followers:Read al PAT de GH_BLOCKER_TOKEN (el primer intento dio 403). `audit.py` ahora explica ese 403 en el log.
+- Pages redesplegado tras la revisión: https://github.com/iberi22/github-sentinel-radar/actions/runs/34085611816 — cola visible en la pestaña Review Queue.
+- Sospechosos: arvelquigley99 (0%), arpitrajjj (17%), Lxcardoza993 (30%), bludnic / Connor9994 / standardgalactic (45% — veteranos con follow masivo, decide el humano).
+- Pendiente: Belalcazar valida si su bot conocido está entre los 6 y decide bloqueos.
