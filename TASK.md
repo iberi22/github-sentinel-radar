@@ -3,7 +3,7 @@ Gestión de Tareas: GitHub Sentinel & Radar
 _Última actualización: 2026-09-06_
 
 ## 🎯 Resumen Ejecutivo y Estado Actual
-**Estado General:** Auditoría local validada; publicación remota en curso. Las afirmaciones originales de 100% no estaban respaldadas por pruebas incluidas.
+**Estado General:** Código publicado y GitHub Pages desplegado y verificado. Activación de motores pendiente de GH_BLOCKER_TOKEN. Las afirmaciones originales de 100% no estaban respaldadas por pruebas incluidas.
 
 ---
 
@@ -77,7 +77,14 @@ _Última actualización: 2026-09-06_
 ## Resultado de auditoría local — 2026-09-07 UTC
 
 - AD-03 completado: 11 pruebas Python y regresión real en Chromium (10 idiomas/RTL, tema, dispatch simulado, token, XSS).
-- Workflows YAML parseados y permisos/triggers revisados con documentación oficial de GitHub. Validación remota de Pages en curso.
+- Workflows YAML parseados y permisos/triggers revisados con documentación oficial de GitHub. Pages finalizó correctamente (run 34078083746); regresión Chromium pasada sobre la URL pública.
 - Dependencias instaladas y compatibles en Python 3.12.12; Python 3.11 se validará en Actions al activar los motores.
 - Datos de ejemplo no verificados retirados de la plantilla pública; ZIP original conservado.
 - TD-01 y TD-02 permanecen pendientes con plan, sin procesos adicionales residentes.
+
+## Publicación — 2026-09-07 UTC
+
+- Repositorio: https://github.com/iberi22/github-sentinel-radar
+- Web: https://iberi22.github.io/github-sentinel-radar/
+- Despliegue verificado: https://github.com/iberi22/github-sentinel-radar/actions/runs/34078083746
+- Pendiente operativo: configurar GH_BLOCKER_TOKEN (Block another user: write y Starring: read). La web requiere un PAT independiente con Actions: write para el disparo manual. No se ejecutaron motores con credenciales reales.

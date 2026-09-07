@@ -1,9 +1,9 @@
 {
   "project": "GitHub Sentinel & Radar",
-  "last_updated": "2026-09-07T02:52:00Z",
+  "last_updated": "2026-09-07T03:00:42.716631+00:00",
   "executive_summary": {
-    "status": "local_validation_passed",
-    "focus": "Publicación autorizada con gh CLI y verificación de GitHub Pages"
+    "status": "published",
+    "focus": "Web desplegada y validada; motores pendientes de GH_BLOCKER_TOKEN; TD-01/TD-02 planificados"
   },
   "progress_by_component": {
     "Infraestructura_Workflows": "locally_validated",
@@ -129,6 +129,16 @@
     "python_tests": 11,
     "browser": "Chromium: 10 locales, RTL, theme, dispatch, token deletion, XSS",
     "workflows": "YAML parsed, permissions and triggers reviewed",
-    "remote_deployment": "in_progress"
+    "remote_deployment": "success",
+    "pages_run": 34078083746,
+    "public_browser": "passed"
+  },
+  "deployment": {
+    "repository": "https://github.com/iberi22/github-sentinel-radar",
+    "pages": "https://iberi22.github.io/github-sentinel-radar/",
+    "missing_secrets": [
+      "GH_BLOCKER_TOKEN"
+    ],
+    "live_scanners_tested": false
   }
 }

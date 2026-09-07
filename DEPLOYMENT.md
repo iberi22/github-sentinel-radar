@@ -4,7 +4,11 @@
 
 Extraído de `apps/github-sentinel-radar.zip` el 2026-09-07 UTC. Publicación autorizada por el mantenedor mediante gh CLI. La consulta inicial
 como `iberi22` confirmó que era necesario crear el repositorio.
-No se ejecutaron bloqueos reales durante la validación local.
+Repositorio creado y main subido con gh/git. Pages desplegado correctamente:
+https://github.com/iberi22/github-sentinel-radar/actions/runs/34078083746
+
+Web verificada con Chromium: https://iberi22.github.io/github-sentinel-radar/
+No se ejecutaron bloqueos reales. GH_BLOCKER_TOKEN aún no está configurado.
 
 La plantilla se publica con datos vacíos. Los ejemplos heredados del ZIP no
 acreditaban bloqueos, releases o verificaciones reales y siguen conservados
@@ -78,3 +82,9 @@ la revisión visual requiere red. Los diccionarios y datos son locales.
 
 TD-01 (webhooks organizacionales) y TD-02 (LLM local) siguen pendientes, con planes
 paso a paso sincronizados en `TASK.md` y `.gitcore/planning/tasks.json`.
+
+Prueba sobre el despliegue público (API GitHub simulada):
+
+```sh
+SENTINEL_URL=https://iberi22.github.io/github-sentinel-radar/ xavier exec 'node tests/browser.mjs'
+```

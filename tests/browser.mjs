@@ -70,7 +70,7 @@ try {
       return originalFetch(url, options);
     };
   ` });
-  await send('Page.navigate', { url: `http://127.0.0.1:${server.address().port}/docs/index.html` });
+  await send('Page.navigate', { url: process.env.SENTINEL_URL || `http://127.0.0.1:${server.address().port}/docs/index.html` });
   await evaluate(`new Promise((resolve, reject) => {
     const started = Date.now();
     const timer = setInterval(() => {
