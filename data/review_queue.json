@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-09-07T06:52:58.807099+00:00",
+  "last_updated": "2026-09-07T06:54:36.820120+00:00",
   "totals": {
-    "scanned": 79,
+    "scanned": 78,
     "trusted": 72,
-    "suspicious": 7,
+    "suspicious": 6,
     "blocked": 0
   },
   "threshold": 60,
@@ -2373,27 +2373,6 @@
         "public_repos": 8,
         "age_days": 872
       }
-    },
-    {
-      "login": "ghost-login-404-xyz",
-      "profile_url": "https://github.com/ghost-login-404-xyz",
-      "direction": "unknown",
-      "trust": 0,
-      "verdict": "suspicious",
-      "reasons": [
-        {
-          "code": "manual",
-          "detail": "",
-          "tone": "bad"
-        }
-      ],
-      "stats": {
-        "followers": 0,
-        "following": 0,
-        "public_repos": 0,
-        "age_days": null
-      },
-      "status": "approved"
     }
   ]
 }
