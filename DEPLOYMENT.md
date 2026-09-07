@@ -92,3 +92,9 @@ pausa y límite de espera, y XSS. No envía solicitudes de escaneo reales.
 - [GITHUB_TOKEN y triggers](https://docs.github.com/en/actions/concepts/security/github_token).
 - [Restricción de nombres GITHUB_ en secretos](https://docs.github.com/en/actions/reference/security/secrets).
 - [Habilitación de Pages y permisos](https://github.com/actions/configure-pages/blob/main/action.yml).
+
+## Resultado verificado (2026-09-07 UTC)
+
+- Radar con token automático y Python 3.11: [ejecución correcta](https://github.com/iberi22/github-sentinel-radar/actions/runs/34080489299).
+- 8 releases y 10 descubrimientos de iberi22 publicados por [Pages](https://github.com/iberi22/github-sentinel-radar/actions/runs/34080509221).
+- 14 pruebas Python y Chromium local/público correctos, sin llamadas autenticadas desde la web.

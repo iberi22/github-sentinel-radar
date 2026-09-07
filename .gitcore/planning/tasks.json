@@ -1,9 +1,9 @@
 {
   "project": "GitHub Sentinel & Radar",
-  "last_updated": "2026-09-07T03:00:42.716631+00:00",
+  "last_updated": "2026-09-07T03:43:02.891388+00:00",
   "executive_summary": {
     "status": "published",
-    "focus": "Web desplegada y validada; motores pendientes de GH_BLOCKER_TOKEN; TD-01/TD-02 planificados"
+    "focus": "Acceso sin token web y guía; Radar público con GITHUB_TOKEN validado en producción"
   },
   "progress_by_component": {
     "Infraestructura_Workflows": "locally_validated",
@@ -128,7 +128,7 @@
       "id": "AD-04",
       "title": "Web sin PAT, onboarding guiado, Radar público sin secretos adicionales",
       "priority": "HIGH",
-      "status": "in_progress",
+      "status": "completed",
       "implementation_plan": [
         "Purgar token web y sustituir dispatch REST por confirmación GitHub",
         "Generar contexto público repo/rama y guía de tres pasos",
@@ -139,17 +139,23 @@
     }
   ],
   "validation": {
-    "python_tests": 11,
-    "browser": "Chromium: 10 locales, RTL, theme, dispatch, token deletion, XSS",
+    "python_tests": 14,
+    "browser": "Chromium local y público: 10 locales/RTL, guía, móvil, purga de PAT, rutas de copias, espera acotada, pausa, errores, XSS",
     "workflows": "YAML parsed, permissions and triggers reviewed",
     "remote_deployment": "success",
-    "pages_run": 34078083746,
-    "public_browser": "passed"
+    "pages_run": 34080509221,
+    "public_browser": "passed",
+    "radar_run": 34080489299
   },
   "deployment": {
     "repository": "https://github.com/iberi22/github-sentinel-radar",
     "pages": "https://iberi22.github.io/github-sentinel-radar/",
     "missing_secrets": [],
-    "live_scanners_tested": false
+    "live_scanners_tested": {
+      "radar": true,
+      "blocker": false
+    },
+    "template": true,
+    "web_credentials": false
   }
 }

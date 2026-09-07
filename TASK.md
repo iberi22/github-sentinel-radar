@@ -3,7 +3,7 @@ Gestión de Tareas: GitHub Sentinel & Radar
 _Última actualización: 2026-09-06_
 
 ## 🎯 Resumen Ejecutivo y Estado Actual
-**Estado General:** Código publicado y GitHub Pages desplegado y verificado. Activación de motores pendiente de GH_BLOCKER_TOKEN. Las afirmaciones originales de 100% no estaban respaldadas por pruebas incluidas.
+**Estado General:** Web sin PAT publicada; Radar público ejecutado y Pages verificado. GH_BLOCKER_TOKEN existe para protección personal opcional. Las afirmaciones originales de 100% no estaban respaldadas por pruebas incluidas.
 
 ---
 
@@ -91,10 +91,19 @@ _Última actualización: 2026-09-06_
 
 ## AD-04 — Acceso sin token web y puesta en marcha guiada
 
-Estado: en curso. Plan previo a implementación:
+Estado: completado y publicado. Plan aplicado:
 1. Eliminar captura/uso de PAT en navegador y purgar credenciales locales antiguas.
 2. Detectar repo y rama desde metadatos públicos del despliegue; guía Siguiente/Atrás con enlaces GitHub oficiales.
 3. Usar sesión GitHub para confirmar ejecución; comprobar sólo archivos estáticos al volver, con espera acotada y pausa al ocultarse.
 4. Ejecutar Radar público con GITHUB_TOKEN automático y perfil del propietario; reservar GH_BLOCKER_TOKEN para bloqueo personal.
 5. Validar rutas, ausencia de credenciales web, migración, diez idiomas/RTL, estado de carga/errores, límites de espera y API pública en Actions.
 6. Publicar y comprobar Pages/feed reales. OAuth mediante GitHub App requeriría servicio de autenticación adicional; no es necesario para esta fase.
+
+## Validación AD-04 — 2026-09-07 UTC
+
+- 14 pruebas Python y prueba Chromium local/pública correctas (10 idiomas/RTL, guía, móvil, purga de PAT, rutas de copias, cero llamadas API desde la web, pausa/timeout y errores de carga).
+- Radar real con GITHUB_TOKEN automático en Python 3.11: https://github.com/iberi22/github-sentinel-radar/actions/runs/34080489299
+- Feed publicado: 8 releases y 10 descubrimientos públicos de iberi22.
+- Pages posterior al Radar: https://github.com/iberi22/github-sentinel-radar/actions/runs/34080509221
+- Repositorio habilitado como template. GH_BLOCKER_TOKEN confirmado existente, no leído ni copiado; no se ejecutaron bloqueos como prueba.
+- Límites explícitos: se confirma Run workflow en GitHub con permiso de escritura; primera copia requiere habilitar Pages; GitHub App/OAuth con servidor sería otra arquitectura.
