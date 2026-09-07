@@ -8,6 +8,10 @@ suspicious accounts land in data/review_queue.json so you decide.
 Block mode (--block login1,login2) blocks an explicit list given by a
 human (web UI selection or workflow input) and records the decision in
 the queue, data/blocklist.json and BLOCKED_ACCOUNTS.md.
+
+Needs GH_BLOCKER_TOKEN to be a user PAT with Followers read access
+(fine-grained PAT: Account permissions -> Followers -> Read-only) plus
+blocking permission for --block mode.
 """
 
 import argparse
@@ -24,8 +28,17 @@ def paginate(url, headers):
     items = []
     page = 1
     while True:
-        resp = github_request("GET", url, headers=headers,
-                              params={"per_page": 100, "page": page})
+        try:
+            resp = github_request("GET", url, headers=headers,
+                                  params={"per_page": 100, "page": page})
+        except Exception as exc:
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            if status == 403:
+                print("[ERROR] GitHub devolvió 403 en " + url + ". "
+                      "El PAT de GH_BLOCKER_TOKEN necesita permiso de lectura de "
+                      "seguidores (fine-grained PAT: Account permissions -> "
+                      "Followers -> Read-only). Edita el token y repite el scan.")
+            raise
         batch = resp.json()
         items.extend(batch)
         if len(batch) < 100:

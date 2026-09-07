@@ -298,5 +298,19 @@ class ReviewTests(unittest.TestCase):
         self.assertEqual(by_login['farm-01']['verdict'], 'suspicious')
         self.assertEqual(by_login['mentor']['direction'], 'following')
 
+    def test_audit_scan_403_prints_actionable_permission_hint(self):
+        import io
+        from contextlib import redirect_stdout
+        self.cfg['review']['enabled'] = True
+        error = common.requests.HTTPError('forbidden')
+        error.response = Mock(status_code=403)
+        buffer = io.StringIO()
+        with patch.dict(os.environ, {'GH_TOKEN': 'test'}), \
+             patch.object(audit, 'load_config', return_value=self.cfg), \
+             patch.object(audit, 'github_request', side_effect=error):
+            with redirect_stdout(buffer), self.assertRaises(common.requests.HTTPError):
+                audit.main([])
+        self.assertIn('Followers', buffer.getvalue())
+
 if __name__ == '__main__':
     unittest.main()
