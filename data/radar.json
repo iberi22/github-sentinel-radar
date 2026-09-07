@@ -1,10 +1,288 @@
 {
-  "last_updated": null,
-  "last_dispatched_at": null,
+  "profile_user": "iberi22",
+  "last_updated": "2026-09-07T03:41:36.192112+00:00",
+  "last_dispatched_at": "2026-09-07T03:41:36.192089+00:00",
   "profile_dna": {
-    "top_languages": [],
-    "top_topics": []
+    "top_languages": [
+      "Python",
+      "TypeScript",
+      "Rust",
+      "Go",
+      "JavaScript"
+    ],
+    "top_topics": [
+      "cli",
+      "mcp",
+      "codex",
+      "ai-agents",
+      "claude-code"
+    ]
   },
-  "releases": [],
-  "discoveries": []
+  "releases": [
+    {
+      "repo": "rtk-ai/grit",
+      "tag_name": "v0.4.0",
+      "published_at": "2026-06-14T21:26:19Z",
+      "html_url": "https://github.com/rtk-ai/grit/releases/tag/v0.4.0",
+      "body_snippet": "## [0.4.0](https://github.com/rtk-ai/grit/compare/v0.3.0...v0.4.0) (2026-06-14)\n\n\n### Features\n\n* real shared read locks on S3/Azure backends ([#16](https://github.com/rtk-ai/grit/issues/16)) ([#25](h..."
+    },
+    {
+      "repo": "rtk-ai/rtk",
+      "tag_name": "v0.48.0",
+      "published_at": "2026-09-04T14:35:14Z",
+      "html_url": "https://github.com/rtk-ai/rtk/releases/tag/v0.48.0",
+      "body_snippet": "## [0.48.0](https://github.com/rtk-ai/rtk/compare/v0.47.0...v0.48.0) (2026-09-04)\n\n\n### Features\n\n* add Bun and Deno runtime support ([856c345](https://github.com/rtk-ai/rtk/commit/856c34599a50086e00f..."
+    },
+    {
+      "repo": "sanjay3290/jules-pr-reviewer",
+      "tag_name": "v1.0.0",
+      "published_at": "2026-04-17T13:35:04Z",
+      "html_url": "https://github.com/sanjay3290/jules-pr-reviewer/releases/tag/v1.0.0",
+      "body_snippet": "Initial public release of Jules PR Reviewer — a GitHub Action that uses Google Jules to review pull requests.\r\n\r\n## Features\r\n- Per-PR review comments with severity tags (BLOCKING / WARN / NIT).\r\n- Me..."
+    },
+    {
+      "repo": "ChromeDevTools/chrome-devtools-mcp",
+      "tag_name": "chrome-devtools-mcp-v1.8.0",
+      "published_at": "2026-08-25T11:35:48Z",
+      "html_url": "https://github.com/ChromeDevTools/chrome-devtools-mcp/releases/tag/chrome-devtools-mcp-v1.8.0",
+      "body_snippet": "## [1.8.0](https://github.com/ChromeDevTools/chrome-devtools-mcp/compare/chrome-devtools-mcp-v1.7.0...chrome-devtools-mcp-v1.8.0) (2026-08-25)\n\n\n### 🎉 Features\n\n* Add additional params to get_heapsnap..."
+    },
+    {
+      "repo": "zhaoxuya520/reverse-skill",
+      "tag_name": "v1.0.1",
+      "published_at": "2026-08-08T10:16:19Z",
+      "html_url": "https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.1",
+      "body_snippet": "## 重点更新\r\n\r\n- 将路由改为客户端无关的结构化配置：以 `skills/config/routing.json` 作为唯一事实源，不绑定 OpenCode、Codex、Claude Code、Cursor 或其他客户端。\r\n- 扩展到 41 条路由（R0–R40）与 163 条中英双语回归基准，并加入 Windows + Ubuntu CI。\r\n- 新增只读 Case Review 证据图..."
+    },
+    {
+      "repo": "bryllim/workout-guide",
+      "tag_name": "v1.0.0",
+      "published_at": "2026-08-24T02:32:24Z",
+      "html_url": "https://github.com/bryllim/workout-guide/releases/tag/v1.0.0",
+      "body_snippet": "The first public release of Workout Guide by Bryl Lim.\n\n- 302 exercises with exactly three transparent 512 × 512 PNG frames each\n- Typed ESM and CommonJS API with manifest, search, lookups, and CDN UR..."
+    },
+    {
+      "repo": "googleworkspace/cli",
+      "tag_name": "v0.22.5",
+      "published_at": "2026-03-31T18:53:24Z",
+      "html_url": "https://github.com/googleworkspace/cli/releases/tag/v0.22.5",
+      "body_snippet": "## Installation\n\nDownload the archive for your OS and architecture from the assets below.\n\n### Linux / macOS\n\nReplace `<target>` with your platform (e.g., `aarch64-apple-darwin` or `x86_64-unknown-lin..."
+    },
+    {
+      "repo": "vercel-labs/fx",
+      "tag_name": "v0.0.7",
+      "published_at": "2026-08-29T15:56:13Z",
+      "html_url": "https://github.com/vercel-labs/fx/releases/tag/v0.0.7",
+      "body_snippet": "**MCP is safer, easier to manage and more compatible; project servers require explicit trust, `fx mcp` is now a top-level command, `Ctrl+Enter` can steer active turns and fx uses eight fewer tools to ..."
+    }
+  ],
+  "discoveries": [
+    {
+      "full_name": "n8n-io/n8n",
+      "html_url": "https://github.com/n8n-io/n8n",
+      "stars": 203579,
+      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "apis",
+        "automation",
+        "cli",
+        "data-flow",
+        "development",
+        "integration-framework",
+        "integrations",
+        "ipaas",
+        "low-code",
+        "low-code-platform",
+        "mcp",
+        "mcp-client",
+        "mcp-server",
+        "n8n",
+        "no-code",
+        "self-hosted",
+        "typescript",
+        "workflow",
+        "workflow-automation"
+      ]
+    },
+    {
+      "full_name": "ohmyzsh/ohmyzsh",
+      "html_url": "https://github.com/ohmyzsh/ohmyzsh",
+      "stars": 189602,
+      "description": "🙃   A delightful community-driven (with 2,500+ contributors) framework for managing your zsh configuration. Includes 300+ optional plugins (rails, git, macOS, hub, docker, homebrew, node, php, python, etc), 140+ themes to spice up your morning, and an auto-update tool that makes it easy to keep up with the latest updates from the community.",
+      "language": "Shell",
+      "topics": [
+        "cli",
+        "cli-app",
+        "oh-my-zsh",
+        "oh-my-zsh-plugin",
+        "oh-my-zsh-theme",
+        "ohmyzsh",
+        "plugin-framework",
+        "plugins",
+        "productivity",
+        "shell",
+        "terminal",
+        "theme",
+        "themes",
+        "zsh",
+        "zsh-configuration"
+      ]
+    },
+    {
+      "full_name": "yt-dlp/yt-dlp",
+      "html_url": "https://github.com/yt-dlp/yt-dlp",
+      "stars": 189474,
+      "description": "A feature-rich command-line audio/video downloader",
+      "language": "Python",
+      "topics": [
+        "cli",
+        "downloader",
+        "python",
+        "sponsorblock",
+        "youtube-dl",
+        "youtube-downloader",
+        "yt-dlp"
+      ]
+    },
+    {
+      "full_name": "google-gemini/gemini-cli",
+      "html_url": "https://github.com/google-gemini/gemini-cli",
+      "stars": 106840,
+      "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "ai-agents",
+        "cli",
+        "gemini",
+        "gemini-api",
+        "mcp-client",
+        "mcp-server"
+      ]
+    },
+    {
+      "full_name": "sherlock-project/sherlock",
+      "html_url": "https://github.com/sherlock-project/sherlock",
+      "stars": 91036,
+      "description": "Hunt down social media accounts by username across social networks",
+      "language": "Python",
+      "topics": [
+        "cli",
+        "cti",
+        "cybersecurity",
+        "forensics",
+        "hacktoberfest",
+        "information-gathering",
+        "infosec",
+        "linux",
+        "osint",
+        "pentesting",
+        "python",
+        "python3",
+        "reconnaissance",
+        "redteam",
+        "sherlock",
+        "tools"
+      ]
+    },
+    {
+      "full_name": "OpenHands/OpenHands",
+      "html_url": "https://github.com/OpenHands/OpenHands",
+      "stars": 86389,
+      "description": "🙌 OpenHands: AI-Driven Development",
+      "language": "TypeScript",
+      "topics": [
+        "agent",
+        "artificial-intelligence",
+        "chatgpt",
+        "claude-ai",
+        "cli",
+        "developer-tools",
+        "gpt",
+        "llm",
+        "openai"
+      ]
+    },
+    {
+      "full_name": "junegunn/fzf",
+      "html_url": "https://github.com/junegunn/fzf",
+      "stars": 82850,
+      "description": ":cherry_blossom: A command-line fuzzy finder",
+      "language": "Go",
+      "topics": [
+        "bash",
+        "cli",
+        "fish",
+        "fzf",
+        "go",
+        "neovim",
+        "tmux",
+        "unix",
+        "vim",
+        "zsh"
+      ]
+    },
+    {
+      "full_name": "jesseduffield/lazygit",
+      "html_url": "https://github.com/jesseduffield/lazygit",
+      "stars": 82084,
+      "description": "simple terminal UI for git commands",
+      "language": "Go",
+      "topics": [
+        "cli",
+        "git",
+        "terminal"
+      ]
+    },
+    {
+      "full_name": "rtk-ai/rtk",
+      "html_url": "https://github.com/rtk-ai/rtk",
+      "stars": 79130,
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies",
+      "language": "Rust",
+      "topics": [
+        "agentic-coding",
+        "ai-coding",
+        "anthropic",
+        "claude-code",
+        "cli",
+        "command-line-tool",
+        "cost-reduction",
+        "developer-tools",
+        "llm",
+        "open-source",
+        "productivity",
+        "rust",
+        "token-optimization"
+      ]
+    },
+    {
+      "full_name": "Panniantong/Agent-Reach",
+      "html_url": "https://github.com/Panniantong/Agent-Reach",
+      "stars": 78465,
+      "description": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
+      "language": "Python",
+      "topics": [
+        "agent-infrastructure",
+        "ai-agent",
+        "ai-search",
+        "automation",
+        "bilibili",
+        "claude-code",
+        "cli",
+        "cursor",
+        "free-api",
+        "llm-tools",
+        "mcp",
+        "python",
+        "reddit-scraper",
+        "twitter-scraper",
+        "web-scraper",
+        "xiaohongshu",
+        "youtube-transcript"
+      ]
+    }
+  ]
 }
