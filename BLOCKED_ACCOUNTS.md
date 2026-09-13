@@ -1,5 +1,5 @@
 # 🛡️ Cuentas Bloqueadas por GitHub Sentinel
-_Última actualización: 2026-09-13 14:02:36 UTC_
+_Última actualización: 2026-09-13 18:30:54 UTC_
 **Total de cuentas neutralizadas:** 0
 
 | Usuario | Perfil | Fecha Bloqueo | Motivo / Heurística |
