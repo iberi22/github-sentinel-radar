@@ -42,6 +42,6 @@
 4. O bloqueio pessoal é opcional: [configuração do Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 Licença
-Licença MIT © 2026 Sandra Lorena Santacruz e Contribuidores.
+Licença MIT © 2026 by [iberi22](https://github.com/iberi22) e Contribuidores.
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

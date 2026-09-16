@@ -15,7 +15,15 @@
     "hibernation_days": 7,
     "max_starred_to_analyze": 50,
     "max_releases_to_track": 15,
-    "max_discoveries": 10
+    "max_discoveries": 10,
+    "discovery_min_stars": 20,
+    "discovery_max_stars": 20000,
+    "discovery_pushed_within_days": 365,
+    "discovery_created_within_days": 1095,
+    "discovery_topics": 3,
+    "exclude_starred": true,
+    "exclude_seen": true,
+    "seen_history_cap": 500
   },
   "review": {
     "enabled": true,

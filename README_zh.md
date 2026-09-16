@@ -42,6 +42,6 @@
 4. 个人屏蔽可选：[Sentinel 设置](DEPLOYMENT.md#sentinel)。
 
 ## 📜 许可证
-MIT License © 2026 Sandra Lorena Santacruz 与社区贡献者。
+MIT License © 2026 by [iberi22](https://github.com/iberi22) 与社区贡献者。
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

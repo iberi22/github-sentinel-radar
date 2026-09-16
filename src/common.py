@@ -34,6 +34,20 @@ def load_config():
                 raise ValueError(f'{section}.{key} must be an integer')
     if cfg["radar"]["max_discoveries"] > 100:
         raise ValueError("radar.max_discoveries must be at most 100")
+    for key in ('discovery_min_stars', 'discovery_max_stars',
+                'discovery_pushed_within_days', 'discovery_created_within_days',
+                'discovery_topics', 'seen_history_cap'):
+        if key in cfg['radar']:
+            value = cfg['radar'][key]
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                raise ValueError(f'radar.{key} must be a nonnegative integer')
+    for key in ('exclude_starred', 'exclude_seen'):
+        if key in cfg['radar'] and not isinstance(cfg['radar'][key], bool):
+            raise ValueError(f'radar.{key} must be a boolean')
+    radar_cfg = cfg['radar']
+    if ('discovery_min_stars' in radar_cfg and 'discovery_max_stars' in radar_cfg
+            and radar_cfg['discovery_min_stars'] > radar_cfg['discovery_max_stars']):
+        raise ValueError('radar.discovery_min_stars must be <= radar.discovery_max_stars')
     return cfg
 
 

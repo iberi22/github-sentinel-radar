@@ -8,6 +8,31 @@ on:
         required: false
         default: 'true'
         type: boolean
+      min_stars:
+        description: 'Vacío = valor de config.json. Mínimo de estrellas para descubrimientos'
+        required: false
+        default: ''
+      max_stars:
+        description: 'Vacío = valor de config.json. Máximo (excluye mega-famosos ya conocidos)'
+        required: false
+        default: ''
+      pushed_within_days:
+        description: 'Vacío = config.json. Solo proyectos activos en los últimos N días'
+        required: false
+        default: ''
+      created_within_days:
+        description: 'Vacío = config.json. Solo proyectos creados en los últimos N días'
+        required: false
+        default: ''
+      topics:
+        description: 'Vacío = config.json. Nº de top topics a explorar (1-5)'
+        required: false
+        default: ''
+      exclude_seen:
+        description: 'No repetir proyectos ya mostrados'
+        required: false
+        default: 'true'
+        type: boolean
 
 permissions:
   contents: write
@@ -42,6 +67,12 @@ jobs:
           FORCE_RUN: ${{ inputs.force }}
           GH_TOKEN: ${{ github.token }}
           RADAR_USERNAME: ${{ vars.RADAR_USERNAME || github.repository_owner }}
+          RADAR_MIN_STARS: ${{ inputs.min_stars }}
+          RADAR_MAX_STARS: ${{ inputs.max_stars }}
+          RADAR_PUSHED_WITHIN_DAYS: ${{ inputs.pushed_within_days }}
+          RADAR_CREATED_WITHIN_DAYS: ${{ inputs.created_within_days }}
+          RADAR_TOPICS: ${{ inputs.topics }}
+          RADAR_EXCLUDE_SEEN: ${{ inputs.exclude_seen }}
         run: |
           if [ "$FORCE_RUN" = "true" ]; then
             python src/radar.py --force

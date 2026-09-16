@@ -42,6 +42,6 @@
 4. الحظر الشخصي اختياري: [إعداد Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 الترخيص
-رخصة MIT © 2026 Sandra Lorena Santacruz ومساهمو المجتمع.
+رخصة MIT © 2026 by [iberi22](https://github.com/iberi22) ومساهمو المجتمع.
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

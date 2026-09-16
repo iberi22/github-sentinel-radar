@@ -42,6 +42,6 @@
 4. ذاتی بلاکنگ اختیاری ہے: [Sentinel سیٹ اپ](DEPLOYMENT.md#sentinel)۔
 
 ## 📜 لائسنس
-MIT License © 2026 Sandra Lorena Santacruz اور کمیونٹی۔
+MIT License © 2026 by [iberi22](https://github.com/iberi22) اور کمیونٹی۔
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

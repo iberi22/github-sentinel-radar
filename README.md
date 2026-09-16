@@ -71,6 +71,6 @@
 ```
 
 ## 📜 License
-MIT License © 2026 Sandra Lorena Santacruz & Community Contributors.
+MIT License © 2026 by [iberi22](https://github.com/iberi22) & Community Contributors.
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

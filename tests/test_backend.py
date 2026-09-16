@@ -97,6 +97,46 @@ class BackendTests(unittest.TestCase):
             self.assertEqual(len(data['discoveries']), 1)
             self.assertIsNotNone(data['last_dispatched_at'])
 
+    def test_radar_env_overrides_and_novelty_fields(self):
+        self.cfg['radar'].update(max_starred_to_analyze=1, max_releases_to_track=0, max_discoveries=5)
+        now = datetime.now(timezone.utc)
+        fresh = now.isoformat()
+        old = (now - timedelta(days=800)).isoformat()
+        starred = [{'full_name': 'me/known', 'owner': {'login': 'me'}, 'name': 'known',
+                    'language': 'Python', 'topics': ['cli']}]
+        items = [
+            {'full_name': 'me/known', 'html_url': 'https://github.com/me/known', 'stargazers_count': 500,
+             'description': 'seen', 'language': 'Python', 'topics': ['cli'],
+             'pushed_at': fresh, 'created_at': fresh, 'owner': {'login': 'me'}},
+            {'full_name': 'big/famous', 'html_url': 'https://github.com/big/famous', 'stargazers_count': 90000,
+             'description': 'famous', 'language': 'Python', 'topics': ['cli'],
+             'pushed_at': fresh, 'created_at': fresh, 'owner': {'login': 'big'}},
+            {'full_name': 'new/rising', 'html_url': 'https://github.com/new/rising', 'stargazers_count': 800,
+             'description': 'fresh', 'language': 'Python', 'topics': ['cli'],
+             'pushed_at': fresh, 'created_at': fresh, 'owner': {'login': 'new'}},
+        ]
+        def request(method, url, **kwargs):
+            if url.endswith('/starred'):
+                return Mock(json=lambda: starred)
+            return Mock(status_code=200, json=lambda: {'items': items})
+        env = {'GH_TOKEN': 'test', 'RADAR_USERNAME': 'me',
+               'RADAR_MIN_STARS': '100', 'RADAR_MAX_STARS': '5000'}
+        with patch.dict(os.environ, env, clear=True), patch.object(sys, 'argv', ['radar.py', '--force']), \
+             patch.object(radar, 'load_config', return_value=self.cfg), \
+             patch.object(radar, 'github_request', side_effect=request), \
+             patch.object(radar, 'update_radar_files') as save, \
+             patch.object(radar, 'load_previous_state', return_value=({}, set())):
+            radar.main()
+            data = save.call_args.args[0]
+            names = [d['full_name'] for d in data['discoveries']]
+            self.assertEqual(names, ['new/rising'])
+            item = data['discoveries'][0]
+            self.assertIn('pushed_at', item)
+            self.assertIn('created_at', item)
+            self.assertTrue(item.get('novelty_reason'))
+            self.assertEqual(data['discovery_filters']['min_stars'], 100)
+            self.assertEqual(data['discovery_filters']['max_stars'], 5000)
+
     def test_background_run_preserves_activity(self):
         self.cfg['radar'].update(max_starred_to_analyze=0, max_discoveries=0)
         original = json.loads((common.ROOT/'data/radar.json').read_text())['last_dispatched_at']

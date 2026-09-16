@@ -90,5 +90,16 @@
   "reason_veteran": "Long-standing account ({d})",
   "reason_established": "Solid follower base ({d})",
   "reason_active_creator": "Active creator ({d} public repos)",
-  "open_pulls": "View block requests ↗"
+  "open_pulls": "View block requests ↗",
+  "prefs_title": "Tune discoveries",
+  "prefs_min": "Min stars",
+  "prefs_max": "Max stars",
+  "prefs_pushed": "Active within (days)",
+  "prefs_created": "Created within (days)",
+  "prefs_topics": "Topics to explore",
+  "prefs_seen": "Hide already-shown",
+  "prefs_reset": "Reset",
+  "prefs_copy": "Copy workflow inputs ↗",
+  "prefs_note": "Saved in this browser. Filters apply instantly; Copy + paste into the Update Feed form so the next server run uses them too.",
+  "prefs_copied": "Workflow inputs copied. Paste each value into the Update Feed form."
 }

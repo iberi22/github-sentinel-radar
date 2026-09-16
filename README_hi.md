@@ -42,6 +42,6 @@
 4. व्यक्तिगत ब्लॉकिंग वैकल्पिक है: [Sentinel सेटअप](DEPLOYMENT.md#sentinel)।
 
 ## 📜 लाइसेंस
-MIT License © 2026 Sandra Lorena Santacruz और समुदाय।
+MIT License © 2026 by [iberi22](https://github.com/iberi22) और समुदाय।
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

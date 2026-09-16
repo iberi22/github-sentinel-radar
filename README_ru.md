@@ -42,6 +42,6 @@
 4. Личная блокировка необязательна: [настройка Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 Лицензия
-Лицензия MIT © 2026 Sandra Lorena Santacruz и сообщество.
+Лицензия MIT © 2026 by [iberi22](https://github.com/iberi22) и сообщество.
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

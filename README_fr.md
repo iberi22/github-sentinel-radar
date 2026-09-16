@@ -42,6 +42,6 @@
 4. Le blocage personnel est facultatif : [configuration Sentinel](DEPLOYMENT.md#sentinel).
 
 ## 📜 Licence
-Licence MIT © 2026 Sandra Lorena Santacruz & Contributeurs.
+Licence MIT © 2026 by [iberi22](https://github.com/iberi22) & Contributeurs.
 
 > Deployment / permisos / validation: [DEPLOYMENT.md](DEPLOYMENT.md) is the audited setup reference (2026-09-07).

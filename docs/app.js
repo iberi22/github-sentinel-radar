@@ -30,6 +30,133 @@ const FALLBACK_REASONS = {
 };
 const LOGIN_RE = /^[A-Za-z0-9]([A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/;
 
+// Discovery preferences: stored in localStorage, applied instantly to the
+// rendered feed. "Copy workflow inputs" carries them to the next server run
+// (paste each value into the Update Feed dispatch form; empty = repo default).
+const PREFS_KEY = 'gsr:discovery-prefs:v1';
+const PREFS_DEFAULTS = {minStars: 20, maxStars: 20000, pushedWithinDays: 365, createdWithinDays: 1095, topics: 3, hideSeen: true};
+const FALLBACK_PREFS = {
+  prefs_title: 'Tune discoveries',
+  prefs_min: 'Min stars',
+  prefs_max: 'Max stars',
+  prefs_pushed: 'Active within (days)',
+  prefs_created: 'Created within (days)',
+  prefs_topics: 'Topics to explore',
+  prefs_seen: 'Hide already-shown',
+  prefs_reset: 'Reset',
+  prefs_copy: 'Copy workflow inputs ↗',
+  prefs_note: 'Saved in this browser. Filters apply instantly; Copy + paste into the Update Feed form so the next server run uses them too.',
+  prefs_copied: 'Workflow inputs copied. Paste each value into the Update Feed form.',
+};
+let prefs = loadPrefs();
+
+function sanitizePrefs(p) {
+  const num = (v, d, lo, hi) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? Math.min(Math.max(Math.round(n), lo), hi) : d;
+  };
+  return {
+    minStars: num(p.minStars, PREFS_DEFAULTS.minStars, 0, 1000000),
+    maxStars: num(p.maxStars, PREFS_DEFAULTS.maxStars, 0, 1000000),
+    pushedWithinDays: num(p.pushedWithinDays, PREFS_DEFAULTS.pushedWithinDays, 0, 3650),
+    createdWithinDays: num(p.createdWithinDays, PREFS_DEFAULTS.createdWithinDays, 0, 3650),
+    topics: num(p.topics, PREFS_DEFAULTS.topics, 1, 5),
+    hideSeen: typeof p.hideSeen === 'boolean' ? p.hideSeen : PREFS_DEFAULTS.hideSeen,
+  };
+}
+
+function loadPrefs() {
+  try {
+    return sanitizePrefs({...PREFS_DEFAULTS, ...JSON.parse(localStorage.getItem(PREFS_KEY) || '{}')});
+  } catch { return {...PREFS_DEFAULTS}; }
+}
+
+function savePrefs() {
+  try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch {}
+}
+
+function withinDays(iso, days) {
+  if (!days) return true;
+  const t = Date.parse(iso);
+  if (!Number.isFinite(t)) return true; // unknown date: do not punish
+  return (Date.now() - t) <= days * 864e5;
+}
+
+function discoveryVisible(d) {
+  const stars = Number(d.stars) || 0;
+  if (stars < prefs.minStars || stars > prefs.maxStars) return false;
+  if (!withinDays(d.pushed_at, prefs.pushedWithinDays)) return false;
+  if (!withinDays(d.created_at, prefs.createdWithinDays)) return false;
+  if (prefs.hideSeen && d.first_seen && radarData?.last_updated && d.first_seen < radarData.last_updated) return false;
+  return true;
+}
+
+function renderPrefsLabels() {
+  const t = k => localeData[k] || FALLBACK_PREFS[k];
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('prefs-title', t('prefs_title'));
+  set('prefs-min-label', t('prefs_min'));
+  set('prefs-max-label', t('prefs_max'));
+  set('prefs-pushed-label', t('prefs_pushed'));
+  set('prefs-created-label', t('prefs_created'));
+  set('prefs-topics-label', t('prefs_topics'));
+  set('prefs-seen-label', t('prefs_seen'));
+  set('btn-prefs-reset', t('prefs_reset'));
+  set('btn-prefs-copy', t('prefs_copy'));
+  set('prefs-note', t('prefs_note'));
+}
+
+function applyPrefsToInputs() {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+  set('pref-min-stars', prefs.minStars);
+  set('pref-max-stars', prefs.maxStars);
+  set('pref-pushed-days', prefs.pushedWithinDays);
+  set('pref-created-days', prefs.createdWithinDays);
+  set('pref-topics', prefs.topics);
+  const hide = document.getElementById('pref-hide-seen');
+  if (hide) hide.checked = prefs.hideSeen;
+}
+
+function readPrefsFromInputs() {
+  const get = id => document.getElementById(id)?.value;
+  prefs = sanitizePrefs({
+    minStars: get('pref-min-stars'),
+    maxStars: get('pref-max-stars'),
+    pushedWithinDays: get('pref-pushed-days'),
+    createdWithinDays: get('pref-created-days'),
+    topics: get('pref-topics'),
+    hideSeen: document.getElementById('pref-hide-seen')?.checked,
+  });
+  savePrefs();
+}
+
+function renderPrefsSummary(total, shown) {
+  const el = document.getElementById('prefs-summary');
+  if (el) el.textContent = `★${prefs.minStars}–${prefs.maxStars}` + (total !== shown ? ` · ${shown}/${total}` : '');
+}
+
+async function copyPrefsInputs() {
+  const text = [
+    `min_stars=${prefs.minStars}`,
+    `max_stars=${prefs.maxStars}`,
+    `pushed_within_days=${prefs.pushedWithinDays}`,
+    `created_within_days=${prefs.createdWithinDays}`,
+    `topics=${prefs.topics}`,
+    `exclude_seen=${prefs.hideSeen}`,
+  ].join('\n');
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const area = document.createElement('textarea');
+    area.value = text;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+  showToast(localeData.prefs_copied || FALLBACK_PREFS.prefs_copied);
+}
+
 // RTL Locales
 const RTL_LOCALES = ['ar', 'ur'];
 const SUPPORTED_LOCALES = ['en', 'zh', 'hi', 'es', 'fr', 'ar', 'bn', 'pt', 'ru', 'ur'];
@@ -133,6 +260,7 @@ function applyTranslations() {
   document.getElementById('btn-close-modal').setAttribute('aria-label', localeData.close_btn);
   document.getElementById('btn-open-settings').title = localeData.nav_settings;
   document.getElementById('theme-toggle').title = localeData.theme_label;
+  renderPrefsLabels();
   renderGuide();
   renderFeedStatus();
   renderDirectory();
@@ -218,13 +346,19 @@ function renderRadar() {
     `;
   });
 
-  // Discoveries
+  // Discoveries (client prefs from localStorage filter instantly)
   const discContainer = document.getElementById('discoveries-list');
-  const discoveries = radarData.discoveries || [];
-  document.getElementById('discoveries-count').textContent = discoveries.length;
+  const allDiscoveries = radarData.discoveries || [];
+  const discoveries = allDiscoveries.filter(discoveryVisible);
+  document.getElementById('discoveries-count').textContent =
+    discoveries.length === allDiscoveries.length ? String(discoveries.length) : `${discoveries.length}/${allDiscoveries.length}`;
+  renderPrefsSummary(allDiscoveries.length, discoveries.length);
   discContainer.innerHTML = '';
 
   discoveries.forEach(d => {
+    const novelty = d.novelty_reason ? `<p class="text-[10px] text-emerald-500">✨ ${escapeHTML(d.novelty_reason)}</p>` : '';
+    const matched = Array.isArray(d.matched_topics) && d.matched_topics.length
+      ? `<span class="text-[10px] text-indigo-400">${escapeHTML(d.matched_topics.slice(0, 3).join(' · '))}</span>` : '';
     discContainer.innerHTML += `
       <div class="surface-card bg-surface-cardLight dark:bg-surface-cardDark p-4 rounded-2xl shadow-sm space-y-2">
         <div class="flex items-center justify-between">
@@ -232,8 +366,10 @@ function renderRadar() {
           <span class="font-mono text-[10px] text-amber-500">★ ${escapeHTML(d.stars)}</span>
         </div>
         <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">${escapeHTML(d.description)}</p>
+        ${novelty}
         <div class="flex items-center gap-2 pt-1">
           <span class="text-[10px] bg-slate-100 dark:bg-surface-mutedDark px-2 py-0.5 rounded text-slate-500">${escapeHTML(d.language)}</span>
+          ${matched}
         </div>
       </div>
     `;
@@ -607,7 +743,21 @@ document.getElementById('btn-copy-targets').addEventListener('click', async () =
   showToast(localeData.copied_msg || 'Copied.');
 });
 
+// Discovery prefs wiring
+['pref-min-stars', 'pref-max-stars', 'pref-pushed-days', 'pref-created-days', 'pref-topics', 'pref-hide-seen'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', () => { readPrefsFromInputs(); renderRadar(); });
+});
+document.getElementById('btn-prefs-reset')?.addEventListener('click', () => {
+  prefs = {...PREFS_DEFAULTS};
+  savePrefs();
+  applyPrefsToInputs();
+  renderRadar();
+});
+document.getElementById('btn-prefs-copy')?.addEventListener('click', copyPrefsInputs);
+
 // Init
+applyPrefsToInputs();
+renderPrefsLabels();
 document.getElementById('lang-select').addEventListener('change', (e) => {
   loadLocale(e.target.value);
 });
