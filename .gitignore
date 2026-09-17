@@ -5,7 +5,6 @@ venv/
 .env
 *.local
 .DS_Store
-
 .venv/
 .env.*
 *.db
@@ -31,6 +30,7 @@ docs/site.json
 .gitcore/chronicles/
 .gitcore/waves/
 .gitcore/sdd/
+.gitcore/releases/
 .gitcore/issues/
 .gitcore/features.details/
 .gitcore/CONTEXT_LOG.md
@@ -50,6 +50,7 @@ docs/site.json
 .atl/
 .gestalt/
 .jules/
+.xavier/
 .xavier-backups/
 .skill-registry.cache.json
 
