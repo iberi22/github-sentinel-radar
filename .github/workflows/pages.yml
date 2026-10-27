@@ -1,14 +1,12 @@
-name: Deploy GitHub Pages
+name: CI
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'docs/**'
-      - 'data/**'
-      - '.github/workflows/pages.yml'
-      - 'src/build_site.py'
+  pull_request:
+    branches:
+      - main
   workflow_run:
     workflows: ['GitHub Sentinel - Anti-Bot Blocker', 'GitHub Radar - On-Demand Technical Feed', 'GitHub Review - Scan and Block', 'Execute Approved Blocks']
     types: [completed]
@@ -25,8 +23,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          python -m unittest discover tests
+
   deploy:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    needs: test
+    if: |
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'))
     timeout-minutes: 10
     environment:
       name: github-pages
