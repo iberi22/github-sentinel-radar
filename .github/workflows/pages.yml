@@ -44,6 +44,13 @@ jobs:
         run: |
           python -m unittest discover tests
 
+      - name: Build site (verify build passes)
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          python src/build_site.py
+
   deploy:
     needs: test
     if: |
