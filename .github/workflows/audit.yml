@@ -50,13 +50,15 @@ jobs:
       - name: Run Review Engine
         env:
           GH_TOKEN: ${{ secrets.GH_BLOCKER_TOKEN }}
+          MODE: ${{ inputs.mode || 'scan' }}
+          TARGETS: ${{ inputs.targets }}
         run: |
-          if [ "${{ inputs.mode || 'scan' }}" = "block" ]; then
-            if [ -z "${{ inputs.targets }}" ]; then
+          if [ "${MODE}" = "block" ]; then
+            if [ -z "${TARGETS}" ]; then
               echo "targets is required in block mode" >&2
               exit 1
             fi
-            python src/audit.py --propose "${{ inputs.targets }}"
+            python src/audit.py --propose "${TARGETS}"
           else
             python src/audit.py
           fi
@@ -73,18 +75,21 @@ jobs:
         if: (inputs.mode || 'scan') == 'block'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGETS: ${{ inputs.targets }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          RUN_ID: ${{ github.run_id }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          BRANCH="review/block-${{ github.run_id }}"
+          BRANCH="review/block-${RUN_ID}"
           git checkout -b "$BRANCH"
           git add data/review_queue.json REVIEW_QUEUE.md
           git diff --quiet && git diff --staged --quiet && { echo "No hay cambios que proponer."; exit 1; }
-          git commit -m "proposal(review): block request for ${{ inputs.targets }}"
+          git commit -m "proposal(review): block request for ${TARGETS}"
           git push -u origin "$BRANCH"
-          PR_URL=$(gh pr create --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" \
-            --title "🛡️ Block request: ${{ inputs.targets }}" \
-            --body "Solicitud de bloqueo generada desde la Cola de Revisión (run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). Revisa el diff: cada login queda marcado como \`approved\` en \`data/review_queue.json\`. **Pulsa Merge para ejecutar los bloqueos**; cerrar sin merge no bloquea a nadie.")
+          PR_URL=$(gh pr create --head "$BRANCH" --base "${DEFAULT_BRANCH}" \
+            --title "🛡️ Block request: ${TARGETS}" \
+            --body "Solicitud de bloqueo generada desde la Cola de Revisión (run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${RUN_ID}). Revisa el diff: cada login queda marcado como \`approved\` en \`data/review_queue.json\`. **Pulsa Merge para ejecutar los bloqueos**; cerrar sin merge no bloquea a nadie.")
           echo "Abre el PR para revisar y confirmar: $PR_URL"
           echo "## 🛡️ Block request" >> "$GITHUB_STEP_SUMMARY"
           echo "Revisa y pulsa Merge para ejecutar: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
