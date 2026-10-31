@@ -1,12 +1,12 @@
 # 🔍 Cola de Revisión — Sentinel
-_Última actualización: 2026-10-30T12:36:57.120138+00:00_
+_Última actualización: 2026-10-31T12:02:13.985815+00:00_
 **Escaneados:** 71 · **Confiables:** 70 · **Sospechosos:** 1 · **Bloqueados:** 0 · **Umbral:** 60%
 
 ## 🚨 Posibles bots
 
 | Usuario | Perfil | Vínculo | Confianza | Motivos | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `Connor9994` | [Connor9994](https://github.com/Connor9994) | follower | 45% | +veteran 8y; -extreme_ratio 53:1; +established 11106; +active_creator 23 | pending |
+| `Connor9994` | [Connor9994](https://github.com/Connor9994) | follower | 45% | +veteran 8y; -extreme_ratio 52:1; +established 11114; +active_creator 23 | pending |
 
 ## ✅ Confiables
 
@@ -17,7 +17,7 @@ _Última actualización: 2026-10-30T12:36:57.120138+00:00_
 | `nixblick` | [nixblick](https://github.com/nixblick) | follower | 70% | +veteran 12y | pending |
 | `0KnowledgeNetwork` | [0KnowledgeNetwork](https://github.com/0KnowledgeNetwork) | following | 70% | +veteran 2y | pending |
 | `ProdFact` | [ProdFact](https://github.com/ProdFact) | following | 70% | +veteran 5y | pending |
-| `rtk-ai` | [rtk-ai](https://github.com/rtk-ai) | following | 70% | +established 797; +active_creator 10 | pending |
+| `rtk-ai` | [rtk-ai](https://github.com/rtk-ai) | following | 70% | +established 796; +active_creator 10 | pending |
 | `ZeroKnowledgeNetwork` | [ZeroKnowledgeNetwork](https://github.com/ZeroKnowledgeNetwork) | following | 70% | +veteran 2y | pending |
 | `fish-filet` | [fish-filet](https://github.com/fish-filet) | follower | 75% | +veteran 8y; +active_creator 21 | pending |
 | `guten-tag-100` | [guten-tag-100](https://github.com/guten-tag-100) | follower | 75% | +veteran 1y; +active_creator 196 | pending |
@@ -30,57 +30,57 @@ _Última actualización: 2026-10-30T12:36:57.120138+00:00_
 | `LeaderOnePro` | [LeaderOnePro](https://github.com/LeaderOnePro) | following | 75% | +veteran 3y; +active_creator 34 | pending |
 | `patrick-michelberger` | [patrick-michelberger](https://github.com/patrick-michelberger) | following | 75% | +veteran 14y; +active_creator 79 | pending |
 | `paucaro` | [paucaro](https://github.com/paucaro) | following | 75% | +veteran 11y; +active_creator 57 | pending |
-| `sydney-runkle` | [sydney-runkle](https://github.com/sydney-runkle) | following | 80% | +veteran 7y; +established 776 | pending |
-| `IDouble` | [IDouble](https://github.com/IDouble) | follower | 85% | +veteran 10y; +established 62230; +active_creator 61 | pending |
-| `NotAFlightRisk` | [NotAFlightRisk](https://github.com/NotAFlightRisk) | follower | 85% | +veteran 9y; +established 387; +active_creator 178 | pending |
+| `sydney-runkle` | [sydney-runkle](https://github.com/sydney-runkle) | following | 80% | +veteran 7y; +established 778 | pending |
+| `IDouble` | [IDouble](https://github.com/IDouble) | follower | 85% | +veteran 10y; +established 62258; +active_creator 61 | pending |
+| `NotAFlightRisk` | [NotAFlightRisk](https://github.com/NotAFlightRisk) | follower | 85% | +veteran 9y; +established 412; +active_creator 180 | pending |
 | `StefanHritcu` | [StefanHritcu](https://github.com/StefanHritcu) | follower | 85% | +veteran 3y; +established 1311; +active_creator 41 | pending |
-| `tysoncung` | [tysoncung](https://github.com/tysoncung) | follower | 85% | +veteran 7y; +established 869; +active_creator 463 | pending |
-| `valentynkit` | [valentynkit](https://github.com/valentynkit) | follower | 85% | +veteran 8y; +established 435; +active_creator 85 | pending |
+| `tysoncung` | [tysoncung](https://github.com/tysoncung) | follower | 85% | +veteran 7y; +established 873; +active_creator 463 | pending |
+| `valentynkit` | [valentynkit](https://github.com/valentynkit) | follower | 85% | +veteran 8y; +established 443; +active_creator 85 | pending |
 | `0x27` | [0x27](https://github.com/0x27) | following | 85% | +veteran 12y; +established 667; +active_creator 77 | pending |
 | `AndreaGriffiths11` | [AndreaGriffiths11](https://github.com/AndreaGriffiths11) | following | 85% | +veteran 10y; +established 1173; +active_creator 163 | pending |
-| `anomalyco` | [anomalyco](https://github.com/anomalyco) | following | 85% | +veteran 6y; +established 6797; +active_creator 90 | pending |
-| `coleam00` | [coleam00](https://github.com/coleam00) | following | 85% | +veteran 7y; +established 7609; +active_creator 78 | pending |
+| `anomalyco` | [anomalyco](https://github.com/anomalyco) | following | 85% | +veteran 6y; +established 6818; +active_creator 91 | pending |
+| `coleam00` | [coleam00](https://github.com/coleam00) | following | 85% | +veteran 7y; +established 7612; +active_creator 78 | pending |
 | `CyberPunkMetalHead` | [CyberPunkMetalHead](https://github.com/CyberPunkMetalHead) | following | 85% | +veteran 7y; +established 1560; +active_creator 37 | pending |
 | `dcramer` | [dcramer](https://github.com/dcramer) | following | 85% | +veteran 18y; +established 3466; +active_creator 250 | pending |
-| `dexhorthy` | [dexhorthy](https://github.com/dexhorthy) | following | 85% | +veteran 13y; +established 2216; +active_creator 164 | pending |
-| `dilums` | [dilums](https://github.com/dilums) | following | 85% | +veteran 8y; +established 1078; +active_creator 116 | pending |
+| `dexhorthy` | [dexhorthy](https://github.com/dexhorthy) | following | 85% | +veteran 13y; +established 2217; +active_creator 164 | pending |
+| `dilums` | [dilums](https://github.com/dilums) | following | 85% | +veteran 8y; +established 1083; +active_creator 116 | pending |
 | `DusKing1` | [DusKing1](https://github.com/DusKing1) | following | 85% | +veteran 9y; +established 110; +active_creator 82 | pending |
-| `educlopez` | [educlopez](https://github.com/educlopez) | following | 85% | +veteran 11y; +established 186; +active_creator 49 | pending |
-| `facebookresearch` | [facebookresearch](https://github.com/facebookresearch) | following | 85% | +veteran 10y; +established 38264; +active_creator 1464 | pending |
+| `educlopez` | [educlopez](https://github.com/educlopez) | following | 85% | +veteran 11y; +established 190; +active_creator 49 | pending |
+| `facebookresearch` | [facebookresearch](https://github.com/facebookresearch) | following | 85% | +veteran 10y; +established 38276; +active_creator 1468 | pending |
 | `fastai` | [fastai](https://github.com/fastai) | following | 85% | +veteran 10y; +established 5481; +active_creator 125 | pending |
 | `Fosowl` | [Fosowl](https://github.com/Fosowl) | following | 85% | +veteran 7y; +established 681; +active_creator 20 | pending |
-| `Gentleman-Programming` | [Gentleman-Programming](https://github.com/Gentleman-Programming) | following | 85% | +veteran 4y; +established 4266; +active_creator 90 | pending |
-| `google-gemini` | [google-gemini](https://github.com/google-gemini) | following | 85% | +veteran 2y; +established 15849; +active_creator 50 | pending |
+| `Gentleman-Programming` | [Gentleman-Programming](https://github.com/Gentleman-Programming) | following | 85% | +veteran 4y; +established 4267; +active_creator 90 | pending |
+| `google-gemini` | [google-gemini](https://github.com/google-gemini) | following | 85% | +veteran 2y; +established 15857; +active_creator 50 | pending |
 | `guchangan1` | [guchangan1](https://github.com/guchangan1) | following | 85% | +veteran 7y; +established 294; +active_creator 11 | pending |
 | `hackermondev` | [hackermondev](https://github.com/hackermondev) | following | 85% | +veteran 6y; +established 1523; +active_creator 181 | pending |
-| `HackUnderway` | [HackUnderway](https://github.com/HackUnderway) | following | 85% | +veteran 5y; +established 540; +active_creator 45 | pending |
-| `HKUDS` | [HKUDS](https://github.com/HKUDS) | following | 85% | +veteran 3y; +established 14025; +active_creator 93 | pending |
+| `HackUnderway` | [HackUnderway](https://github.com/HackUnderway) | following | 85% | +veteran 5y; +established 541; +active_creator 45 | pending |
+| `HKUDS` | [HKUDS](https://github.com/HKUDS) | following | 85% | +veteran 3y; +established 14036; +active_creator 93 | pending |
 | `jlengstorf` | [jlengstorf](https://github.com/jlengstorf) | following | 85% | +veteran 16y; +established 4468; +active_creator 496 | pending |
 | `langwatch` | [langwatch](https://github.com/langwatch) | following | 85% | +veteran 3y; +established 226; +active_creator 44 | pending |
 | `leaningtech` | [leaningtech](https://github.com/leaningtech) | following | 85% | +veteran 13y; +established 659; +active_creator 56 | pending |
-| `lissy93` | [lissy93](https://github.com/lissy93) | following | 85% | +veteran 14y; +established 7556; +active_creator 129 | pending |
-| `lynx-family` | [lynx-family](https://github.com/lynx-family) | following | 85% | +veteran 1y; +established 2577; +active_creator 26 | pending |
+| `lissy93` | [lissy93](https://github.com/lissy93) | following | 85% | +veteran 14y; +established 7558; +active_creator 129 | pending |
+| `lynx-family` | [lynx-family](https://github.com/lynx-family) | following | 85% | +veteran 1y; +established 2576; +active_creator 26 | pending |
 | `marshtompsxd` | [marshtompsxd](https://github.com/marshtompsxd) | following | 85% | +veteran 10y; +established 140; +active_creator 18 | pending |
-| `MiaAI-Lab` | [MiaAI-Lab](https://github.com/MiaAI-Lab) | following | 85% | +veteran 5y; +established 2267; +active_creator 121 | pending |
-| `microsoft` | [microsoft](https://github.com/microsoft) | following | 85% | +veteran 12y; +established 132807; +active_creator 8415 | pending |
-| `midudev` | [midudev](https://github.com/midudev) | following | 85% | +veteran 14y; +established 40002; +active_creator 245 | pending |
+| `MiaAI-Lab` | [MiaAI-Lab](https://github.com/MiaAI-Lab) | following | 85% | +veteran 5y; +established 2280; +active_creator 121 | pending |
+| `microsoft` | [microsoft](https://github.com/microsoft) | following | 85% | +veteran 12y; +established 132887; +active_creator 8416 | pending |
+| `midudev` | [midudev](https://github.com/midudev) | following | 85% | +veteran 14y; +established 40011; +active_creator 245 | pending |
 | `mtxr` | [mtxr](https://github.com/mtxr) | following | 85% | +veteran 15y; +established 459; +active_creator 71 | pending |
 | `paslandau` | [paslandau](https://github.com/paslandau) | following | 85% | +veteran 12y; +established 129; +active_creator 35 | pending |
-| `penberg` | [penberg](https://github.com/penberg) | following | 85% | +veteran 17y; +established 2035; +active_creator 46 | pending |
-| `playcanvas` | [playcanvas](https://github.com/playcanvas) | following | 85% | +veteran 15y; +established 5107; +active_creator 81 | pending |
-| `poteto` | [poteto](https://github.com/poteto) | following | 85% | +veteran 14y; +established 14945; +active_creator 85 | pending |
-| `rust-lang` | [rust-lang](https://github.com/rust-lang) | following | 85% | +veteran 13y; +established 18873; +active_creator 248 | pending |
+| `penberg` | [penberg](https://github.com/penberg) | following | 85% | +veteran 17y; +established 2036; +active_creator 46 | pending |
+| `playcanvas` | [playcanvas](https://github.com/playcanvas) | following | 85% | +veteran 15y; +established 5109; +active_creator 81 | pending |
+| `poteto` | [poteto](https://github.com/poteto) | following | 85% | +veteran 14y; +established 15074; +active_creator 85 | pending |
+| `rust-lang` | [rust-lang](https://github.com/rust-lang) | following | 85% | +veteran 13y; +established 18885; +active_creator 248 | pending |
 | `sebastian-hofstaetter` | [sebastian-hofstaetter](https://github.com/sebastian-hofstaetter) | following | 85% | +veteran 12y; +established 214; +active_creator 16 | pending |
 | `socrata` | [socrata](https://github.com/socrata) | following | 85% | +veteran 17y; +established 148; +active_creator 66 | pending |
-| `steipete` | [steipete](https://github.com/steipete) | following | 85% | +veteran 17y; +established 53444; +active_creator 227 | pending |
-| `thesysdev` | [thesysdev](https://github.com/thesysdev) | following | 85% | +veteran 2y; +established 317; +active_creator 27 | pending |
-| `torvalds` | [torvalds](https://github.com/torvalds) | following | 85% | +veteran 15y; +established 329816; +active_creator 12 | pending |
+| `steipete` | [steipete](https://github.com/steipete) | following | 85% | +veteran 17y; +established 53459; +active_creator 227 | pending |
+| `thesysdev` | [thesysdev](https://github.com/thesysdev) | following | 85% | +veteran 2y; +established 318; +active_creator 27 | pending |
+| `torvalds` | [torvalds](https://github.com/torvalds) | following | 85% | +veteran 15y; +established 329929; +active_creator 12 | pending |
 | `v2ray` | [v2ray](https://github.com/v2ray) | following | 85% | +veteran 11y; +established 1910; +active_creator 23 | pending |
 | `weincoder` | [weincoder](https://github.com/weincoder) | following | 85% | +veteran 9y; +established 187; +active_creator 95 | pending |
-| `worldcoin` | [worldcoin](https://github.com/worldcoin) | following | 85% | +veteran 6y; +established 8314; +active_creator 157 | pending |
+| `worldcoin` | [worldcoin](https://github.com/worldcoin) | following | 85% | +veteran 6y; +established 8315; +active_creator 157 | pending |
 | `yatendra2001` | [yatendra2001](https://github.com/yatendra2001) | following | 85% | +veteran 6y; +established 116; +active_creator 63 | pending |
-| `yichuan-w` | [yichuan-w](https://github.com/yichuan-w) | following | 85% | +veteran 5y; +established 557; +active_creator 83 | pending |
-| `zachary62` | [zachary62](https://github.com/zachary62) | following | 85% | +veteran 9y; +established 1662; +active_creator 98 | pending |
+| `yichuan-w` | [yichuan-w](https://github.com/yichuan-w) | following | 85% | +veteran 6y; +established 557; +active_creator 83 | pending |
+| `zachary62` | [zachary62](https://github.com/zachary62) | following | 85% | +veteran 9y; +established 1669; +active_creator 98 | pending |
 | `zerodytrash` | [zerodytrash](https://github.com/zerodytrash) | following | 85% | +veteran 6y; +established 617; +active_creator 18 | pending |
 
 > *Este archivo es generado automáticamente por el workflow de revisión.*
