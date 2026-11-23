@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-22T14:25:12.817870+00:00",
+  "last_updated": "2026-11-23T17:51:24.716187+00:00",
   "totals": {
     "scanned": 72,
     "trusted": 71,
@@ -29,7 +29,7 @@
         },
         {
           "code": "established",
-          "detail": "11198",
+          "detail": "11201",
           "tone": "good"
         },
         {
@@ -39,10 +39,10 @@
         }
       ],
       "stats": {
-        "followers": 11198,
-        "following": 583315,
+        "followers": 11201,
+        "following": 583310,
         "public_repos": 23,
-        "age_days": 3102
+        "age_days": 3103
       }
     },
     {
@@ -64,7 +64,7 @@
         "followers": 1,
         "following": 3,
         "public_repos": 7,
-        "age_days": 2258
+        "age_days": 2260
       }
     },
     {
@@ -91,7 +91,7 @@
         "followers": 6,
         "following": 2,
         "public_repos": 21,
-        "age_days": 3162
+        "age_days": 3163
       }
     },
     {
@@ -113,7 +113,7 @@
         "followers": 1,
         "following": 3,
         "public_repos": 3,
-        "age_days": 2137
+        "age_days": 2138
       }
     },
     {
@@ -127,20 +127,20 @@
       "reasons": [
         {
           "code": "established",
-          "detail": "3154",
+          "detail": "3211",
           "tone": "good"
         },
         {
           "code": "active_creator",
-          "detail": "103",
+          "detail": "105",
           "tone": "good"
         }
       ],
       "stats": {
-        "followers": 3154,
-        "following": 87801,
-        "public_repos": 103,
-        "age_days": 119
+        "followers": 3211,
+        "following": 87795,
+        "public_repos": 105,
+        "age_days": 120
       }
     },
     {
@@ -167,7 +167,7 @@
         "followers": 0,
         "following": 0,
         "public_repos": 197,
-        "age_days": 596
+        "age_days": 597
       }
     },
     {
@@ -186,7 +186,7 @@
         },
         {
           "code": "established",
-          "detail": "63023",
+          "detail": "63060",
           "tone": "good"
         },
         {
@@ -196,10 +196,10 @@
         }
       ],
       "stats": {
-        "followers": 63023,
-        "following": 609642,
+        "followers": 63060,
+        "following": 609634,
         "public_repos": 61,
-        "age_days": 3888
+        "age_days": 3889
       }
     },
     {
@@ -226,7 +226,7 @@
         "followers": 5,
         "following": 2,
         "public_repos": 26,
-        "age_days": 450
+        "age_days": 451
       }
     },
     {
@@ -253,7 +253,7 @@
         "followers": 1,
         "following": 7,
         "public_repos": 11,
-        "age_days": 496
+        "age_days": 497
       }
     },
     {
@@ -280,7 +280,7 @@
         "followers": 3,
         "following": 7,
         "public_repos": 10,
-        "age_days": 4658
+        "age_days": 4659
       }
     },
     {
@@ -299,7 +299,7 @@
         },
         {
           "code": "established",
-          "detail": "1314",
+          "detail": "1316",
           "tone": "good"
         },
         {
@@ -309,10 +309,10 @@
         }
       ],
       "stats": {
-        "followers": 1314,
-        "following": 5762,
+        "followers": 1316,
+        "following": 5761,
         "public_repos": 41,
-        "age_days": 1124
+        "age_days": 1125
       }
     },
     {
@@ -331,7 +331,7 @@
         },
         {
           "code": "established",
-          "detail": "993",
+          "detail": "994",
           "tone": "good"
         },
         {
@@ -341,10 +341,10 @@
         }
       ],
       "stats": {
-        "followers": 993,
-        "following": 15878,
+        "followers": 994,
+        "following": 15923,
         "public_repos": 463,
-        "age_days": 2917
+        "age_days": 2918
       }
     },
     {
@@ -371,7 +371,7 @@
         "followers": 38,
         "following": 50,
         "public_repos": 35,
-        "age_days": 4945
+        "age_days": 4946
       }
     },
     {
@@ -390,7 +390,7 @@
         },
         {
           "code": "established",
-          "detail": "479",
+          "detail": "475",
           "tone": "good"
         },
         {
@@ -400,10 +400,10 @@
         }
       ],
       "stats": {
-        "followers": 479,
-        "following": 1924,
+        "followers": 475,
+        "following": 1923,
         "public_repos": 86,
-        "age_days": 3233
+        "age_days": 3234
       }
     },
     {
@@ -425,7 +425,7 @@
         "followers": 11,
         "following": 0,
         "public_repos": 2,
-        "age_days": 1087
+        "age_days": 1088
       }
     },
     {
@@ -457,7 +457,7 @@
         "followers": 667,
         "following": 33,
         "public_repos": 77,
-        "age_days": 4427
+        "age_days": 4428
       }
     },
     {
@@ -476,7 +476,7 @@
         },
         {
           "code": "established",
-          "detail": "1186",
+          "detail": "1187",
           "tone": "good"
         },
         {
@@ -486,10 +486,10 @@
         }
       ],
       "stats": {
-        "followers": 1186,
+        "followers": 1187,
         "following": 91,
         "public_repos": 164,
-        "age_days": 3770
+        "age_days": 3772
       }
     },
     {
@@ -508,7 +508,7 @@
         },
         {
           "code": "established",
-          "detail": "7408",
+          "detail": "7423",
           "tone": "good"
         },
         {
@@ -518,10 +518,10 @@
         }
       ],
       "stats": {
-        "followers": 7408,
+        "followers": 7423,
         "following": 0,
         "public_repos": 88,
-        "age_days": 2358
+        "age_days": 2359
       }
     },
     {
@@ -548,7 +548,7 @@
         "followers": 40,
         "following": 11,
         "public_repos": 12,
-        "age_days": 5024
+        "age_days": 5026
       }
     },
     {
@@ -567,20 +567,20 @@
         },
         {
           "code": "established",
-          "detail": "7666",
+          "detail": "7668",
           "tone": "good"
         },
         {
           "code": "active_creator",
-          "detail": "82",
+          "detail": "84",
           "tone": "good"
         }
       ],
       "stats": {
-        "followers": 7666,
+        "followers": 7668,
         "following": 2,
-        "public_repos": 82,
-        "age_days": 2849
+        "public_repos": 84,
+        "age_days": 2850
       }
     },
     {
@@ -612,7 +612,7 @@
         "followers": 1555,
         "following": 5,
         "public_repos": 37,
-        "age_days": 2908
+        "age_days": 2909
       }
     },
     {
@@ -631,7 +631,7 @@
         },
         {
           "code": "established",
-          "detail": "3479",
+          "detail": "3480",
           "tone": "good"
         },
         {
@@ -641,10 +641,10 @@
         }
       ],
       "stats": {
-        "followers": 3479,
+        "followers": 3480,
         "following": 11,
         "public_repos": 250,
-        "age_days": 6649
+        "age_days": 6650
       }
     },
     {
@@ -663,7 +663,7 @@
         },
         {
           "code": "established",
-          "detail": "2296",
+          "detail": "2300",
           "tone": "good"
         },
         {
@@ -673,10 +673,10 @@
         }
       ],
       "stats": {
-        "followers": 2296,
+        "followers": 2300,
         "following": 48,
         "public_repos": 164,
-        "age_days": 5014
+        "age_days": 5015
       }
     },
     {
@@ -695,7 +695,7 @@
         },
         {
           "code": "established",
-          "detail": "1660",
+          "detail": "1736",
           "tone": "good"
         },
         {
@@ -705,10 +705,10 @@
         }
       ],
       "stats": {
-        "followers": 1660,
+        "followers": 1736,
         "following": 18,
         "public_repos": 116,
-        "age_days": 3054
+        "age_days": 3055
       }
     },
     {
@@ -740,7 +740,7 @@
         "followers": 109,
         "following": 140,
         "public_repos": 82,
-        "age_days": 3377
+        "age_days": 3379
       }
     },
     {
@@ -759,7 +759,7 @@
         },
         {
           "code": "established",
-          "detail": "189",
+          "detail": "190",
           "tone": "good"
         },
         {
@@ -769,10 +769,10 @@
         }
       ],
       "stats": {
-        "followers": 189,
+        "followers": 190,
         "following": 59,
         "public_repos": 50,
-        "age_days": 4146
+        "age_days": 4147
       }
     },
     {
@@ -791,7 +791,7 @@
         },
         {
           "code": "established",
-          "detail": "38586",
+          "detail": "38597",
           "tone": "good"
         },
         {
@@ -801,10 +801,10 @@
         }
       ],
       "stats": {
-        "followers": 38586,
+        "followers": 38597,
         "following": 0,
         "public_repos": 1475,
-        "age_days": 3950
+        "age_days": 3951
       }
     },
     {
@@ -823,7 +823,7 @@
         },
         {
           "code": "established",
-          "detail": "5486",
+          "detail": "5487",
           "tone": "good"
         },
         {
@@ -833,10 +833,10 @@
         }
       ],
       "stats": {
-        "followers": 5486,
+        "followers": 5487,
         "following": 0,
         "public_repos": 125,
-        "age_days": 3777
+        "age_days": 3778
       }
     },
     {
@@ -868,7 +868,7 @@
         "followers": 686,
         "following": 41,
         "public_repos": 20,
-        "age_days": 2793
+        "age_days": 2794
       }
     },
     {
@@ -887,7 +887,7 @@
         },
         {
           "code": "established",
-          "detail": "4388",
+          "detail": "4390",
           "tone": "good"
         },
         {
@@ -897,10 +897,10 @@
         }
       ],
       "stats": {
-        "followers": 4388,
+        "followers": 4390,
         "following": 0,
         "public_repos": 91,
-        "age_days": 1782
+        "age_days": 1783
       }
     },
     {
@@ -919,7 +919,7 @@
         },
         {
           "code": "established",
-          "detail": "16141",
+          "detail": "16183",
           "tone": "good"
         },
         {
@@ -929,10 +929,10 @@
         }
       ],
       "stats": {
-        "followers": 16141,
+        "followers": 16183,
         "following": 0,
         "public_repos": 52,
-        "age_days": 996
+        "age_days": 997
       }
     },
     {
@@ -964,7 +964,7 @@
         "followers": 299,
         "following": 39,
         "public_repos": 11,
-        "age_days": 2634
+        "age_days": 2636
       }
     },
     {
@@ -983,7 +983,7 @@
         },
         {
           "code": "established",
-          "detail": "1528",
+          "detail": "1530",
           "tone": "good"
         },
         {
@@ -993,10 +993,10 @@
         }
       ],
       "stats": {
-        "followers": 1528,
+        "followers": 1530,
         "following": 36,
         "public_repos": 181,
-        "age_days": 2478
+        "age_days": 2479
       }
     },
     {
@@ -1015,7 +1015,7 @@
         },
         {
           "code": "established",
-          "detail": "559",
+          "detail": "562",
           "tone": "good"
         },
         {
@@ -1025,10 +1025,10 @@
         }
       ],
       "stats": {
-        "followers": 559,
+        "followers": 562,
         "following": 0,
         "public_repos": 46,
-        "age_days": 2176
+        "age_days": 2177
       }
     },
     {
@@ -1047,7 +1047,7 @@
         },
         {
           "code": "established",
-          "detail": "14354",
+          "detail": "14368",
           "tone": "good"
         },
         {
@@ -1057,10 +1057,10 @@
         }
       ],
       "stats": {
-        "followers": 14354,
+        "followers": 14368,
         "following": 0,
         "public_repos": 93,
-        "age_days": 1469
+        "age_days": 1470
       }
     },
     {
@@ -1087,7 +1087,7 @@
         "followers": 26,
         "following": 2,
         "public_repos": 17,
-        "age_days": 4393
+        "age_days": 4394
       }
     },
     {
@@ -1119,7 +1119,7 @@
         "followers": 4461,
         "following": 5,
         "public_repos": 496,
-        "age_days": 6194
+        "age_days": 6195
       }
     },
     {
@@ -1146,7 +1146,7 @@
         "followers": 73,
         "following": 4,
         "public_repos": 18,
-        "age_days": 4262
+        "age_days": 4263
       }
     },
     {
@@ -1178,7 +1178,7 @@
         "followers": 233,
         "following": 0,
         "public_repos": 44,
-        "age_days": 1146
+        "age_days": 1148
       }
     },
     {
@@ -1202,10 +1202,10 @@
         }
       ],
       "stats": {
-        "followers": 86,
+        "followers": 85,
         "following": 269,
         "public_repos": 34,
-        "age_days": 1374
+        "age_days": 1375
       }
     },
     {
@@ -1237,7 +1237,7 @@
         "followers": 666,
         "following": 0,
         "public_repos": 56,
-        "age_days": 4771
+        "age_days": 4773
       }
     },
     {
@@ -1256,7 +1256,7 @@
         },
         {
           "code": "established",
-          "detail": "7603",
+          "detail": "7609",
           "tone": "good"
         },
         {
@@ -1266,10 +1266,10 @@
         }
       ],
       "stats": {
-        "followers": 7603,
+        "followers": 7609,
         "following": 161,
         "public_repos": 131,
-        "age_days": 5270
+        "age_days": 5271
       }
     },
     {
@@ -1301,7 +1301,7 @@
         "followers": 2589,
         "following": 0,
         "public_repos": 25,
-        "age_days": 634
+        "age_days": 635
       }
     },
     {
@@ -1320,7 +1320,7 @@
         },
         {
           "code": "established",
-          "detail": "141",
+          "detail": "142",
           "tone": "good"
         },
         {
@@ -1330,10 +1330,10 @@
         }
       ],
       "stats": {
-        "followers": 141,
+        "followers": 142,
         "following": 42,
         "public_repos": 18,
-        "age_days": 3765
+        "age_days": 3767
       }
     },
     {
@@ -1352,7 +1352,7 @@
         },
         {
           "code": "established",
-          "detail": "2599",
+          "detail": "2610",
           "tone": "good"
         },
         {
@@ -1362,10 +1362,10 @@
         }
       ],
       "stats": {
-        "followers": 2599,
+        "followers": 2610,
         "following": 44,
         "public_repos": 136,
-        "age_days": 2039
+        "age_days": 2040
       }
     },
     {
@@ -1384,20 +1384,20 @@
         },
         {
           "code": "established",
-          "detail": "134503",
+          "detail": "134593",
           "tone": "good"
         },
         {
           "code": "active_creator",
-          "detail": "8499",
+          "detail": "8500",
           "tone": "good"
         }
       ],
       "stats": {
-        "followers": 134503,
+        "followers": 134593,
         "following": 0,
-        "public_repos": 8499,
-        "age_days": 4729
+        "public_repos": 8500,
+        "age_days": 4730
       }
     },
     {
@@ -1416,7 +1416,7 @@
         },
         {
           "code": "established",
-          "detail": "40202",
+          "detail": "40211",
           "tone": "good"
         },
         {
@@ -1426,10 +1426,10 @@
         }
       ],
       "stats": {
-        "followers": 40202,
+        "followers": 40211,
         "following": 2,
         "public_repos": 248,
-        "age_days": 5358
+        "age_days": 5359
       }
     },
     {
@@ -1453,15 +1453,15 @@
         },
         {
           "code": "active_creator",
-          "detail": "71",
+          "detail": "72",
           "tone": "good"
         }
       ],
       "stats": {
         "followers": 457,
-        "following": 20,
-        "public_repos": 71,
-        "age_days": 5711
+        "following": 21,
+        "public_repos": 72,
+        "age_days": 5712
       }
     },
     {
@@ -1493,7 +1493,7 @@
         "followers": 129,
         "following": 0,
         "public_repos": 35,
-        "age_days": 4559
+        "age_days": 4560
       }
     },
     {
@@ -1520,7 +1520,7 @@
         "followers": 78,
         "following": 83,
         "public_repos": 79,
-        "age_days": 5301
+        "age_days": 5302
       }
     },
     {
@@ -1547,7 +1547,7 @@
         "followers": 44,
         "following": 8,
         "public_repos": 57,
-        "age_days": 4104
+        "age_days": 4106
       }
     },
     {
@@ -1566,7 +1566,7 @@
         },
         {
           "code": "established",
-          "detail": "2045",
+          "detail": "2046",
           "tone": "good"
         },
         {
@@ -1576,10 +1576,10 @@
         }
       ],
       "stats": {
-        "followers": 2045,
+        "followers": 2046,
         "following": 55,
         "public_repos": 46,
-        "age_days": 6408
+        "age_days": 6409
       }
     },
     {
@@ -1598,7 +1598,7 @@
         },
         {
           "code": "established",
-          "detail": "5174",
+          "detail": "5173",
           "tone": "good"
         },
         {
@@ -1608,10 +1608,10 @@
         }
       ],
       "stats": {
-        "followers": 5174,
+        "followers": 5173,
         "following": 0,
         "public_repos": 82,
-        "age_days": 5555
+        "age_days": 5557
       }
     },
     {
@@ -1630,7 +1630,7 @@
         },
         {
           "code": "established",
-          "detail": "19095",
+          "detail": "19473",
           "tone": "good"
         },
         {
@@ -1640,10 +1640,10 @@
         }
       ],
       "stats": {
-        "followers": 19095,
+        "followers": 19473,
         "following": 10,
         "public_repos": 85,
-        "age_days": 5410
+        "age_days": 5411
       }
     },
     {
@@ -1665,7 +1665,7 @@
         "followers": 2,
         "following": 0,
         "public_repos": 3,
-        "age_days": 2195
+        "age_days": 2196
       }
     },
     {
@@ -1679,7 +1679,7 @@
       "reasons": [
         {
           "code": "established",
-          "detail": "831",
+          "detail": "833",
           "tone": "good"
         },
         {
@@ -1689,10 +1689,10 @@
         }
       ],
       "stats": {
-        "followers": 831,
+        "followers": 833,
         "following": 0,
         "public_repos": 12,
-        "age_days": 295
+        "age_days": 297
       }
     },
     {
@@ -1711,7 +1711,7 @@
         },
         {
           "code": "established",
-          "detail": "19326",
+          "detail": "19347",
           "tone": "good"
         },
         {
@@ -1721,10 +1721,10 @@
         }
       ],
       "stats": {
-        "followers": 19326,
+        "followers": 19347,
         "following": 0,
         "public_repos": 248,
-        "age_days": 4820
+        "age_days": 4821
       }
     },
     {
@@ -1756,7 +1756,7 @@
         "followers": 214,
         "following": 0,
         "public_repos": 16,
-        "age_days": 4536
+        "age_days": 4537
       }
     },
     {
@@ -1788,7 +1788,7 @@
         "followers": 149,
         "following": 0,
         "public_repos": 66,
-        "age_days": 6479
+        "age_days": 6480
       }
     },
     {
@@ -1807,7 +1807,7 @@
         },
         {
           "code": "established",
-          "detail": "2786",
+          "detail": "2789",
           "tone": "good"
         },
         {
@@ -1817,10 +1817,10 @@
         }
       ],
       "stats": {
-        "followers": 2786,
+        "followers": 2789,
         "following": 0,
         "public_repos": 151,
-        "age_days": 5699
+        "age_days": 5701
       }
     },
     {
@@ -1839,7 +1839,7 @@
         },
         {
           "code": "established",
-          "detail": "53639",
+          "detail": "53651",
           "tone": "good"
         },
         {
@@ -1849,10 +1849,10 @@
         }
       ],
       "stats": {
-        "followers": 53639,
+        "followers": 53651,
         "following": 110,
         "public_repos": 228,
-        "age_days": 6477
+        "age_days": 6478
       }
     },
     {
@@ -1879,7 +1879,7 @@
         "followers": 790,
         "following": 58,
         "public_repos": 8,
-        "age_days": 2650
+        "age_days": 2652
       }
     },
     {
@@ -1911,7 +1911,7 @@
         "followers": 342,
         "following": 0,
         "public_repos": 30,
-        "age_days": 1055
+        "age_days": 1056
       }
     },
     {
@@ -1930,7 +1930,7 @@
         },
         {
           "code": "established",
-          "detail": "332757",
+          "detail": "332877",
           "tone": "good"
         },
         {
@@ -1940,10 +1940,10 @@
         }
       ],
       "stats": {
-        "followers": 332757,
+        "followers": 332877,
         "following": 0,
         "public_repos": 12,
-        "age_days": 5558
+        "age_days": 5560
       }
     },
     {
@@ -1962,7 +1962,7 @@
         },
         {
           "code": "established",
-          "detail": "1916",
+          "detail": "1917",
           "tone": "good"
         },
         {
@@ -1972,10 +1972,10 @@
         }
       ],
       "stats": {
-        "followers": 1916,
+        "followers": 1917,
         "following": 0,
         "public_repos": 23,
-        "age_days": 4098
+        "age_days": 4099
       }
     },
     {
@@ -2007,7 +2007,7 @@
         "followers": 192,
         "following": 9,
         "public_repos": 97,
-        "age_days": 3601
+        "age_days": 3602
       }
     },
     {
@@ -2039,7 +2039,7 @@
         "followers": 8317,
         "following": 0,
         "public_repos": 161,
-        "age_days": 2475
+        "age_days": 2476
       }
     },
     {
@@ -2071,7 +2071,7 @@
         "followers": 116,
         "following": 19,
         "public_repos": 63,
-        "age_days": 2429
+        "age_days": 2430
       }
     },
     {
@@ -2090,7 +2090,7 @@
         },
         {
           "code": "established",
-          "detail": "563",
+          "detail": "564",
           "tone": "good"
         },
         {
@@ -2100,10 +2100,10 @@
         }
       ],
       "stats": {
-        "followers": 563,
+        "followers": 564,
         "following": 268,
         "public_repos": 84,
-        "age_days": 2212
+        "age_days": 2213
       }
     },
     {
@@ -2122,7 +2122,7 @@
         },
         {
           "code": "established",
-          "detail": "1772",
+          "detail": "1779",
           "tone": "good"
         },
         {
@@ -2132,10 +2132,10 @@
         }
       ],
       "stats": {
-        "followers": 1772,
+        "followers": 1779,
         "following": 3,
         "public_repos": 99,
-        "age_days": 3317
+        "age_days": 3318
       }
     },
     {
@@ -2154,7 +2154,7 @@
         },
         {
           "code": "established",
-          "detail": "624",
+          "detail": "625",
           "tone": "good"
         },
         {
@@ -2164,10 +2164,10 @@
         }
       ],
       "stats": {
-        "followers": 624,
+        "followers": 625,
         "following": 16,
         "public_repos": 18,
-        "age_days": 2522
+        "age_days": 2524
       }
     },
     {
@@ -2189,7 +2189,7 @@
         "followers": 17,
         "following": 0,
         "public_repos": 9,
-        "age_days": 948
+        "age_days": 950
       }
     }
   ]
